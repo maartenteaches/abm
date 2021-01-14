@@ -5,7 +5,7 @@ mata set matastrict on
 
 class abm_pop 
 {
-	private: 
+	protected: 
 		pointer (pointer matrix) matrix pop
 		real                     scalar N
 		real                     scalar k
