@@ -1,5 +1,3 @@
-clear all
-
 mata:
 mata set matastrict on
 class abm_bc 
