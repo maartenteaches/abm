@@ -4,41 +4,52 @@ class abm_bc
 {
     protected:
         real          rowvector vnr
+		real          rowvector parse_vnr()
 
     public: 
         transmorphic            vnr()
         real          scalar    lessthan_version()
 }
 
-transmorphic abm_bc::vnr(| string scalar valstr)
+real rowvector abm_bc::parse_vnr(string scalar valstr)
 {
-	real rowvector val
+	real scalar l, i, j
+	string scalar part
+	string rowvector res, nr
 
+	res = J(1,3,"0")
+	l = ustrlen(valstr)
+	j=1
+	nr = "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
+	
+	for(i=1; i<=l; i++) {
+		part = usubstr(valstr,i,1)
+		if (anyof(nr,part)) {
+			res[j] = res[j]+part
+		}
+		else if (part == " ") {
+			// do nothing; i.e. ignore spaces
+		}
+		else if (part == "." ) {
+			if (i!=l) {
+				j=j+1
+				if (j>3) {
+					_error("format for version number is #.#.#")
+				}
+				res[j]=""
+			}
+		}
+		else {
+			_error("format for version number is #.#.#")
+		}
+	}
+	return(strtoreal(res))
+}
+
+transmorphic abm_bc::vnr(| string scalar val)
+{
     if (args() == 1) {
-		val = strtoreal(tokens(valstr,"."))
-		if (cols(val) == 1 | (cols(val) == 2 & val[2]==.)) {
-			val = val, 0, 0
-		} 
-		else if (cols(val) == 3 | (cols(val) == 4 & val[4] == .)) {
-			if (val[2]!= .) _error("format of version nr is #.#.#")
-			val = val[1], val[3], 0
-		}
-		else if (cols(val) == 5) {
-			if (val[2]!=. & val[4]!= .) _error("format of version nr is #.#.#")
-			val = val[1], val[3], val[5]
-		}
-		else if (cols(val) > 5) {
-			_error("version has only 3 levels")
-		}
-		val
-		if (anyof(val,.)) {
-			_error("version cannot contain missing values")
-		}
-		if (any(val:< 0) | any(floor(val):!=val)) {
-			_error("version levels must be positive integers")
-		}
-		
-		vnr = val
+		vnr = parse_vnr(val)
 	}
 	else {
 		return(vnr)
