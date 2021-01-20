@@ -55,6 +55,9 @@ real scalar abm_bc::lessthan_version(real rowvector tocheck)
 	
 	res = 0
 	for (i=1; i<=3 ; i++) {
+		if (vnr[i] > tocheck[i]) {
+			break
+		}
 	    if (vnr[i] < tocheck[i]) {
 		    res = 1
 			break

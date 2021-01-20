@@ -5,7 +5,11 @@ include current_version.do
 do abm_bc.mata
 
 mata:
-bc = abm_bc()
-bc.vnr("1.0.0")
-bc.vnr()
+doc = abm_bc()
+doc.vnr("1.0.0")
+assert(doc.vnr()== (1,0,0))
+
+assert(doc.lessthan_version((0,6,4))==0)
+assert(doc.lessthan_version((1,0,0))==0)
+assert(doc.lessthan_version((5,6,4))==1)
 end
