@@ -1,9 +1,10 @@
 clear all
+include current_version
 
 mata:
 mata set matastrict on
 
-class abm_pop 
+class abm_pop extends abm_bc
 {
 	protected: 
 		pointer (pointer matrix) matrix pop
@@ -51,6 +52,7 @@ void abm_pop::setup()
 {
 	if (N==.)    _error("N has not been set")
 	if (k==.)    k=1
+	if (mod_version == J(1,0,.)) mod_version = `current'
 	pop = J(N,k,NULL)
 }
 
