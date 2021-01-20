@@ -1,17 +1,18 @@
+// class to manage backwards compatability
 mata:
 mata set matastrict on
 class abm_bc 
 {
     protected:
-        real          rowvector vnr
-		real          rowvector parse_vnr()
+        real          rowvector mod_version
+		real          rowvector parse_version()
 
     public: 
-        transmorphic            vnr()
-        real          scalar    lessthan_version()
+        transmorphic            mod_version()
+        real          scalar    mod_lt()
 }
 
-real rowvector abm_bc::parse_vnr(string scalar valstr)
+real rowvector abm_bc::parse_version(string scalar valstr)
 {
 	real scalar l, i, j
 	string scalar part
@@ -46,17 +47,17 @@ real rowvector abm_bc::parse_vnr(string scalar valstr)
 	return(strtoreal(res))
 }
 
-transmorphic abm_bc::vnr(| string scalar val)
+transmorphic abm_bc::mod_version(| string scalar val)
 {
     if (args() == 1) {
-		vnr = parse_vnr(val)
+		mod_version = parse_version(val)
 	}
 	else {
-		return(vnr)
+		return(mod_version)
 	}
 }
 
-real scalar abm_bc::lessthan_version(real rowvector tocheck) 
+real scalar abm_bc::mod_lt(real rowvector tocheck) 
 {
     real scalar i, res
 	
@@ -66,10 +67,10 @@ real scalar abm_bc::lessthan_version(real rowvector tocheck)
 	
 	res = 0
 	for (i=1; i<=3 ; i++) {
-		if (vnr[i] > tocheck[i]) {
+		if (mod_version[i] > tocheck[i]) {
 			break
 		}
-	    if (vnr[i] < tocheck[i]) {
+	    if (mod_version[i] < tocheck[i]) {
 		    res = 1
 			break
 		}

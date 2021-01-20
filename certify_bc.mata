@@ -6,23 +6,36 @@ do abm_bc.mata
 
 mata:
 doc = abm_bc()
-doc.vnr("1.0.0")
-assert(doc.vnr()== (1,0,0))
+doc.mod_version("1.0.0")
+assert(doc.mod_version()== (1,0,0))
 
-assert(doc.lessthan_version((0,6,4))==0)
-assert(doc.lessthan_version((1,0,0))==0)
-assert(doc.lessthan_version((5,6,4))==1)
+// less than
+assert(doc.mod_lt((0,6,4))==0)
+assert(doc.mod_lt((0,6,4))==0)
+assert(doc.mod_lt((1,0,0))==0)
+assert(doc.mod_lt((5,6,4))==1)
 
 // partial version number
-doc.vnr("1.0.")
-assert(doc.vnr()==(1,0,0))
+doc.mod_version("1.0.")
+assert(doc.mod_version()==(1,0,0))
 
-doc.vnr("1.0")
-assert(doc.vnr()==(1,0,0))
+doc.mod_version("1.0")
+assert(doc.mod_version()==(1,0,0))
 
-doc.vnr("1.")
-assert(doc.vnr()==(1,0,0))
+doc.mod_version("1.")
+assert(doc.mod_version()==(1,0,0))
 
-doc.vnr("1")
-assert(doc.vnr()==(1,0,0))
+doc.mod_version("1")
+assert(doc.mod_version()==(1,0,0))
+
+// the purpose of this class is for it be inherrited
+class model extends abm_bc {
+
+}
+
+model=model()
+model.mod_version("2.1.0")
+assert(model.mod_version()==(2,1,0))
+assert(model.mod_lt((3,0,2))==1)
+assert(model.mod_lt((1,0,2))==0)
 end
