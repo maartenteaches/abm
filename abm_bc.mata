@@ -10,6 +10,7 @@ class abm_bc
     public: 
         transmorphic            mod_version()
         real          scalar    mod_lt()
+		real          scalar    mod_geq()
 }
 
 real rowvector abm_bc::parse_version(string scalar valstr)
@@ -72,6 +73,27 @@ real scalar abm_bc::mod_lt(real rowvector tocheck)
 		}
 	    if (mod_version[i] < tocheck[i]) {
 		    res = 1
+			break
+		}
+	}
+	return(res)
+}
+
+real scalar abm_bc::mod_geq(real rowvector tocheck) 
+{
+    real scalar i, res
+	
+	if (cols(tocheck)!= 3 | anyof(tocheck,.) | any(tocheck:<0) | any(floor(tocheck):!=tocheck)) {
+	  _error("version to be checked invalid")  
+	} 
+	
+	res = 0
+	for (i=1; i<=3 ; i++) {
+		if (mod_version[i] >= tocheck[i]) {
+			res = 1
+			break
+		}
+	    if (mod_version[i] < tocheck[i]) {
 			break
 		}
 	}
