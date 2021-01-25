@@ -9,6 +9,8 @@ class abm_pop extends abm_bc
 		pointer (pointer matrix) matrix pop
 		real                     scalar N
 		real                     scalar k
+		real                     scalar get_t()
+		transmorphic                    get_c()
 
 	public: 
 		transmorphic                    N()
@@ -20,6 +22,15 @@ class abm_pop extends abm_bc
 		pointer                  matrix extract()
 }
 
+real scalar abm_pop::get_t(real scalar row, real scalar col, real scalar i)
+{
+	 return(*((*pop[row,col])[2,i]))
+}
+
+transmorphic abm_pop::get_c(real scalar row, real scalar col, real scalar i)
+{
+	return(*((*pop[row,col])[1,i]))
+}
 transmorphic abm_pop::N(|real scalar val) 
 {
 	if (args()>0) {
@@ -105,47 +116,46 @@ transmorphic abm_pop::get(real rowvector key, | string scalar how)
 
 	cols = cols(*pop[row,col])
 	if (how == "last") {
-	    if(t < *((*pop[row,col])[2,i])) _error("t is not the last time")
-		return( *((*pop[row,col])[1,1]) )
+	    if(t < get_t(row,col,1) ) _error("t is not the last time")
+		return( get_c(row,col,1) )
 	}	
-	else if (*((*pop[row,col])[2,cols]) > t) {
+	else if (get_t(row,col,cols) > t) { // before the first time that char for that agent was specified
 		return
 	}
 	else if (how == "first") {
 	    if (cols >= 2 & t != .) {
-		    if(t >= *((*pop[row,col])[2,cols-1])) _error("t is not the first time")
+		    if(t >= get_t(row,col,cols-1)) _error("t is not the first time")
 		}
-		return( *((*pop[row,col])[1,cols]) )
+		return( get_c(row,col,cols) )
 	}	
 	else if (how == "backwards") {
 		for (i=1; i<= cols; i++) {
-			if( *((*pop[row,col])[2,i]) <= t ) {
-				return( *((*pop[row,col])[1,i]) )
+			if( get_t(row,col,i) <= t ) {
+				return( get_c(row,col,i)  )
 			}
 		}		
 	}
 	else if (how == "forwards") {
 		for (i=cols; i>= 1; i--) {
-			if( *((*pop[row,col])[2,i]) > t ) {
-				return( *((*pop[row,col])[1,i+1]) )
+			if( get_t(row,col,i) > t ) {
+				return( get_c(row,col,i+1) )
 			}
 		}
-		return( *((*pop[row,col])[1,1]) )
+		return(get_c(row,col,1))
 	}
 	else if (how == "binary" | how == "") {
 		u = cols
 		l = 1
-		"bla"
 		while (l < u) {
 			m = floor((l+u)/2)
-			if (*((*pop[row,col])[2,m]) > t) {
+			if (get_t(row,col,m) > t) {
 				l=m+1
 			}
 			else {
 				u=m
 			}
 		}
-		return(*((*pop[row,col])[1,l]))
+		return(get_c(row,col,l))
 	}
 	else {
 	    _error("method " + how + " not allowed")
