@@ -24,7 +24,7 @@ real rowvector abm_bc::parse_version(string scalar valstr)
 	string scalar part, errmsg
 	string rowvector res, nr
 
-	res = J(1,3,"0")
+	res = "", J(1,2,"0")
 	l = ustrlen(valstr)
 	j=1
 	nr = "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
@@ -51,8 +51,15 @@ real rowvector abm_bc::parse_version(string scalar valstr)
 		}
 	}
 	v = strtoreal(res)
-
-	return(strtoreal(res))
+	v
+	if (mod_lt(v,"max")) {  // current < version specified
+		errmsg = strofreal(`current'[1]) + "." +
+		         strofreal(`current'[2]) + "." + 
+				 strofreal(`current'[3])
+		errmsg = "this is verison " + errmsg + " of ABM"
+		_error(errmsg)
+	}
+	return(v)
 }
 
 transmorphic abm_bc::mod_version(| string scalar val)
@@ -65,20 +72,28 @@ transmorphic abm_bc::mod_version(| string scalar val)
 	}
 }
 
-real scalar abm_bc::mod_lt(real rowvector tocheck) 
+real scalar abm_bc::mod_lt(real rowvector tocheck, | string scalar max) 
 {
     real scalar i, res
+	real rowvector against
 	
 	if (cols(tocheck)!= 3 | anyof(tocheck,.) | any(tocheck:<0) | any(floor(tocheck):!=tocheck)) {
 	  _error("version to be checked invalid")  
 	} 
 	
+	if (args()==1) {
+		against = mod_version
+	}
+	else {
+		against = `current'
+	}
+
 	res = 0
 	for (i=1; i<=3 ; i++) {
-		if (mod_version[i] > tocheck[i]) {
+		if (against[i] > tocheck[i]) {
 			break
 		}
-	    if (mod_version[i] < tocheck[i]) {
+	    if (against[i] < tocheck[i]) {
 		    res = 1
 			break
 		}
@@ -131,7 +146,7 @@ real scalar abm_bc::mod_geq(real rowvector tocheck)
 real scalar abm_bc::mod_gt(real rowvector tocheck) 
 {
     real scalar i, res
-	
+
 	if (cols(tocheck)!= 3 | anyof(tocheck,.) | any(tocheck:<0) | any(floor(tocheck):!=tocheck)) {
 	  _error("version to be checked invalid")  
 	} 

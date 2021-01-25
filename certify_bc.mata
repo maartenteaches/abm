@@ -48,8 +48,8 @@ class model extends abm_bc {
 }
 
 model=model()
-model.mod_version("2.1.0")
-assert(model.mod_version()==(2,1,0))
+model.mod_version("1.0.0")
+assert(model.mod_version()==(1,0,0))
 assert(model.mod_lt((3,0,2))==1)
-assert(model.mod_lt((1,0,2))==0)
+assert(model.mod_lt((0,0,2))==0)
 end
