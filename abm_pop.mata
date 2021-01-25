@@ -1,4 +1,3 @@
-clear all
 include current_version
 
 mata:
