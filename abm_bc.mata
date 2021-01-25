@@ -1,5 +1,7 @@
 // class to manage backwards compatability
-include current_version.do
+
+// set current version
+local current (1,0,0)
 
 mata:
 mata set matastrict on
@@ -11,10 +13,18 @@ class abm_bc
 
     public: 
         transmorphic            mod_version()
+		void                    bc_setup()
 		real          scalar    mod_leq()
         real          scalar    mod_lt()
 		real          scalar    mod_geq()
 		real          scalar    mod_gt()
+}
+
+void abm_bc::bc_setup()
+{
+	if (mod_version == J(1,0,.)) {
+		mod_version = `current'
+	}
 }
 
 real rowvector abm_bc::parse_version(string scalar valstr)

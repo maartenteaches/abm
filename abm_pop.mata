@@ -1,5 +1,3 @@
-include current_version
-
 mata:
 mata set matastrict on
 
@@ -62,7 +60,7 @@ void abm_pop::setup()
 {
 	if (N==.)    _error("N has not been set")
 	if (k==.)    k=1
-	if (mod_version == J(1,0,.)) mod_version = `current'
+	bc_setup()
 	pop = J(N,k,NULL)
 }
 
