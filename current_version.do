@@ -1,1 +1,1 @@
-local current (2,0,0)
+local current (1,0,0)
