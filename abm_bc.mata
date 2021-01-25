@@ -51,7 +51,6 @@ real rowvector abm_bc::parse_version(string scalar valstr)
 		}
 	}
 	v = strtoreal(res)
-	v
 	if (mod_lt(v,"max")) {  // current < version specified
 		errmsg = strofreal(`current'[1]) + "." +
 		         strofreal(`current'[2]) + "." + 
