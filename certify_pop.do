@@ -1,5 +1,6 @@
 cscript
-cd "d:\Mijn documenten\projecten\stata\abm\abm_pop"
+cd "d:\Mijn documenten\projecten\stata\abm\abm"
+do abm_bc.mata
 do abm_pop.mata
 
 mata:
