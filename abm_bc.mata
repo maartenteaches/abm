@@ -9,15 +9,16 @@ class abm_bc
 {
     protected:
         real          rowvector mod_version
+		
 		real          rowvector parse_version()
-
-    public: 
-        transmorphic            mod_version()
 		void                    bc_setup()
 		real          scalar    mod_leq()
         real          scalar    mod_lt()
 		real          scalar    mod_geq()
 		real          scalar    mod_gt()
+
+    public: 
+        transmorphic            mod_version()
 }
 
 void abm_bc::bc_setup()
