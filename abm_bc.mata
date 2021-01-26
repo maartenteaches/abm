@@ -18,7 +18,7 @@ class abm_bc
 		real          scalar    mod_gt()
 
     public: 
-        transmorphic            mod_version()
+        transmorphic            abm_version()
 }
 
 void abm_bc::bc_setup()
@@ -72,7 +72,7 @@ real rowvector abm_bc::parse_version(string scalar valstr)
 	return(v)
 }
 
-transmorphic abm_bc::mod_version(| string scalar val)
+transmorphic abm_bc::abm_version(| string scalar val)
 {
     if (args() == 1) {
 		mod_version = parse_version(val)
