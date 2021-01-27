@@ -29,6 +29,7 @@ transmorphic abm_pop::get_c(real scalar row, real scalar col, real scalar i)
 {
 	return(*((*pop[row,col])[1,i]))
 }
+
 transmorphic abm_pop::N(|real scalar val) 
 {
 	if (args()>0) {
