@@ -18,6 +18,10 @@
 {it:real rowvector}
 {cmd:abm_version()}
 
+{p 8 12 2}
+{it:real rowvector}
+{cmd:abm_current()}
+
 
 {marker description}{...}
 {title:Description}
@@ -28,11 +32,11 @@ one can set the version with {cmd:abm_version()}. These three classes continue t
 improved, but these improvements could break your model. Setting the version prevents that.
 If either of these classes is further developed in a way that would break your model, 
 and you have set the version, then the improvements that would break your model are roled 
-back. So by setting the version one can safely update the {cmd:abm} package, 
-without it breaking your existing models.
+back. So by setting the version for every instance of the classes one can safely update 
+the {cmd:abm} package, without it breaking your existing models.
 
 {pstd}
-The current version of {cmd:abm} is "1.0.0".
+To find the current version of {cmd:abm} use the {cmd:abm_current()} function.
 
 {pstd}
 {cmd:abm_version(} {it:val}{cmd:)} expects {it:val} to be a string with the format "#.#.#", 
@@ -52,6 +56,9 @@ then it will be a 1 by 3 real rowvector, otherwise J(1,0,.).
            {it:val}      1 {it:x} 1
 
     {cmd:abm_version( )}:
+           {it:result}:  1 {it:x} 3
+
+    {cmd:abm_current( )}:
            {it:result}:  1 {it:x} 3
 
 

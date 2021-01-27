@@ -19,6 +19,12 @@ class abm_bc
 
     public: 
         transmorphic            abm_version()
+		real          rowvector abm_current()
+}
+
+real rowvector abm_bc::abm_current()
+{
+	return(`current')
 }
 
 void abm_bc::bc_setup()
