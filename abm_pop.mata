@@ -1,7 +1,7 @@
 mata:
 mata set matastrict on
 
-class abm_pop extends abm_bc
+class abm_pop extends abm_chk
 {
 	protected: 
 		pointer (pointer matrix) matrix pop
@@ -33,9 +33,7 @@ transmorphic abm_pop::get_c(real scalar row, real scalar col, real scalar i)
 transmorphic abm_pop::N(|real scalar val) 
 {
 	if (args()>0) {
-		if (val<=0 | ceil(val)!=val) {
-			_error("argument must be a positive integer")
-		}
+		is_posint(val)
 		N=val
 	}
 	else {
@@ -46,9 +44,7 @@ transmorphic abm_pop::N(|real scalar val)
 transmorphic abm_pop::k(|real scalar val) 
 {
 	if (args()>0) {
-		if (val<=0 | ceil(val) != val ) {
-			_error("argument must be a positive integer")
-		}
+		is_posint(val)
 		k=val
 	}
 	else {
@@ -69,7 +65,7 @@ void abm_pop::add(real scalar toadd)
 {
     pointer matrix add
 	
-	if (floor(toadd) != toadd) _error("argument is not an integer") 
+	is_posint(toadd) 
 	
     N = N + toadd
 	add = J(toadd,k,NULL)
@@ -86,9 +82,8 @@ void abm_pop::put(real rowvector key, transmorphic content)
 	row = key[1]
 	col = key[2]
 
-	if (t<=0 | t != ceil(t)) {
-		_error("t must be a positive integer")
-	}	
+	is_posint(t)	
+
 	if (pop[row,col] == NULL) {
 		pop[row, col] = &(&c \ &t)
 	}
@@ -166,7 +161,7 @@ pointer matrix abm_pop::extract(real scalar c, real scalar tmax)
 	pointer matrix res, raw
 	real scalar i, j, current
 	
-	if (floor(tmax) != tmax) _error("argument is not an integer")
+	is_posint(tmax)
 	
 	res = J(N,tmax, NULL)
 
