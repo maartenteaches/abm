@@ -1,8 +1,3 @@
-cscript
-cd "d:\mijn documenten\projecten\stata\abm\abm"
-
-do abm_bc.mata
-
 mata:
 
 class testing extends abm_bc {

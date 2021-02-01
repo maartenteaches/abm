@@ -1,8 +1,3 @@
-cscript
-cd "c:\Mijn documenten\projecten\stata\abm\abm"
-do abm_bc.mata
-do abm_chk.mata
-
 mata:
 class chk extends abm_chk {
     void chk_is_posint()
