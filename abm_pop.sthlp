@@ -71,6 +71,14 @@ agent (row) at each point in time (column) points to the content of a
 characteristic {p_end}
 {p2line -2 0}
 
+{pstd}
+The {cmd:abm_pop} class also contains a number of protected functions and variables. 
+These cannot be accessed directly, but if you create a new class that inherits from 
+{cmd:abm_pop} you will, within that class, have access to them.  This is helpful if 
+you want to change functions (functions with the same name in the new class will 
+take precedence over the functions with that name in {cmd:abm_pop}, or add functions. 
+These are documented {help abm_pop_protected:here}.
+
 
 {title:Example}
 
