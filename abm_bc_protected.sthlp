@@ -47,7 +47,7 @@ stored version number is greater than the argument.{p_end}
 stored version number is less than or equal to the argument.{p_end}
 {p2col:{helpb abm_bc_mod_geq:mod_lt()}}returns whether (1) or not (0) the
 stored version number is less than the argument.{p_end}
-{p2col:{helpb abm_bc_setup:setup()}}sets the version number to the current
+{p2col:{helpb abm_bc_setup:bc_setup()}}sets the version number to the current
 version of {cmd:abm} if it has not been set.{p_end}
 {p2col:{helpb abm_bc_parse_version:parse_version()}}Parses a string that 
 should contain a version number{p_end}
