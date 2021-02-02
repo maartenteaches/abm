@@ -47,6 +47,8 @@ an error if that is not the case.
 {cmd:is_pr()} tests whether {it:val} is between 0 and 1 (inclusive), and aborts 
 with an error if that is not the case.
 
+{pstd}
+{cmd:abm_chk} also inherits from {help abm_bc_protected:abm_bc}.
 
 {marker example}{...}
 {title:Example}
