@@ -1,5 +1,6 @@
 {smcl}
 {* *! version 1.0.0 27Jan2021 MLB}{...}
+{vieweralsosee "help abm_bc" "help abm_bc"}{...}
 {vieweralsosee "help abm_pop protected" "help abm_pop_protected"}{...}
 {vieweralsosee "help abm_nw protected" "help abm_nw_protected"}{...}
 {vieweralsosee "help abm_grid protected" "help abm_grid_protected"}{...}
