@@ -9,6 +9,7 @@ class abm_pop extends abm_chk
 		real                     scalar k
 		real                     scalar get_t()
 		transmorphic                    get_c()
+		void                            new()
 
 	public: 
 		transmorphic                    N()
@@ -18,6 +19,11 @@ class abm_pop extends abm_chk
 		void                            put()
 		void                            add()
 		pointer                  matrix extract()
+}
+
+void abm_pop::new()
+{
+	bc_setup()
 }
 
 real scalar abm_pop::get_t(real scalar row, real scalar col, real scalar i)
@@ -57,7 +63,6 @@ void abm_pop::setup()
 {
 	if (N==.)    _error("N has not been set")
 	if (k==.)    k=1
-	bc_setup()
 	pop = J(N,k,NULL)
 }
 
