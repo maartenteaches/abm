@@ -1,5 +1,6 @@
 {smcl}
 {* *! version 0.1.0 03Aug2020 MLB}{...}
+{vieweralsosee "help abm_pop" "help abm"}{...}
 {p2colset 1 18 20 2}{...}
 {p2col:{bf:abm_pop class} {hline 2}}class for storing and retrieving properties 
 of agent that can change over time in an agent based model{p_end}

@@ -1,5 +1,6 @@
 {smcl}
 {* *! version 1.0.0 01Feb2021 MLB}{...}
+{vieweralsosee "help abm_pop" "help abm"}{...}
 {phang}{cmd:abm_chk} {hline 2} Class with functions that aborts with 
 an error if arguments don't meet requirements{p_end}
 

@@ -1,5 +1,6 @@
 {smcl}
 {* *! version 1.0.0 01Feb2021 MLB}{...}
+{vieweralsosee "help abm_pop" "help abm"}{...}
 {phang}{cmd:abm_bc} {hline 2} Class to help with backwards compatability{p_end}
 
 {marker description}{...}
