@@ -33,4 +33,4 @@ the content of {it:k}th element{p_end}
 
 {pstd}
 In addition, {cmd:abm_pop} inherits protected functions from the 
-{help abm_chk}, and {help abm_bc_protected:abm_bc} packages. 
+{help abm_chk}, and {help abm_bc_protected:abm_bc} classes. 
