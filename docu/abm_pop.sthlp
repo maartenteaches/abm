@@ -56,6 +56,7 @@ You can intract with the {cmd:abm_pop} class through these functions:
 {p2col:{helpb abm_pop_N:N()}}sets or returns the number of agents{p_end}
 {p2col:{helpb abm_pop_k:k()}}sets or returns the number of things stored per 
 agent{p_end}
+{p2col:{helpb abm_bc_abm_version:abm_version()}}Set the version of {cmd:abm} used.{p_end}
 {p2col:{helpb abm_pop_setup:setup()}}sets defaults and performs checks on 
 settings{p_end}
 
