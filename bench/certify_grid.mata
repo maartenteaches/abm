@@ -1,11 +1,22 @@
 mata:
-foo = abm_grid()
+class tests_abm_grid extends abm_grid
+{
+    void tests_new()
+}
+
+foo = tests_abm_grid()
 
 // new() sets the abm_version to current
 assert(foo.abm_version() == foo.abm_current())
 
 foo.abm_version("0.5.1")
 assert(foo.abm_version() == (0,5,1))
+
+void tests_abm_grid::tests_new()
+{
+    assert(setup==0)
+}
+foo.tests_new()
 end
 
 rcof "mata: foo.setup()" == 3351
