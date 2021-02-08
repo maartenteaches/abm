@@ -77,3 +77,19 @@ assert(foo.neumann() == 1)
 assert(foo.randit() == 1)
 
 end
+
+mata:
+foo = abm_grid()
+foo.rdim(5)
+foo.cdim(4)
+foo.setup()
+
+bla = foo.random_cell(60)
+assert(all(bla :<= (5,4)))
+assert(all(bla :> 0))
+assert(all(floor(bla) :== bla))
+bla = foo.schedule()
+assert(all(bla :<= (5,4)))
+assert(all(bla :> 0))
+assert(all(floor(bla) :== bla))
+end
