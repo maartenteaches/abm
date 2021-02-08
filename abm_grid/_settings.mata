@@ -3,7 +3,7 @@ mata:
 transmorphic abm_grid::neumann(| real scalar newval) 
 {
 	if (args() == 1) {
-		is_bool(newval,"newval")
+		is_bool(newval)
 		neumann = newval
 		setup = 0
 	}
@@ -15,7 +15,7 @@ transmorphic abm_grid::neumann(| real scalar newval)
 transmorphic abm_grid::torus(| real scalar newval) 
 {
 	if (args() == 1) {
-		is_bool(newval,"newval")
+		is_bool(newval)
 		torus = newval
 		setup = 0
 	}
@@ -27,7 +27,7 @@ transmorphic abm_grid::torus(| real scalar newval)
 transmorphic abm_grid::randit(| real scalar newval) 
 {
 	if (args() == 1) {
-		is_bool(newval,"newval")
+		is_bool(newval)
 		randit = newval
 		setup = 0
 	}
@@ -39,7 +39,7 @@ transmorphic abm_grid::randit(| real scalar newval)
 transmorphic abm_grid::idim(| real scalar dim) 
 {
 	if (args() == 1) {
-		is_posint(dim, "dim", "zero_ok")
+		is_posint(dim, "zero_ok")
 		idim = dim
 		setup = 0
 	}
@@ -50,7 +50,7 @@ transmorphic abm_grid::idim(| real scalar dim)
 transmorphic abm_grid::tdim(| real scalar dim) 
 {
 	if (args() == 1) {
-		is_posint(dim, "dim", "zero_ok")
+		is_posint(dim, "zero_ok")
 		tdim = dim
 		setup = 0
 	}
@@ -61,7 +61,7 @@ transmorphic abm_grid::tdim(| real scalar dim)
 transmorphic abm_grid::rdim(| real scalar dim) 
 {
 	if (args() == 1) {
-		is_posint(dim, "dim")
+		is_posint(dim)
 		rdim = dim
 		setup = 0
 	}
@@ -72,7 +72,7 @@ transmorphic abm_grid::rdim(| real scalar dim)
 transmorphic abm_grid::cdim(| real scalar dim)
 {
 	if (args() == 1) {
-		is_posint(dim, "dim")		
+		is_posint(dim)		
 		cdim = dim
 		setup = 0
 	}
