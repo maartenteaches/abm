@@ -15,7 +15,7 @@ void abm_grid::basecoords()
 	}
 }
 
-real rowvector abm_grid::random_cell(real scalar k) {
+real matrix abm_grid::random_cell(real scalar k) {
 	is_setup() 
 	
 	return(ceil(runiform(k,2):*(rdim,cdim)))

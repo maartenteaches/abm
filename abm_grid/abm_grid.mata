@@ -79,7 +79,7 @@ class abm_grid extends abm_chk
 
 		// _schedule.mata
 		real matrix    schedule() 
-		real rowvector random_cell() 
+		real matrix    random_cell() 
 
 		// _line.mata
 		real scalar    dist()
