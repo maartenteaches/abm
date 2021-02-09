@@ -95,7 +95,7 @@ real matrix abm_grid::basering(real scalar radius)
 real matrix abm_grid::torus_adj(real matrix pos)
 {
 	is_setup() 
-	if (any(mod(pos,1))) {
+	if (any(floor(pos):!=pos)) {
 		_error("pos must contain integers")
 	}
 	if (cols(pos)!= 2) {
@@ -110,7 +110,7 @@ real matrix abm_grid::torus_adj(real matrix pos)
 real colvector abm_grid::out_of_bounds(real matrix pos) 
 {
 	is_setup() 
-	if (any(mod(pos,1))) {
+	if (any(floor(pos):!=pos)) {
 		_error("pos must contain integers")
 	}
 	if (cols(pos)!= 2) {
