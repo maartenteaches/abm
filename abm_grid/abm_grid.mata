@@ -22,6 +22,7 @@ class abm_grid extends abm_chk
 		
 		// _setup.mata
 		void           is_setup()
+		void           is_valid_cell()
 		void           new()
 
 		// _neighbours.mata
