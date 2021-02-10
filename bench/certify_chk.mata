@@ -3,6 +3,7 @@ class chk extends abm_chk {
     void chk_is_posint()
     void chk_is_bool()
     void chk_is_pr()
+    void chk_is_int()
 }
 
 void chk::chk_is_posint(real scalar val, | string scalar zero_ok) {
@@ -22,6 +23,11 @@ void chk::chk_is_bool(real scalar val)
 void chk::chk_is_pr(real scalar val)
 {
     is_pr(val)
+}
+
+void chk::chk_is_int(real matrix val)
+{
+    is_int(val)
 }
 
 foo = chk()
@@ -51,4 +57,11 @@ end
 rcof "mata foo.chk_is_pr(-1)" == 3300
 rcof "mata foo.chk_is_pr(2)" == 3300
 rcof "mata foo.chk_is_pr(1.00000005)" == 3300
+
+mata:
+foo.chk_is_int(-1)
+foo.chk_is_int((-1,0,1 \ 5, 3, 2))
+end                
+rcof "mata: foo.chk_is_int(1.2)" == 3300
+rcof "mata: foo.chk_is_int((-1,0,1 \ 5, 3, 2.1))" == 3300
 

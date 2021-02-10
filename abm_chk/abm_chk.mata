@@ -5,6 +5,7 @@ class abm_chk extends abm_bc
 {
     protected:
    		void                             is_posint()
+		void                             is_int()
 		void                             is_bool()
 		void                             is_pr()
 }
@@ -16,6 +17,13 @@ void abm_chk::is_bool(real scalar val)
 	if (val != 1 & val != 0) {
 		errmsg = "argument can only be 0 or 1"
 		_error(3300, errmsg)
+	}
+}
+
+void abm_chk::is_int(real matrix val)
+{
+	if (ceil(val)!=val) {
+		_error(3300,"argument must be integer")
 	}
 }
 

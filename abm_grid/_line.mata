@@ -3,7 +3,7 @@ mata:
 real rowvector abm_grid::lerp(real rowvector orig, real rowvector dest, real scalar t)
 {
 	is_setup()
-	if (any(mod((orig,dest),1))) {
+	if (floor((orig,dest))!=(orig,dest)) {
 		_error("orig and dest must contain integers")
 	}
 	if (torus == 0 & (out_of_bounds(orig) | out_of_bounds(dest))) {
@@ -18,7 +18,7 @@ real matrix abm_grid::torus_closest(real rowvector orig, real rowvector dest)
 	real rowvector dist
 	
 	is_setup()
-	if (any(mod((orig,dest),1))) {
+	if (floor((orig,dest))!=(orig,dest)) {
 		_error("orig and dest must contain integers")
 	}
 	if (torus == 0 & (out_of_bounds(orig) | out_of_bounds(dest))) {
@@ -54,7 +54,7 @@ real scalar abm_grid::dist(real rowvector orig, real rowvector dest, | string sc
 	real matrix points
 
 	is_setup()
-	if (any(mod((orig,dest),1))) {
+	if (floor((orig,dest))!=(orig,dest)) {
 		_error("orig and dest must contain integers")
 	}
 	if (torus == 0 & (out_of_bounds(orig) | out_of_bounds(dest))) {
