@@ -6,6 +6,22 @@ void abm_grid::is_setup()
 	}
 }
 
+void abm_grid::is_valid_cell(real matrix cells)
+{
+	if (torus == 0) {
+		if (any(out_of_bounds(cells))) {
+			_error("position invalid")
+		}
+	}
+	else{
+		is_setup()
+		if (cols(cells)!=2) {
+			_error("position invalid")
+		}
+		is_int(cells)
+	}
+}
+
 void abm_grid::new()
 {
 	setup = 0

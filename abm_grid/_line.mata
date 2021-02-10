@@ -3,9 +3,8 @@ mata:
 real rowvector abm_grid::lerp(real rowvector orig, real rowvector dest, real scalar t)
 {
 	is_setup()
-	if (floor((orig,dest))!=(orig,dest)) {
-		_error("orig and dest must contain integers")
-	}
+	is_int((orig,dest))
+
 	if (torus == 0 & (out_of_bounds(orig) | out_of_bounds(dest))) {
 		_error("orig and/or dest contain coordinates outside the grid")
 	}	

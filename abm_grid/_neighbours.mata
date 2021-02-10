@@ -110,9 +110,7 @@ real matrix abm_grid::torus_adj(real matrix pos)
 real colvector abm_grid::out_of_bounds(real matrix pos) 
 {
 	is_setup() 
-	if (any(floor(pos):!=pos)) {
-		_error("pos must contain integers")
-	}
+	is_int(pos)
 	if (cols(pos)!= 2) {
 		_error("pos must contain two columns")
 	}
