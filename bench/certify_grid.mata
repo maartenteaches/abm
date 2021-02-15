@@ -744,20 +744,66 @@ foo = abm_grid()
 foo.rdim(10)
 foo.cdim(10)
 foo.setup()
-foo.find_line((1,1),(2,6))
+
+//   | 1  2  3  4  5  6
+// --+------------------
+// 1 | 1  2  3
+// 2 |          4  5  6      
+
+true = 1,1 \
+       1,2 \
+       1,3 \
+       2,4 \
+       2,5 \
+       2,6
+assert(foo.find_line((1,1),(2,6)) == true)
 
 foo.neumann(1)
 foo.setup()
-foo.find_line((1,1),(2,6))
+//   | 1  2  3  4  5  6
+// --+------------------
+// 1 | 1  2  3
+// 2 |       4  5  6  7   
+true = 1,1 \
+       1,2 \
+       1,3 \
+       2,3 \
+       2,4 \
+       2,5 \
+       2,6
+assert(foo.find_line((1,1),(2,6))==true)
+
+ 
 
 foo.neumann(0)
 foo.torus(1)
 foo.setup()
-foo.find_line((1,1),(2,7))
+//   | 1  2  3  4  5  6  7  8  9 10
+// --+-----------------------------
+// 1 | 1                          2
+// 2 |                   5  4  3
+true = 1,1 \
+       1,10 \
+       2,9 \
+       2,8 \
+       2,7
+
+assert(foo.find_line((1,1),(2,7))==true)
 
 foo.neumann(1)
 foo.torus(1)
 foo.setup()
-foo.find_line((1,1),(2,7))
+//   | 1  2  3  4  5  6  7  8  9 10
+// --+-----------------------------
+// 1 | 1                       3  2
+// 2 |                   6  5  4
+true = 1,1 \
+       1,10 \
+       1,9 \
+       2,9 \
+       2,8 \
+       2,7
+assert(foo.find_line((1,1),(2,7))==true)
+
 
 end
