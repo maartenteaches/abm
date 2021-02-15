@@ -736,9 +736,28 @@ true = 5,4 \
        5,3
 assert(foo.find_spiral(4,4,2)==true)
 
-
-
-
-
 end
 
+// _line.mata
+mata:
+foo = abm_grid()
+foo.rdim(10)
+foo.cdim(10)
+foo.setup()
+foo.find_line((1,1),(2,6))
+
+foo.neumann(1)
+foo.setup()
+foo.find_line((1,1),(2,6))
+
+foo.neumann(0)
+foo.torus(1)
+foo.setup()
+foo.find_line((1,1),(2,7))
+
+foo.neumann(1)
+foo.torus(1)
+foo.setup()
+foo.find_line((1,1),(2,7))
+
+end

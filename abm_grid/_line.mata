@@ -2,28 +2,13 @@ mata:
 
 real rowvector abm_grid::lerp(real rowvector orig, real rowvector dest, real scalar t)
 {
-	is_setup()
-	is_int((orig,dest))
-
-	if (torus == 0 & (out_of_bounds(orig) | out_of_bounds(dest))) {
-		_error("orig and/or dest contain coordinates outside the grid")
-	}	
-	
 	return(round(orig :+ t:*(dest:-orig)))
 }
 
 real matrix abm_grid::torus_closest(real rowvector orig, real rowvector dest)
 {
 	real rowvector dist
-	
-	is_setup()
-	if (floor((orig,dest))!=(orig,dest)) {
-		_error("orig and dest must contain integers")
-	}
-	if (torus == 0 & (out_of_bounds(orig) | out_of_bounds(dest))) {
-		_error("orig and/or dest contain coordinates outside the grid")
-	}	
-	
+		
 	if (torus== 1) {
 		dist = abs(dest:-orig)
 		if (dist[1] > .5*cdim) {
@@ -52,13 +37,7 @@ real scalar abm_grid::dist(real rowvector orig, real rowvector dest, | string sc
 	string scalar errmsg
 	real matrix points
 
-	is_setup()
-	if (floor((orig,dest))!=(orig,dest)) {
-		_error("orig and dest must contain integers")
-	}
-	if (torus == 0 & (out_of_bounds(orig) | out_of_bounds(dest))) {
-		_error("orig and/or dest contain coordinates outside the grid")
-	}	
+	is_valid_cell((orig\dest))
 	
 	points = torus_closest(orig, dest)
 	orig = points[1,.]
@@ -126,13 +105,7 @@ real matrix abm_grid::find_line(real rowvector orig, real rowvector dest,| strin
 	string scalar    errmsg
 	real   matrix    res, points
 
-	is_setup()
-	if (any(mod((orig,dest),1))) {
-		_error("orig and dest must contain integers")
-	}
-	if (torus == 0 & (out_of_bounds(orig) | out_of_bounds(dest))) {
-		_error("orig and/or dest contain coordinates outside the grid")
-	}
+	is_valid_cell((orig\dest))
 	
 	if (args()<3) {
 		if (neumann == 0) {
@@ -155,7 +128,7 @@ real matrix abm_grid::find_line(real rowvector orig, real rowvector dest,| strin
 	orig = points[1,.]
 	dest = points[2,.]
 	
-	res = single_line(orig, dest, what)
+	res = comp_line(orig, dest, what)
 
 	return(torus_adj(res))
 }
