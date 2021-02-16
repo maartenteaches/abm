@@ -3,6 +3,7 @@ class tests_abm_grid extends abm_grid
 {
     void tests_new()
     void tests_setup()
+    void tests_is_valid_cell()
     real scalar return_setup()
     void tests_basecoords()
     void tests_neumannring()
@@ -32,6 +33,35 @@ end
 rcof "mata: foo.setup()" == 3351
 
 mata:
+void tests_abm_grid::tests_is_valid_cell(real matrix tocheck)
+{
+    is_valid_cell(tocheck)
+}
+foo=tests_abm_grid()
+foo.rdim(10)
+foo.cdim(10)
+foo.setup()
+tocheck = 1,1 \ 
+          2,4 \
+          3,3 
+foo.tests_is_valid_cell(tocheck)
+end
+rcof "mata: foo.tests_is_valid_cell((tocheck\(0,0)))" == 3498
+rcof "mata: foo.tests_is_valid_cell((tocheck\(1,1.1)))" == 3300
+
+mata:
+foo.torus(1)
+foo.setup()
+tocheck = tocheck \
+          0,0 \
+          -1,-1\
+          11,11
+foo.tests_is_valid_cell(tocheck)
+end
+rcof "mata: foo.tests_is_valid_cell((tocheck\(1,1.1)))" == 3300
+
+mata:
+foo = tests_abm_grid()
 foo.rdim(10)
 foo.cdim(20)
 assert(foo.rdim() == 10)

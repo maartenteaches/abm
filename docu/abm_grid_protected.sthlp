@@ -24,6 +24,8 @@ that existing functions work differently.
 {p2col 6 23 25 8:{it:Protected functions}}{p_end}
 {p2col:{helpb abm_grid_is_setup:is_setup()}}aborts with an error if the scalar 
 {cmd:setup} is not 1{p_end}
+{p2col:{helpb abm_grid_is_valid_cell:is_valid_cell()}}aborts with an error if 
+the argument is not a matrix of valid cell adresses{p_end}
 {p2col:{helpb abm_grid_baserings:baserings()}}Fills the associative array 
 {cmd:baserings} with baserings for the radiuses 1..max(rdim,cdim) using either
 {cmd:neumannring()} or {cmd:moorering()} depending on the setting 
