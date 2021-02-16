@@ -12,6 +12,7 @@ class tests_abm_grid extends abm_grid
     void tests_basering()
     void tests_outofbounds()
     void tests_torus_adj()
+    real matrix tests_torus_closest()
 }
 
 // ============================ _setup.mata
@@ -779,6 +780,7 @@ foo.setup()
 // --+------------------
 // 1 | 1  2  3
 // 2 |          4  5  6      
+assert(foo.dist((1,1),(2,6))==5) // there are 5 steps between the 6 cells
 
 true = 1,1 \
        1,2 \
@@ -802,7 +804,7 @@ true = 1,1 \
        2,5 \
        2,6
 assert(foo.find_line((1,1),(2,6))==true)
-
+assert(foo.dist((1,1),(2,6))==6)
  
 
 foo.neumann(0)
@@ -819,6 +821,7 @@ true = 1,1 \
        2,7
 
 assert(foo.find_line((1,1),(2,7))==true)
+assert(foo.dist((1,1),(2,7))==4)
 
 foo.neumann(1)
 foo.torus(1)
@@ -834,6 +837,65 @@ true = 1,1 \
        2,8 \
        2,7
 assert(foo.find_line((1,1),(2,7))==true)
+assert(foo.dist((1,1),(2,7))==5)
+end
 
+mata:
+real matrix tests_abm_grid::tests_torus_closest(real rowvector orig, real rowvector dest)
+{
+    return(torus_closest(orig,dest))
+}
+foo = tests_abm_grid()
+foo.rdim(10)
+foo.cdim(10)
+foo.torus(1)
+foo.setup()
 
+//   | 1 2 3 4 5 6 7 8 9 10 11
+// --+--------------------------------------  
+// 1 | O                    O'
+// 2 |             D
+true = 1, 11 \
+       2, 7
+assert(foo.tests_torus_closest((1,1),(2,7))==true)
+
+foo.torus(0)
+foo.setup()
+true = 1,1 \
+       2,7
+assert(foo.tests_torus_closest((1,1),(2,7))==true)
+// find_line() is just a wrapper for comp_line()
+// there is not much to check for lerp()
+
+// _export.mata
+foo=tests_abm_grid()
+foo.rdim(10)
+foo.cdim(10)
+foo.setup()
+foo.create_agent(2,1,1)
+foo.create_agent(2,2,5)
+foo.create_agent(1,1,3)
+true = 1,1,0,1,3 \
+       2,1,0,1,1 \
+       2,2,0,1,5
+assert(foo.extract()==true)
+
+// _agents.mata
+foo=tests_abm_grid()
+foo.rdim(10)
+foo.cdim(10)
+foo.setup()
+foo.create_agent(1,1,2)
+assert(foo.agent_id(1,1)==2)
+assert(foo.agent_ids(1,1)==2)
+
+foo=tests_abm_grid()
+foo.rdim(10)
+foo.cdim(10)
+foo.idim(2)
+foo.setup()
+foo.create_agent(1,1,.,1,2)
+foo.create_agent(1,1,.,2,3)
+assert(foo.agent_id(1,1)==2)
+assert(foo.agent_ids(1,1)==(2,3))
 end
