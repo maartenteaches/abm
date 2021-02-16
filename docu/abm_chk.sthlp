@@ -17,6 +17,10 @@ an error if arguments don't meet requirements{p_end}
 {cmd:is_posint(}{it:real scalar val}, {it:string scalar zero_ok}{cmd:)}
 
 {p 8 12 2}
+{it:void}
+{cmd: is_int(}{it:real matrix val}{cmd:)}
+
+{p 8 12 2}
 {it:void} 
 {cmd:is_bool(}{it:real scalar val}{cmd:)}
 
@@ -40,6 +44,10 @@ by {help abm_pop}, {help abm_nw}, and {help abm_grid}.
 an error if that is not the case. The value 0 is allowed if the {it:zero_ok} 
 argument is also specified, otherwise the value 0 will also results in an error.
 
+{pmore}
+{cmd:is_int()} tests whether {it:val} contains all integers, and aborts with an
+error if that is not the case.
+ 
 {pmore}
 {cmd:is_bool()} tests whether {it:val} is either 0 or 1, and aborts with 
 an error if that is not the case.
@@ -90,9 +98,13 @@ set some parameter {it:N}, which has to be a positive integer. Than we can inher
            {it:val}:       1 {it:x} 1
 
     {cmd:is_posint(}{it:val}, {it:zero_ok}{cmd:)}:
-           {it:result}:   {it:void}
+           {it:result}:    {it:void}
            {it:val}:       1 {it:x} 1
            {it:zero_ok}:   1 {it:x} 1
+
+    {cmd:is_int(}{it:val}{cmd:)}:
+           {it:result}:    {it:void}
+           {it:val}:       {it:r x c}
 
     {cmd:is_bool(}{it:val}{cmd:)}:
            {it:result}:    {it:void}
