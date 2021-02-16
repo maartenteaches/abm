@@ -4,17 +4,7 @@ real rowvector abm_grid::make_key(real scalar r, real scalar c, real scalar t, r
 	string scalar errmsg
 
 	is_setup() 
-	
-	if (r <= 0 | r > rdim | mod(r,1) != 0 ) {
-		errmsg = "r must be an integer larger than 0, less than or equal to " + 
-		          strofreal(rdim)
-		_error(3300, errmsg)
-	}
-	if (c <= 0 | c > cdim | mod(c,1) != 0 ) {
-		errmsg = "c must be an integer larger than 0, less than or equal to " + 
-		          strofreal(cdim)
-		_error(3300, errmsg)
-	}	
+	is_valid_cell((r,c))
 	if (idim == 1 ) {
 		if (i != . & i != 1 & i != 0) {
 			_error(3001, "you specified i, but set idim to 1")
@@ -24,7 +14,7 @@ real rowvector abm_grid::make_key(real scalar r, real scalar c, real scalar t, r
 		}
 	}
 	else {
-		if (i < 0 | (i > idim & idim != 0) | mod(i,1) != 0 ) {
+		if (i < 0 | (i > idim & idim != 0) | floor(i) != i ) {
 			errmsg = "i must be an integer larger than or equal 0" + 
 			( idim == 0 ?  "" : "and less than or equal to " + strofreal(idim)) 
 			_error(3300, errmsg)
@@ -39,7 +29,7 @@ real rowvector abm_grid::make_key(real scalar r, real scalar c, real scalar t, r
 		}
 	}
 	else {
-		if (t < 0 | t > tdim | mod(t,1) != 0 ) {
+		if (t < 0 | t > tdim | floor(t) != t ) {
 			errmsg = "t must be an integer larger than or equal to 0, less than or equal to " + 
 					strofreal(tdim)
 			_error(3300, errmsg)

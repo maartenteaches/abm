@@ -13,6 +13,7 @@ class tests_abm_grid extends abm_grid
     void tests_outofbounds()
     void tests_torus_adj()
     real matrix tests_torus_closest()
+    real rowvector tests_make_key()
 }
 
 // ============================ _setup.mata
@@ -894,8 +895,21 @@ foo.rdim(10)
 foo.cdim(10)
 foo.idim(2)
 foo.setup()
-foo.create_agent(1,1,.,1,2)
-foo.create_agent(1,1,.,2,3)
-assert(foo.agent_id(1,1)==2)
-assert(foo.agent_ids(1,1)==(2,3))
+foo.create_agent(1,1,3,.,1)
+foo.create_agent(1,1,5,.,2)
+assert(foo.agent_id(1,1,.,1)==3)
+assert(foo.agent_ids(1,1)==(3,5))
+
+real rowvector tests_abm_grid::tests_make_key(real scalar r, real scalar c, real scalar t, real scalar i)
+{
+    return(make_key(r,c,t,i))
+}
+
+foo=tests_abm_grid()
+foo.rdim(10)
+foo.cdim(10)
+foo.setup()
+assert(foo.tests_make_key(1,1,.,.)==(1,1,0,1))
+
+
 end
