@@ -991,4 +991,15 @@ foo.delete_agents(1,1,0)
 assert(foo.free_spot(1,1,0)==1)
 assert(foo.tests_agent_loc(1,1,0)==J(1,0,.))
 assert(foo.has_agent(1,1)==0)
+
+foo.create_agent(1,1,1,0,1)
+foo.create_agent(1,1,2,0,2)
+
+foo.copy_agent(1,1,2,2,0,0,1,1)
+assert(foo.agent_id(1,1,0,1)==1)
+assert(foo.agent_id(2,2,0,1)==1)
+
+foo.copy_agents(1,1,3,3)
+assert(foo.agent_ids(1,1)==(1,2))
+assert(foo.agent_ids(3,3)==(1,2))
 end
