@@ -933,3 +933,22 @@ rcof "mata:foo.tests_make_key(1,1,.,1)" == 3300
 rcof "mata:foo.tests_make_key(1,1,0,.)" == 3300
 rcof "mata foo.tests_make_key(1,11,0,1)" == 3498
 rcof "mata foo.tests_make_key(11,1,0,1)" == 3498
+
+mata:
+foo = tests_abm_grid()
+foo.rdim(10)
+foo.cdim(10)
+foo.idim(5)
+foo.setup()
+assert(foo.free_spot(1,1,0)==1)
+foo.create_agent(1,1,1,0,1)
+assert(foo.free_spot(1,1,0)==2)
+foo.create_agent(1,1,2,0,2)
+assert(foo.free_spot(1,1,0)==3)
+foo.create_agent(1,1,3,0,3)
+assert(foo.free_spot(1,1,0)==4)
+foo.create_agent(1,1,4,0,4)
+assert(foo.free_spot(1,1,0)==5)
+foo.create_agent(1,1,5,0,5)
+assert(foo.free_spot(1,1,0)==.)
+end

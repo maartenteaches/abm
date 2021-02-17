@@ -25,7 +25,8 @@ If multple agents can occupy the same cell, then each aget will have its own
 {it:r}, {it:c}, {it:t}, {it:i}, whereby the cell is identified by the row and 
 column number ({it:r} and {it:c}, respectively), the point in time by {it:t}, 
 the location in that cell by {it:i}. {cmd:free_spot} returns a free location 
-inside the cell {it:r}, {it:c}, {it:t}
+inside the cell {it:r}, {it:c}, {it:t}. If there are no free locations left it
+will return a missing value.
 
 {marker conformability}{...}
 {title:Conformability}

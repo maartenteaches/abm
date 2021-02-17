@@ -69,6 +69,10 @@ real scalar abm_grid::free_spot(real scalar r, real scalar c, real scalar t)
 	attempt = length(taken) 
 	while (!done) {
 		attempt = attempt + 1
+		if (idim != 0 & attempt > idim) {
+			attempt = .
+			break
+		}
 		if (!anyof(taken,attempt)) done = 1
 	}
 	return(attempt)
