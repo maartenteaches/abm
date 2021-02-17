@@ -910,6 +910,26 @@ foo.rdim(10)
 foo.cdim(10)
 foo.setup()
 assert(foo.tests_make_key(1,1,.,.)==(1,1,0,1))
-
-
+assert(foo.tests_make_key(1,1,.,1)==(1,1,0,1))
+assert(foo.tests_make_key(1,1,0,.)==(1,1,0,1))
+assert(foo.tests_make_key(1,1,0,1)==(1,1,0,1))
 end
+rcof "mata: foo.tests_make_key(1,1,1,1)" == 3001
+rcof "mata: foo.tests_make_key(1,1,0,2)" == 3001
+rcof "mata foo.tests_make_key(1,11,0,1)" == 3498
+rcof "mata foo.tests_make_key(11,1,0,1)" == 3498
+
+mata:
+foo = tests_abm_grid()
+foo.rdim(10)
+foo.cdim(10)
+foo.tdim(10)
+foo.idim(10)
+foo.setup()
+assert(foo.tests_make_key(1,1,0,1)==(1,1,0,1))
+end
+rcof "mata:foo.tests_make_key(1,1,.,.)" == 3300
+rcof "mata:foo.tests_make_key(1,1,.,1)" == 3300
+rcof "mata:foo.tests_make_key(1,1,0,.)" == 3300
+rcof "mata foo.tests_make_key(1,11,0,1)" == 3498
+rcof "mata foo.tests_make_key(11,1,0,1)" == 3498

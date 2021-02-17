@@ -15,7 +15,7 @@ real rowvector abm_grid::make_key(real scalar r, real scalar c, real scalar t, r
 	}
 	else {
 		if (i < 0 | (i > idim & idim != 0) | floor(i) != i ) {
-			errmsg = "i must be an integer larger than or equal 0" + 
+			errmsg = "i must be an integer larger than or equal 0 " + 
 			( idim == 0 ?  "" : "and less than or equal to " + strofreal(idim)) 
 			_error(3300, errmsg)
 		}
