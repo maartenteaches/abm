@@ -14,6 +14,7 @@ class tests_abm_grid extends abm_grid
     void tests_torus_adj()
     real matrix tests_torus_closest()
     real rowvector tests_make_key()
+    real rowvector tests_agent_loc()
 }
 
 // ============================ _setup.mata
@@ -935,20 +936,32 @@ rcof "mata foo.tests_make_key(1,11,0,1)" == 3498
 rcof "mata foo.tests_make_key(11,1,0,1)" == 3498
 
 mata:
+real rowvector tests_abm_grid::tests_agent_loc(
+    real scalar r, real scalar c, real scalar t
+)
+{
+    return(agent_loc(r,c,t))
+}
 foo = tests_abm_grid()
 foo.rdim(10)
 foo.cdim(10)
 foo.idim(5)
 foo.setup()
 assert(foo.free_spot(1,1,0)==1)
+assert(foo.tests_agent_loc(1,1,0)==J(1,0,.))
 foo.create_agent(1,1,1,0,1)
 assert(foo.free_spot(1,1,0)==2)
+assert(foo.tests_agent_loc(1,1,0)==1)
 foo.create_agent(1,1,2,0,2)
 assert(foo.free_spot(1,1,0)==3)
+assert(foo.tests_agent_loc(1,1,0)==(1,2))
 foo.create_agent(1,1,3,0,3)
 assert(foo.free_spot(1,1,0)==4)
+assert(foo.tests_agent_loc(1,1,0)==(1,2,3))
 foo.create_agent(1,1,4,0,4)
 assert(foo.free_spot(1,1,0)==5)
+assert(foo.tests_agent_loc(1,1,0)==(1,2,3,4))
 foo.create_agent(1,1,5,0,5)
 assert(foo.free_spot(1,1,0)==.)
+assert(foo.tests_agent_loc(1,1,0)==(1,2,3,4,5))
 end
