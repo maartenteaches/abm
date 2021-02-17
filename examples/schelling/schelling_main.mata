@@ -1,6 +1,8 @@
+version 16.1
 cd "c:\mijn documenten\projecten\stata\abm\abm"
 
-mata
+mata:
+mata set matastrict on
 class schelling extends abm_chk {
 		class abm_grid  scalar    universe
 		string          colvector agents
