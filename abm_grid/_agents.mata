@@ -66,7 +66,7 @@ real scalar abm_grid::free_spot(real scalar r, real scalar c, real scalar t)
 	taken = universe.get(key)
 	
 	done = 0
-	attempt = length(taken) 
+	attempt = 0 
 	while (!done) {
 		attempt = attempt + 1
 		if (idim != 0 & attempt > idim) {

@@ -982,4 +982,9 @@ assert(foo.tests_agent_loc(1,1,0)==(1,2,3,4,5))
 assert(foo.has_agent(1,1)==1)
 assert(foo.has_agent(1,1,0)==1)
 assert(foo.has_agent(1,2)==0)
+
+foo.delete_agent(1,1,0,2)
+assert(foo.free_spot(1,1,0)==2)
+assert(foo.tests_agent_loc(1,1,0)==(1,3,4,5))
+
 end
