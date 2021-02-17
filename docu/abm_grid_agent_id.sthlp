@@ -52,6 +52,9 @@ and location number ({it:i}) if {cmd:idim} was set to 0 (no upper bound on the
 number of agents per cell) or a number larger than 1. If {cmd:tdim} is set to 0, 
 then the iteration number is always a missing value ({cmd:.}).
 
+{pstd}
+{cmd:agen_id()} returns a missing value if no agent lives at the given address.
+
 
 {title:Remarks}
 

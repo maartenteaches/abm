@@ -82,7 +82,8 @@ real scalar abm_grid::agent_id( real scalar r, real scalar c , | real scalar t,
                                 real scalar i)
 {
 	real rowvector key
-	
+	real scalar res
+
 	is_setup() 
 	
 	if (i == 0) {
@@ -90,7 +91,13 @@ real scalar abm_grid::agent_id( real scalar r, real scalar c , | real scalar t,
 	}
 	
 	key = make_key(r, c, t, i)
-	return(universe.get(key))
+	res = universe.get(key)
+	if (res == J(1,0,.)){
+		return(.)
+	}
+	else {
+		return(res)
+	}
 }
 
 real rowvector abm_grid::agent_ids( real scalar r, real scalar c , | real scalar t)
