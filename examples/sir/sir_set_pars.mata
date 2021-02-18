@@ -1,11 +1,11 @@
-include sir_locals.do
+include examples/sir/sir_locals.mata
 
 mata:
 
 transmorphic sir::N(| real scalar val)
 {
 	if (args() == 1) {
-		posint(val)
+		is_posint(val)
 		N = val
 	}
 	else {
@@ -16,7 +16,7 @@ transmorphic sir::N(| real scalar val)
 transmorphic sir::tdim(| real scalar val)
 {
 	if (args() == 1) {
-		posint(val)
+		is_posint(val)
 		tdim= val
 	}
 	else {
@@ -28,7 +28,7 @@ transmorphic sir::tdim(| real scalar val)
 transmorphic sir::outbreak(| real scalar val)
 {
 	if (args() == 1) {
-		posint(val)
+		is_posint(val)
 		outbreak= val
 	}
 	else {
@@ -39,7 +39,7 @@ transmorphic sir::outbreak(| real scalar val)
 transmorphic sir::removed(| real scalar val)
 {
 	if (args() == 1) {
-		posint(val)
+		is_posint(val)
 		removed= val
 	}
 	else {
@@ -61,7 +61,7 @@ transmorphic sir::mcontacts(| real scalar val)
 transmorphic sir::transmissibility(| real scalar val)
 {
 	if ( args()==1 ) {
-		pr(val)
+		is_pr(val)
 		transmissibility = val
 	}
 	else {
@@ -72,7 +72,7 @@ transmorphic sir::transmissibility(| real scalar val)
 transmorphic sir::mindur(| real scalar val)
 {
 	if ( args()==1 ) {
-		posint(val)
+		is_posint(val)
 		mindur = val
 	}
 	else {
@@ -94,7 +94,7 @@ transmorphic sir::meandur(| real scalar val)
 transmorphic sir::pr_loss(| real scalar val)
 {
 	if ( args()==1 ) {
-		pr(val)
+		is_pr(val)
 		pr_loss = val
 	}
 	else {

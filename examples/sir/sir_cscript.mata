@@ -24,17 +24,8 @@ assert(model.mcontacts()==2)
 assert(model.mindur()==10)
 assert(model.meandur()==14)
 assert(model.pr_loss()==0.01)
-model.posint(3)
-model.pr(0)
-model.pr(.5)
-model.pr(1)
 end
 
-rcof "mata: model.posint(0)"   == 3498
-rcof "mata: model.posint(1.4)" == 3498
-rcof "mata: model.posint(-2)"  == 3498
-rcof "mata: model.pr(-1)"      == 3498 
-rcof "mata: model.pr(1.2)"     == 3498
 
 // setup
 mata:

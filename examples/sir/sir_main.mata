@@ -1,5 +1,5 @@
 version 16.1
-cd "c:\mijn documenten\projecten\abm\abm"
+cd "d:\mijn documenten\projecten\stata\abm\abm"
 
 mata:
 
@@ -49,9 +49,9 @@ class sir extends abm_chk {
 }
 end 
 
-do sir_chks.do
-do sir_set_pars.do
-do sir_sim.do
-do sir_export.do
+do examples/sir/sir_chks.mata
+do examples/sir/sir_set_pars.mata
+do examples/sir/sir_sim.mata
+do examples/sir/sir_export.mata
 
 exit

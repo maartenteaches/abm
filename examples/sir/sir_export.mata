@@ -1,4 +1,4 @@
-include sir_locals.do
+include examples/sir/sir_locals.mata
 
 mata:
 

@@ -1,4 +1,4 @@
-include sir_locals.do
+include examples/sir/sir_locals.mata
 
 mata:
 
@@ -39,6 +39,7 @@ void sir::setup()
 	
 	agents.N(N)
 	agents.k(3)
+	agents.abm_version("1.0.0")
 	agents.setup()
 	
 	id = jumble((1..N)')
@@ -65,8 +66,8 @@ void sir::step(real scalar id, real scalar t)
 	real scalar i, k
 	real rowvector key
 	
-	isid(id)
-	istime(t)
+	is_id(id)
+	is_time(t)
 
 	key = id, `dur',t
 
@@ -87,8 +88,8 @@ void sir::progress(real scalar id, real scalar t)
 {
     real rowvector key1, key2, key3
 	
-	isid(id)
-	istime(t)
+	is_id(id)
+	is_time(t)
 	
 	key1 = id, `state',t
 	key2 = id, `dur',t
@@ -112,7 +113,7 @@ real matrix sir::meet(real scalar id, real scalar t)
 	real colvector res
 	real rowvector key
 
-	isid(id)
+	is_id(id)
 	
 	k = rpoisson(1,1,mcontacts)
 	if (k == 0) {
@@ -131,8 +132,8 @@ real scalar sir::infect(real scalar id, real scalar t)
 	real vector key
 	real scalar infected
 
-	isid(id)
-	istime(t)
+	is_id(id)
+	is_time(t)
 
 	infected = 0
 	key = id,`state', t
