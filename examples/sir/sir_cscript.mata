@@ -3,8 +3,7 @@ cscript
 
 set seed 123456
 
-cd "D:\Mijn documenten\projecten\stata\abm\sug\london\sir"
-do sir_master.do
+do examples\sir\sir_main.mata
 
 
 // declare parameters
@@ -40,7 +39,7 @@ model.meandur(14)
 model.pr_loss(0.01)
 model.setup()
 assert(model.agents.N()==10)
-assert(model.agents.k()==4)
+assert(model.agents.k()==3)
 
 n_ill = 0
 for(i=1;i<=10;i++) {
