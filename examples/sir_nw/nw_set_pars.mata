@@ -5,7 +5,7 @@ mata:
 transmorphic sir_nw::N(| real scalar val)
 {
 	if (args() == 1) {
-		posint(val)
+		is_posint(val)
 		N = val
 	}
 	else {
@@ -16,7 +16,7 @@ transmorphic sir_nw::N(| real scalar val)
 transmorphic sir_nw::tdim(| real scalar val)
 {
 	if (args() == 1) {
-		posint(val)
+		is_posint(val)
 		tdim= val
 	}
 	else {
@@ -28,7 +28,7 @@ transmorphic sir_nw::tdim(| real scalar val)
 transmorphic sir_nw::outbreak(| real scalar val)
 {
 	if (args() == 1) {
-		posint(val)
+		is_posint(val)
 		outbreak= val
 	}
 	else {
@@ -39,7 +39,7 @@ transmorphic sir_nw::outbreak(| real scalar val)
 transmorphic sir_nw::removed(| real scalar val)
 {
 	if (args() == 1) {
-		posint(val)
+		is_posint(val)
 		removed= val
 	}
 	else {
@@ -50,7 +50,7 @@ transmorphic sir_nw::removed(| real scalar val)
 transmorphic sir_nw::transmissibility(| real scalar val)
 {
 	if ( args()==1 ) {
-		pr(val)
+		is_pr(val)
 		transmissibility = val
 	}
 	else {
@@ -61,7 +61,7 @@ transmorphic sir_nw::transmissibility(| real scalar val)
 transmorphic sir_nw::mindur(| real scalar val)
 {
 	if ( args()==1 ) {
-		posint(val)
+		is_posint(val)
 		mindur = val
 	}
 	else {
@@ -83,7 +83,7 @@ transmorphic sir_nw::meandur(| real scalar val)
 transmorphic sir_nw::pr_loss(| real scalar val)
 {
 	if ( args()==1 ) {
-		pr(val)
+		is_pr(val)
 		pr_loss = val
 	}
 	else {
@@ -94,7 +94,7 @@ transmorphic sir_nw::pr_loss(| real scalar val)
 transmorphic sir_nw::degree(| real scalar val)            // <-- new
 {
 	if ( args()==1 ) {
-		posint(val)
+		is_posint(val)
 		degree = val
 	}
 	else {
@@ -105,7 +105,7 @@ transmorphic sir_nw::degree(| real scalar val)            // <-- new
 transmorphic sir_nw::pr_long(| real scalar val)        // <-- new
 {
 	if ( args()==1 ) {
-		pr(val)
+		is_pr(val)
 		pr_long = val
 	}
 	else {

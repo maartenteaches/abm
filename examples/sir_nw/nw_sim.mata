@@ -41,11 +41,13 @@ void sir_nw::setup()
 	nw.N_nodes(0,N)                                                      // <-- new
 	nw.directed(0)                                                       // <-- new
 	nw.tdim(0)                                                           // <-- new
-	nw.sw(degree,pr_long)                                                // <-- new    
+	nw.sw(degree,pr_long)                                                // <-- new 
+	nw.abm_version("1.0.0")   
 	nw.setup()                                                           // <-- new
 	
 	agents.N(N)
 	agents.k(4)
+	agents.abm_version("1.0.0")
 	agents.setup()
 	
 	id = jumble((1..N)')
@@ -72,8 +74,8 @@ void sir_nw::step(real scalar id, real scalar t)
 	real scalar i, k
 	real rowvector key
 	
-	isid(id)
-	istime(t)
+	is_id(id)
+	is_time(t)
 
 	key = id, `dur',t
 
@@ -95,8 +97,8 @@ void sir_nw::progress(real scalar id, real scalar t)
 {
     real rowvector key1, key2, key3
 	
-	isid(id)
-	istime(t)
+	is_id(id)
+	is_time(t)
 	
 	key1 = id, `state',t
 	key2 = id, `dur',t
@@ -119,8 +121,8 @@ real scalar sir_nw::infect(real scalar id, real scalar t)
 	real vector key
 	real scalar infected
 
-	isid(id)
-	istime(t)
+	is_id(id)
+	is_time(t)
 
 	infected = 0
 	key = id,`state', t
