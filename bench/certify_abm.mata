@@ -1,5 +1,5 @@
 cscript
-cd "c:\mijn documenten\projecten\stata\abm\abm"
+cd "d:\mijn documenten\projecten\stata\abm\abm"
 do abm.mata
 
 do bench\certify_bc.mata

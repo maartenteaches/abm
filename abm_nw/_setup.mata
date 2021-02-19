@@ -29,8 +29,9 @@ void abm_nw::setup()
 
 void abm_nw::clear()
 {
+	if (setup==0) return
+	
 	real scalar i,j
-
 	adjlist0 = J(N_nodes0,1,NULL)
 	for(i=1; i<=N_nodes0; i++) {
 		adjlist0[i] = &(J(1,0,.))
