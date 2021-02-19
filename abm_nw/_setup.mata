@@ -24,6 +24,7 @@ void abm_nw::setup()
 	    randomit = 0
 	}
 	if (weighted == .) weighted = 1
+	if (N_nodes0 == .) N_nodes0 = 0
 	setup = 1
 }
 
