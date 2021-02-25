@@ -77,4 +77,5 @@ bar.test_setup()
 assert(bar.abm_version()==(0,1,0))
 
 end
+rcof `"mata: bar.abm_version("0.5.1")"' == 3498
 exit
