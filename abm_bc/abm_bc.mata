@@ -1,7 +1,7 @@
 // class to manage backwards compatability
 
 // set current version
-local current (1,0,0)
+local current (0,1,0)
 
 mata:
 mata set matastrict on
@@ -11,6 +11,7 @@ class abm_bc
         real          rowvector mod_version
 		
 		real          rowvector parse_version()
+		void                    valid_version()
 		void                    bc_setup()
 		real          scalar    mod_leq()
         real          scalar    mod_lt()
@@ -88,14 +89,19 @@ transmorphic abm_bc::abm_version(| string scalar val)
 	}
 }
 
+void abm_bc::valid_version(real rowvector tocheck)
+{
+	if (cols(tocheck)!= 3 | anyof(tocheck,.) | any(tocheck:<0) | any(floor(tocheck):!=tocheck)) {
+	  _error("version to be checked invalid")  
+	} 
+}
+
 real scalar abm_bc::mod_lt(real rowvector tocheck, | string scalar max) 
 {
     real scalar i, res
 	real rowvector against
 	
-	if (cols(tocheck)!= 3 | anyof(tocheck,.) | any(tocheck:<0) | any(floor(tocheck):!=tocheck)) {
-	  _error("version to be checked invalid")  
-	} 
+	valid_version(tocheck)
 	
 	if (args()==1) {
 		against = mod_version
@@ -121,51 +127,27 @@ real scalar abm_bc::mod_leq(real rowvector tocheck)
 {
     real scalar i, res
 	
-	if (cols(tocheck)!= 3 | anyof(tocheck,.) | any(tocheck:<0) | any(floor(tocheck):!=tocheck)) {
-	  _error("version to be checked invalid")  
-	} 
+	valid_version(tocheck)
 	
-	res = 0
-	for (i=1; i<=3 ; i++) {
-		if (mod_version[i] > tocheck[i]) {
-			break
-		}
-	    if (mod_version[i] <= tocheck[i]) {
-		    res = 1
-			break
-		}
-	}
-	return(res)
+	if (tocheck==mod_version) return(1)
+	return(mod_lt(tocheck))
 }
 
 real scalar abm_bc::mod_geq(real rowvector tocheck) 
 {
     real scalar i, res
 	
-	if (cols(tocheck)!= 3 | anyof(tocheck,.) | any(tocheck:<0) | any(floor(tocheck):!=tocheck)) {
-	  _error("version to be checked invalid")  
-	} 
+	valid_version(tocheck)
 	
-	res = 0
-	for (i=1; i<=3 ; i++) {
-		if (mod_version[i] >= tocheck[i]) {
-			res = 1
-			break
-		}
-	    if (mod_version[i] < tocheck[i]) {
-			break
-		}
-	}
-	return(res)
+	if (tocheck==mod_version) return(1)
+	return(mod_gt(tocheck))
 }
 
 real scalar abm_bc::mod_gt(real rowvector tocheck) 
 {
     real scalar i, res
 
-	if (cols(tocheck)!= 3 | anyof(tocheck,.) | any(tocheck:<0) | any(floor(tocheck):!=tocheck)) {
-	  _error("version to be checked invalid")  
-	} 
+	valid_version(tocheck)
 	
 	res = 0
 	for (i=1; i<=3 ; i++) {
