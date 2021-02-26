@@ -50,7 +50,7 @@ transmorphic abm_grid::idim(| real scalar dim)
 transmorphic abm_grid::tdim(| real scalar dim) 
 {
 	if (args() == 1) {
-		is_posint(dim, "zero_ok")
+		is_posint(dim)
 		tdim = dim
 		setup = 0
 	}

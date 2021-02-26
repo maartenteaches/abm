@@ -37,7 +37,7 @@ void abm_grid::setup()
 		_error(3351, "rdim() must be specified first")
 	}
 	if (tdim==.) {
-		tdim = 0
+		tdim = 1
 	}
 	if (idim==.) {
 		idim = 1

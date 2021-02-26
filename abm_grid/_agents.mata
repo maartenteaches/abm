@@ -20,17 +20,17 @@ real rowvector abm_grid::make_key(real scalar r, real scalar c, real scalar t, r
 			_error(3300, errmsg)
 		}
 	}
-	if (tdim == 0 ) {
-		if (t != . & t != 0) {
-			_error(3001, "you specified t, but set tdim to 0")
+	if (tdim == 1 ) {
+		if (t != . & t != 1) {
+			_error(3001, "you specified t, but set tdim to 1")
 		}
 		else {
-			t = 0
+			t = 1
 		}
 	}
 	else {
-		if (t < 0 | t > tdim | floor(t) != t ) {
-			errmsg = "t must be an integer larger than or equal to 0, less than or equal to " + 
+		if (t < 1 | t > tdim | floor(t) != t ) {
+			errmsg = "t must be a positive integer less than or equal to " + 
 					strofreal(tdim)
 			_error(3300, errmsg)
 		}	
