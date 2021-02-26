@@ -52,6 +52,8 @@ stored version number is less than the argument.{p_end}
 version of {cmd:abm} if it has not been set.{p_end}
 {p2col:{helpb abm_bc_parse_version:parse_version()}}Parses a string that 
 should contain a version number{p_end}
+{p2col:{helpb abm_bc_valid_version:valid_version()}}Checks whether a version 
+is valid{p_end}
 
 {p2col 6 23 25 8:{it:Protected variables}}{p_end}
 {p2col:{bf:mod_version}}version number as a three column real vector.{p_end}
