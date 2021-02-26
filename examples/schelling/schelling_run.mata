@@ -1,4 +1,4 @@
-cd "c:\mijn documenten\projecten\stata\abm\abm"
+cd "d:\mijn documenten\projecten\stata\abm\abm"
 clear mata
 drop _all
 set seed 1234567

@@ -39,7 +39,7 @@ void sir::setup()
 	
 	agents.N(N)
 	agents.k(3)
-	agents.abm_version("1.0.0")
+	agents.abm_version("0.1.0")
 	agents.setup()
 	
 	id = jumble((1..N)')

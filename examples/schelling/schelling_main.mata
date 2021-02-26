@@ -1,5 +1,5 @@
 version 16.1
-cd "c:\mijn documenten\projecten\stata\abm\abm"
+cd "d:\mijn documenten\projecten\stata\abm\abm"
 
 mata:
 mata set matastrict on

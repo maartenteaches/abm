@@ -154,7 +154,7 @@ void schelling::setup_universe()
 	if (tdim()==.) {
 		_error(3000, "tdim must be set first")
 	}
-	universe.abm_version("1.0.0")
+	universe.abm_version("0.1.0")
 	universe.setup()
 }	
 
