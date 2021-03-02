@@ -2,6 +2,7 @@ mata:
 real rowvector abm_grid::make_key(real scalar r, real scalar c, real scalar t, real scalar i)
 {
 	string scalar errmsg
+	real scalar lb
 
 	is_setup() 
 	is_valid_cell((r,c))
@@ -20,16 +21,19 @@ real rowvector abm_grid::make_key(real scalar r, real scalar c, real scalar t, r
 			_error(3300, errmsg)
 		}
 	}
-	if (tdim == 1 ) {
-		if (t != . & t != 1) {
+	lb = mod_gt((0,1,0)) // 1 after 0.1.0 and 0 before that version
+
+	}
+	if (tdim == lb ) {
+		if (t != . & t != lb) {
 			_error(3001, "you specified t, but set tdim to 1")
 		}
 		else {
-			t = 1
+			t = lb
 		}
 	}
 	else {
-		if (t < 1 | t > tdim | floor(t) != t ) {
+		if (t < lb | t > tdim | floor(t) != t ) {
 			errmsg = "t must be a positive integer less than or equal to " + 
 					strofreal(tdim)
 			_error(3300, errmsg)
