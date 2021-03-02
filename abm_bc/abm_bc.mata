@@ -1,7 +1,7 @@
 // class to manage backwards compatability
 
 // set current version
-local current (0,1,0)
+local current (0,2,0)
 
 mata:
 mata set matastrict on

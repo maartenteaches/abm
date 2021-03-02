@@ -70,18 +70,27 @@ assert(foo.cdim() == 20)
 
 // defaults for setup()
 foo.setup()
-assert(foo.tdim()     == 0)
+assert(foo.tdim()     == 1)
 assert(foo.idim()     == 1)
 assert(foo.neumann()  == 0)
 assert(foo.torus()    == 0)
 assert(foo.randit()   == 0)
 assert(foo.size()     == 200)
+assert(foo.abm_version()==(0,2,0))
 
 void tests_abm_grid::tests_setup()
 {
     assert(universe.notfound()==J(1,0,.))
 }
 foo.tests_setup()
+
+foo = tests_abm_grid()
+foo.rdim(10)
+foo.cdim(10)
+foo.abm_version("0.1.0")
+foo.setup()
+assert(foo.tdim()==0)
+assert(foo.abm_version()==(0,1,0))
 
 end
 
