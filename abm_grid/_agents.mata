@@ -23,8 +23,7 @@ real rowvector abm_grid::make_key(real scalar r, real scalar c, real scalar t, r
 	}
 	lb = mod_gt((0,1,0)) // 1 after 0.1.0 and 0 before that version
 
-	}
-	if (tdim == lb ) {
+		if (tdim == lb ) {
 		if (t != . & t != lb) {
 			_error(3001, "you specified t, but set tdim to 1")
 		}
