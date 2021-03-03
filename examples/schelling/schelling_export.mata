@@ -41,7 +41,7 @@ real matrix schelling::summ()
 	res = J(tdim+1, 3, .)
 	res[.,1] = (0..tdim)'
 
-	for(t=0; t <= tdim ; t++){
+	for(t=1; t <= tdim ; t++){
 		prop = J(nagents,2,.)
 		k=1
 		for (r=1; r<=rdim ; r++) {

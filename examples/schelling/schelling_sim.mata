@@ -15,7 +15,7 @@ void schelling::run() {
 	setup_agents()
 	populate_universe()
 	
-	for(t=0; t < universe.tdim() ; t++) {
+	for(t=1; t < universe.tdim() ; t++) {
 		universe.copy_grid(t, t+1)
 		coords = universe.schedule()
 		for(k=1; k <= rows(coords); k++){
@@ -145,7 +145,7 @@ void schelling::populate_universe(){
 		r = grid0[i,1]
 		c = grid0[i,2]
 
-		universe.create_agent(r,c,i,0)
+		universe.create_agent(r,c,i,1)
 	}
 }
 
@@ -154,7 +154,7 @@ void schelling::setup_universe()
 	if (tdim()==.) {
 		_error(3000, "tdim must be set first")
 	}
-	universe.abm_version("0.1.0")
+	universe.abm_version("0.2.0")
 	universe.setup()
 }	
 
