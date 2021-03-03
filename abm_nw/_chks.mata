@@ -27,14 +27,21 @@ void abm_nw::is_symmetric(| real scalar t)
 
 void abm_nw::is_valid_time(real scalar time)
 {
+	real scalar lb
 	if (time != .) {
-		if (tdim == 0 & time > 0) {
+		lb = mod_gt((0,1,0)) // after 0.1.0 time starts at 1 not 0
+		if (tdim == lb & time > lb) {
 			_error(3000,"time is specified while there is no time dimension")
 		}
-		if (tdim==. & time > 0) {
+		if (tdim==. & time > lb) {
 			_error(3000, "time is specified without specifying tdim")
 		}
-		is_posint(time, "zero_ok")
+		if ( mod_gt((0,1,0))) {
+			is_posint(time)
+		}
+		else {
+			is_posint(time, "zero_ok")
+		}
 		if(time > tdim) {
 			_error(3000,"specified time exceeds tdim")
 		}
@@ -45,8 +52,11 @@ void abm_nw::is_valid_id(real scalar id, | real scalar time, string scalar dropp
 {
 	is_nodesset()
     is_valid_time(time)
+	if (args()==1) {
+		time = mod_gt((0,1,0))
+	}
 	if (dropped_ok == "") {
-		if (args()==1 | time == 0) {
+		if (time == 0) {
 			if(!anyof(nodes0,id)) {
 				_error(3000,"invalid id")
 			}
@@ -67,12 +77,14 @@ void abm_nw::is_valid_id(real scalar id, | real scalar time, string scalar dropp
 
 void abm_nw::is_frozen(| real scalar t)
 {
-	if (t==.) t=0
+	real scalar lb 
+	lb = mod_gt((0,1,0))
+	if (t==.) t=lb
 	is_valid_time(t)
-	if (t==0 & setup == 1) {
+	if (t==lb & setup == 1) {
 		_error("network has been frozen")
 	}
-	if(t>0 ) {
+	if(t>lb ) {
 		if (frozen[t]==1) _error("network has been frozen")
 	}
 }

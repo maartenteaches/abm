@@ -12,7 +12,7 @@ void abm_nw::new(){
 void abm_nw::setup()
 {
 	if (tdim==.) {
-	    tdim = 0
+	    tdim = mod_gt((0,1,0))
 	}
 	if (directed == .) {
 	    directed = 1
@@ -24,7 +24,13 @@ void abm_nw::setup()
 	    randomit = 0
 	}
 	if (weighted == .) weighted = 1
-	if (N_nodes0 == .) N_nodes0 = 0
+	if (mod_gt((0,1,0))){
+		if (N_nodes[1] == .) N_nodes[1] = 0
+	}
+	else {
+		if (N_nodes0 == .) N_nodes0 = 0
+	}
+	
 	setup = 1
 }
 
@@ -33,16 +39,18 @@ void abm_nw::clear()
 	if (setup==0) return
 	
 	real scalar i,j
-	adjlist0 = J(N_nodes0,1,NULL)
-	for(i=1; i<=N_nodes0; i++) {
-		adjlist0[i] = &(J(1,0,.))
-	}
-	nodes0 = 1..N_nodes0
-	maxnodes = N_nodes0
+	if (mod_leq((0,1,0))) {
+		adjlist0 = J(N_nodes0,1,NULL)
+		for(i=1; i<=N_nodes0; i++) {
+			adjlist0[i] = &(J(1,0,.))
+		}
+		nodes0 = 1..N_nodes0
+		maxnodes = N_nodes0
 
-	dropped_nodes0 = J(1,0,.)
+		dropped_nodes0 = J(1,0,.)
+	}
 	
-	if (tdim > 0 & tdim < .) {
+	if (tdim > 0 ) {
 		adjlist = J(maxnodes, tdim, NULL)
 		nodes = J(tdim,1,NULL)
 		N_nodes = J(tdim,1,.)
