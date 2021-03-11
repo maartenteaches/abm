@@ -1,6 +1,6 @@
 mata:
 mata set matastrict on
-class nw_data
+class nw_data extends abm_bc
 {
     protected:
 		real                   vector    N_edges
@@ -25,6 +25,7 @@ class nw_data
 		pointer(real vector)   vector    dropped_nodes
 		real                   vector    dropped_nodes0
 
+		// _data_chks.mata
  		void                             is_frozen()
 		void                             is_setup()
 		void                             is_nodesset()
@@ -60,3 +61,5 @@ class nw_data
 		real                   matrix    export_edgelist()               
 }
 end
+
+do abm_nw\_data_chks.mata
