@@ -31,7 +31,9 @@ class nw_data extends abm_bc
 		void                             is_nodesset()
 		void                             is_symmetric() 
 
+		// _data_setup.mata
 		void                             new()
+		void                             clear_010()
 
     public:
    		transmorphic                     N_nodes()
@@ -39,9 +41,12 @@ class nw_data extends abm_bc
 		transmorphic                     directed()
 		transmorphic                     randomit()
 		transmorphic                     weighted()  
-		transmorphic                     randomit()            
+		transmorphic                     randomit()    
+
+		// _data_setup.mata        
 		void                             setup()
        	void                             clear() 
+		   
 		void                             add_edge()
 		void                             add_node()
 		void                             return_node()

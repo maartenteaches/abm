@@ -9,7 +9,7 @@ void nw_data::new(){
 	network.notfound(0)
 }
 
-void abm_nw::setup()
+void nw_data::setup()
 {
 	if (tdim==.) {
 	    tdim = mod_gt((0,1,0))
@@ -35,30 +35,24 @@ void abm_nw::setup()
 	setup = 1
 }
 
-void abm_nw::clear()
+void nw_data::clear_010()
 {
 	if (setup==0) return
 	
 	real scalar i,j
-	if (mod_leq((0,1,0))) {
-		adjlist0 = J(N_nodes0,1,NULL)
-		for(i=1; i<=N_nodes0; i++) {
-			adjlist0[i] = &(J(1,0,.))
-		}
-		nodes0 = 1..N_nodes0
-		maxnodes = N_nodes0
-
-		dropped_nodes0 = J(1,0,.)
+	adjlist0 = J(N_nodes0,1,NULL)
+	for(i=1; i<=N_nodes0; i++) {
+		adjlist0[i] = &(J(1,0,.))
 	}
-    else {
-        maxnodes = N_nodes[1]
-    }
+	nodes0 = 1..N_nodes0
+	maxnodes = N_nodes0
+
+	dropped_nodes0 = J(1,0,.)
 	
 	if (tdim > 0 ) {
 		adjlist = J(maxnodes, tdim, NULL)
 		nodes = J(tdim,1,NULL)
-        if (mod_gt((0,1,0))) nodes[1] = &(1..N_nodes[1])
-		N_nodes = N_nodes[1] \ J(tdim-1,1,.)
+		N_nodes = J(tdim,1,.)
 		N_edges = J(tdim,1,0)
 		dropped_nodes = J(tdim,1,NULL)
 		frozen = J(tdim,1,0)
@@ -75,7 +69,38 @@ void abm_nw::clear()
 	if (weighted==1) network.clear()
 	nw_set    = 0
 	setup     = 0
+}
 
+void nw_data::clear()
+{
+	if (setup==0) return
+	if (mod_leq((0,1,0))) {
+		clear_010()
+		return
+	}
+
+	real scalar i,j
+	maxnodes = N_nodes[1]
+    
+	adjlist = J(maxnodes, tdim, NULL)
+	nodes = nodes[1] \ J(tdim-1,1,NULL)
+	N_nodes = N_nodes[1] \ J(tdim-1,1,.)
+	N_edges = J(tdim,1,0)
+	dropped_nodes = J(tdim,1,NULL)
+	frozen = J(tdim,1,0)
+	for(i=1;i<=tdim; i++) {
+		dropped_nodes[i] = &(J(1,0,.))
+	}
+	
+	for(i=1; i<= maxnodes; i++) {
+		for(j=1; j<=tdim; j++) {
+			adjlist[i,j] = &(J(1,0,.))
+		}
+	}
+
+	if (weighted==1) network.clear()
+	nw_set    = 0
+	setup     = 0
 }
 
 end
