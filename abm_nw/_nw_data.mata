@@ -46,7 +46,7 @@ class nw_data extends abm_bc
 		// _data_setup.mata        
 		void                             setup()
        	void                             clear() 
-		   
+
 		void                             add_edge()
 		void                             add_node()
 		void                             return_node()
@@ -68,3 +68,4 @@ class nw_data extends abm_bc
 end
 
 do abm_nw\_data_chks.mata
+do abm_nw\_data_setup.mata
