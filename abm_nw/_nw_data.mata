@@ -36,7 +36,9 @@ class nw_data extends abm_bc
 		void                             clear_010()
 
     public:
+		// _data_pars.mata
    		transmorphic                     N_nodes()
+		void                             N_nodes_set010()
 		transmorphic                     tdim()
 		transmorphic                     directed()
 		transmorphic                     randomit()
@@ -47,6 +49,7 @@ class nw_data extends abm_bc
 		void                             setup()
        	void                             clear() 
 
+		// _data_change.mata
 		void                             add_edge()
 		void                             add_node()
 		void                             return_node()
@@ -54,6 +57,7 @@ class nw_data extends abm_bc
 		void                             change_weight()
 		void                             remove_node()     
         
+		// _data_return.mata
         real                   scalar    N_edges()
 		real                   rowvector neighbours()
 		real                   scalar    weight()
@@ -61,7 +65,7 @@ class nw_data extends abm_bc
 		real                   scalar    edge_exists()
 		real                   vector    schedule()
 		
-		// _export.mata
+		// _data_export.mata
 		real                   matrix    export_adjmat()
 		real                   matrix    export_edgelist()               
 }
