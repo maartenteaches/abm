@@ -1,34 +1,16 @@
 mata:
 
-
 transmorphic nw_data::N_nodes( real scalar t, | real scalar N){
 		real scalar i
 		t=parse_t(t)
 		
 		if (args()==2){
-            if (mod_leq((0,1,0))) {
-                N_nodes_set010(t,N)
-                return
-            }
 			if (t!=1) _error("number of nodes can only be set for t=1")
 			is_frozen()
-			N_nodes[1] = N
-			adjlist = J(N,tdim,NULL)
-			for(i=1; i<=N; i++) {
-				adjlist[i,1] = &(J(1,0,.))
-			}
-			nodes0 = 1..N_nodes0
-			maxnodes = N_nodes0
-			dropped_nodes0 = J(1,0,.)
-			nodes_set=1
+			N_nodes = N
 		}
 		else {
-			if (t==0) {
-				return(N_nodes0)
-			}
-		    else {
 				return(N_nodes[t])
-			}
 		}
 }
 
@@ -50,26 +32,8 @@ transmorphic abm_nw::tdim(| real scalar t)
 	
 	if(args()==1) {
 	    is_frozen()
-	    is_posint(t, "zero_ok")
-	    is_nodesset()
+		t = parse_t(t)
 		tdim = t
-		if (tdim > 1) {
-			adjlist = J(maxnodes, tdim, NULL)
-			nodes = J(tdim,1,NULL)
-			N_nodes = J(tdim,1,.)
-			N_edges = J(tdim,1,0)
-			dropped_nodes = J(tdim,1,NULL)
-			frozen = J(tdim,1,0)
-			for(i=1;i<=tdim; i++) {
-				dropped_nodes[i] = &(J(1,0,.))
-			}
-			
-			for(i=1; i<= maxnodes; i++) {
-				for(j=1; j<=tdim; j++) {
-					adjlist[i,j] = &(J(1,0,.))
-				}
-			}
-		}
 	}
 	else{
 	    return(tdim)
@@ -79,7 +43,6 @@ transmorphic abm_nw::tdim(| real scalar t)
 transmorphic abm_nw::directed(| real scalar bool)
 {
     if (args()==1)  {
-	    is_bool(bool)
 		is_frozen()
 		directed = bool
 	}
@@ -91,7 +54,6 @@ transmorphic abm_nw::directed(| real scalar bool)
 transmorphic abm_nw::weighted(| real scalar bool)
 {
 	if(args()==1) {
-		is_bool(bool)
 		is_frozen()
 		weighted = bool
 	}

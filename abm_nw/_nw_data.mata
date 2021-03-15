@@ -10,7 +10,6 @@ class nw_data extends abm_bc
 		real                   scalar    directed
 		real                   scalar    weighted
    		real                   scalar    randomit
-		real                   scalar    nodes_set
 		real                   scalar    nw_set
 		real                   scalar    setup
 		real                   vector    frozen
