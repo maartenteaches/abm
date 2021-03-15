@@ -5,8 +5,6 @@ class nw_data extends abm_bc
     protected:
 		real                   vector    N_edges
 		real                   vector    N_nodes
-		real                   scalar    N_edges0
-		real                   scalar    N_nodes0		
 		real                   scalar    maxnodes
 		real                   scalar    tdim
 		real                   scalar    directed
@@ -18,27 +16,23 @@ class nw_data extends abm_bc
 		real                   vector    frozen
 		
 		class AssociativeArray scalar    network
-		pointer(real vector)   vector    adjlist0
 		pointer(real vector)   matrix    adjlist
-		real                   vector    nodes0
 		pointer(real vector)   vector    nodes
 		pointer(real vector)   vector    dropped_nodes
-		real                   vector    dropped_nodes0
 
 		// _data_chks.mata
- 		void                             is_frozen()
+ 		real                   scalar    parse_t() 
+		void                             is_frozen()
 		void                             is_setup()
 		void                             is_nodesset()
 		void                             is_symmetric() 
 
 		// _data_setup.mata
 		void                             new()
-		void                             clear_010()
 
     public:
 		// _data_pars.mata
    		transmorphic                     N_nodes()
-		void                             N_nodes_set010()
 		transmorphic                     tdim()
 		transmorphic                     directed()
 		transmorphic                     randomit()

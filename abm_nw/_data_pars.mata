@@ -1,23 +1,9 @@
 mata:
 
-void nw_data::N_nodes_set010(real scalar t, real scalar N)
-{
-	if (t!=0) _error("number of nodes can only be set for t=0")
-	is_frozen()
-	N_nodes0 = N
-	adjlist0 = J(N_nodes0,1,NULL)
-	for(i=1; i<=N_nodes0; i++) {
-		adjlist0[i] = &(J(1,0,.))
-	}
-	nodes0 = 1..N_nodes0
-	maxnodes = N_nodes0
-	dropped_nodes0 = J(1,0,.)
-	nodes_set=1
-}
 
 transmorphic nw_data::N_nodes( real scalar t, | real scalar N){
 		real scalar i
-		if (t==.) t=0
+		t=parse_t(t)
 		
 		if (args()==2){
             if (mod_leq((0,1,0))) {
@@ -67,7 +53,7 @@ transmorphic abm_nw::tdim(| real scalar t)
 	    is_posint(t, "zero_ok")
 	    is_nodesset()
 		tdim = t
-		if (tdim > 0) {
+		if (tdim > 1) {
 			adjlist = J(maxnodes, tdim, NULL)
 			nodes = J(tdim,1,NULL)
 			N_nodes = J(tdim,1,.)
