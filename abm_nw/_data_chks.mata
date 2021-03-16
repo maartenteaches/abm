@@ -5,12 +5,11 @@ real scalar nw_data::parse_t(real scalar t)
 	t = t + mod_leq((0,1,0))
 	return(t)
 }
-void nw_data::is_symmetric(| real scalar t)
+void nw_data::is_symmetric( real scalar t)
 {
 	real scalar i, j, stop
 	real vector cols
 	
-	t = parse_t(t)
 	is_nodesset()
 			
 	stop = 0
@@ -31,18 +30,12 @@ void nw_data::is_symmetric(| real scalar t)
 
 void nw_data::is_frozen(| real scalar t)
 {
-	t = parse_t(t)
 	if (frozen[t]==1) _error("network has been frozen")
 }
 
 void nw_data::is_setup()
 {
 	if(setup == 0) _error(3000,"setup is required")
-}
-
-void nw_data::is_nodesset()
-{
-	if (nodes_set==0) _error(3000, "setting number of nodes is required")
 }
 
 end

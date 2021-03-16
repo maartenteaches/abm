@@ -17,7 +17,7 @@ void nw_data::setup()
 	    directed = 1
 	}
 	if (directed == 0 ) {
-		is_symmetric()
+		is_symmetric(1)
 	}
 	if (randomit == .) {
 	    randomit = 0
