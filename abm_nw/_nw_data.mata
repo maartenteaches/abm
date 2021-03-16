@@ -23,7 +23,6 @@ class nw_data extends abm_bc
  		real                   scalar    parse_t() 
 		void                             is_frozen()
 		void                             is_setup()
-		void                             is_nodesset()
 		void                             is_symmetric() 
 
 		// _data_setup.mata
