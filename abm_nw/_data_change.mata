@@ -15,7 +15,7 @@ void nw_data::add_edge(real scalar t, real scalar orig, real scalar dest,| real 
 	if (args() <= 4) no_edge(t,orig, dest)
 	if (args() == 3) weight = 1
 
-	change = edge_exists(orig,dest,t, "fast")
+	change = edge_exists(orig,dest,t)
 	if (weighted) {
 		key = t, orig, dest
 		network.put(key, weight)
@@ -42,7 +42,7 @@ void nw_data::remove_edge(real scalar t, real scalar orig, real scalar dest)
 	
 	t = parse_t(t)
  	is_frozen(t)
-    if (!edge_exists(orig,dest,t, "fast")) {
+    if (!edge_exists(orig,dest,t)) {
 	    _error(3000, "no edge to remove")
 	}
 	
@@ -73,7 +73,7 @@ void nw_data::change_weight(real scalar t, real scalar orig, real scalar dest, r
 	is_frozen(t)
 	if (weighted==0) _error("no weight to change")
 	
-    if (!edge_exists(orig,dest,t, "fast")) {
+    if (!edge_exists(orig,dest,t)) {
 	    _error(3000, "no edge to change")
 	}
 	add_edge(t, orig, dest, val, "replace")
@@ -86,7 +86,7 @@ void nw_data::rewire(real scalar t, real scalar orig0, real scalar dest0,
 	
     t=parse_t(t)
 	is_frozen(t)
-	if(!edge_exists(orig0,dest0,t, "fast")) {
+	if(!edge_exists(orig0,dest0,t)) {
 	    _error("no edge to rewire")
 	}
 	
