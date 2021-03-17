@@ -2,7 +2,6 @@ mata:
 
 transmorphic nw_data::N_nodes( real scalar t, | real scalar N){
 		real scalar i
-		t=parse_t(t)
 		
 		if (args()==2){
 			if (t!=1) _error("number of nodes can only be set for t=1")
@@ -32,7 +31,6 @@ transmorphic abm_nw::tdim(| real scalar t)
 	
 	if(args()==1) {
 	    is_frozen()
-		t = parse_t(t)
 		tdim = t
 	}
 	else{

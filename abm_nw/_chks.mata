@@ -1,4 +1,11 @@
 mata: 
+real scalar abm_nw::parse_t(real scalar t)
+{
+	t = (t==. ? 1 : t + mod_leq((0,1,0)))
+
+	return(t)
+}
+
 void abm_nw::is_symmetric(| real scalar t)
 {
 	real scalar i, j, stop

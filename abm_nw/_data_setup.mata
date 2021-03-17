@@ -11,7 +11,7 @@ void nw_data::setup()
 {
 	real scalar i,j
 	if (tdim==.) {
-	    tdim = mod_gt((0,1,0))
+	    tdim = 1
 	}
 	if (directed == .) {
 	    directed = 1

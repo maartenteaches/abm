@@ -20,7 +20,6 @@ class nw_data extends abm_bc
 		pointer(real vector)   vector    dropped_nodes
 
 		// _data_chks.mata
- 		real                   scalar    parse_t() 
 		void                             is_frozen()
 		void                             is_setup()
 		void                             is_symmetric() 

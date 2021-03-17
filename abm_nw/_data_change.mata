@@ -4,8 +4,6 @@ void nw_data::add_edge(real scalar t, real scalar orig, real scalar dest,| real 
 	real rowvector key
 	real scalar change
 	
-    t=parse_t(t)
-
 	if (weight==0) return
 	
 	is_frozen(t)
@@ -40,7 +38,6 @@ void nw_data::remove_edge(real scalar t, real scalar orig, real scalar dest)
 {
     real rowvector key, adj, adj2
 	
-	t = parse_t(t)
  	is_frozen(t)
     if (!edge_exists(orig,dest,t)) {
 	    _error(3000, "no edge to remove")
@@ -69,7 +66,6 @@ void nw_data::remove_edge(real scalar t, real scalar orig, real scalar dest)
 
 void nw_data::change_weight(real scalar t, real scalar orig, real scalar dest, real scalar val)
 {
-	t=parse_t(t)
 	is_frozen(t)
 	if (weighted==0) _error("no weight to change")
 	
@@ -84,7 +80,6 @@ void nw_data::rewire(real scalar t, real scalar orig0, real scalar dest0,
 {
     real scalar val
 	
-    t=parse_t(t)
 	is_frozen(t)
 	if(!edge_exists(orig0,dest0,t)) {
 	    _error("no edge to rewire")
@@ -100,7 +95,6 @@ void nw_data::remove_node(real scalar t, real scalar id)
 	real scalar i, j
 	real vector cols
 	
-	t=parse_t(t)
 	is_frozen(t)
 
 	dropped_nodes[t] = &(*dropped_nodes[t] , id)
@@ -125,7 +119,6 @@ void nw_data::remove_node(real scalar t, real scalar id)
 
 void nw_data::return_node(real scalar t, real scalar id) 
 {
-    t=parse_t(t)
 	is_frozen(t)
     if (!anyof(*dropped_nodes[t], id)){
 	    _error("a node can only be returned if it was previously dropped")
@@ -141,7 +134,6 @@ void nw_data::add_node(real scalar t)
     real scalar i
 	pointer (real vector) vector toadd
 	
-    t=parse_t(t)
 	is_frozen(t)
 	maxnodes = maxnodes +1
 	
@@ -162,8 +154,6 @@ void nw_data::copy_nodes(real scalar t0, real scalar t1)
 	real vector orig, dropped
 	real scalar n
 	
-	t0=parse_t(t0)
-	t1=parse_t(t1)
 	if (nodes[t1] != NULL) _error("nodes for t1 already set")
 	orig    = *nodes[t0]
 	n       = N_nodes[t0]
@@ -176,9 +166,6 @@ void nw_data::copy_nodes(real scalar t0, real scalar t1)
 void nw_data::copy_adjlist(real scalar t0, real scalar t1)
 {
 	real scalar i
-	
-	t0=parse_t(t0)
-	t1=parse_t(t1)
 
 	for(i=1;i<=rows(adjlist);i++) {
 		adjlist[i,t1] = &(*adjlist[i, t0])
@@ -188,10 +175,8 @@ void nw_data::copy_nw(real scalar t0, real scalar t1)
 {
 	real scalar i, j, val
 	real vector cols, key0, key1
-	
-	t0=parse_t(t0)
-	t1=parse_t(t1)
-	is_frozen(t1)
+
+s	is_frozen(t1)
 	is_setup()
 
 	copy_nodes(t0, t1)

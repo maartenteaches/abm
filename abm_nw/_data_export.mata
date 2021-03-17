@@ -6,8 +6,6 @@ real matrix nw_data::export_adjmat(real scalar t)
 	real vector dropped, cols
 	real scalar i, j
 
-	t=parse_t(t)
-
 	dropped = *dropped_nodes[t]
 	res=J(maxnodes, maxnodes, 0)
 	for(i=1; i<=length(dropped); i++) {
@@ -28,8 +26,7 @@ real matrix abm_nw::export_edgelist( real scalar t, | string scalar ego_all)
     real matrix res, temp
 	real vector orig, cols, all_nodes, sel
 	real scalar i, j, k
-	
-	t=parse_t(t)
+
 	orig = *nodes[t]
 	res = J(0,3,.)
 	for(i=1; i<= length(orig); i++) {

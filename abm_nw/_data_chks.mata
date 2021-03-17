@@ -1,10 +1,5 @@
 mata: 
-real scalar nw_data::parse_t(real scalar t)
-{
-	if (t==.) t= mod_gt((0,1,0))
-	t = t + mod_leq((0,1,0))
-	return(t)
-}
+
 void nw_data::is_symmetric( real scalar t)
 {
 	real scalar i, j, stop
