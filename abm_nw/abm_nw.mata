@@ -7,39 +7,12 @@ mata set matastrict on
 class abm_nw extends abm_chk
 {
 	protected: 
-		real                   vector    N_edges
-		real                   vector    N_nodes
-		real                   scalar    N_edges0
-		real                   scalar    N_nodes0		
-		real                   scalar    maxnodes
-		real                   scalar    tdim
-		real                   scalar    directed
-		real                   scalar    weighted
-		real                   scalar    nodes_set
-		real                   scalar    nw_set
-		real                   scalar    setup
-		real                   scalar    randomit
-		real                   vector    frozen
-		
-		class AssociativeArray scalar    network
-		pointer(real vector)   vector    adjlist0
-		pointer(real vector)   matrix    adjlist
-		real                   vector    nodes0
-		pointer(real vector)   vector    nodes
-		pointer(real vector)   vector    dropped_nodes
-		real                   vector    dropped_nodes0
-		
+		class nw_data          scalar    network
+				
 		// _chks.mata
 		void                             is_valid_id()
 		void                             is_valid_time()
-		void                             is_frozen()
-		void                             is_setup()
-		void                             is_nodesset()
-		void                             is_symmetric()
-		
-		// _change_nw.mata
-		void                             copy_adjlist()
-		void                             copy_nodes()
+		real                   scalar    parse_t()
 
 		// _setup.mata
 		void                             new()

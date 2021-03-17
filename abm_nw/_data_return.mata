@@ -49,4 +49,14 @@ real vector nw_data::schedule( real scalar t)
 	return(res)
 }
 
+real vector nw_data::nodes(real scalar t)
+{
+	return(*nodes[time])
+}
+
+real scalar nw_data::maxnodes()
+{
+	return(maxnodes)
+}
+
 end

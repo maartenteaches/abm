@@ -55,6 +55,8 @@ class nw_data extends abm_bc
 		void                             no_edge()
 		real                   scalar    edge_exists()
 		real                   vector    schedule()
+		real                   vector    nodes()
+		real                   scalar    maxnodes()
 		
 		// _data_export.mata
 		real                   matrix    export_adjmat()
