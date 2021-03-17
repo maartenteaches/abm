@@ -1,17 +1,24 @@
 mata:
-void nw_data::add_edge(real scalar t, real scalar orig, real scalar dest,| real scalar weight, string scalar replace)
+void nw_data::add_edge(real scalar t, real scalar orig, real scalar dest, real scalar weight, string scalar replace)
 {
 	real rowvector key
 	real scalar change
 	
-	if (weight==0) return
+	if (replace == "") no_edge(t,orig, dest)
+	if (weight==0) {
+		if (edge_exists(orig,dest,t)) {
+			remove_edge(t,orig,dest)
+		}
+		else {
+			return
+		}
+	} 
 	
 	is_frozen(t)
 	if (weighted == 0 & (weight != . & weight != 0 & weight != 1)){
 		_error("can't set weights for unweighted network'")
 	} 
-	if (args() <= 4) no_edge(t,orig, dest)
-	if (args() == 3) weight = 1
+	if (weight == .) weight = 1
 
 	change = edge_exists(orig,dest,t)
 	if (weighted) {

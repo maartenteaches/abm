@@ -9,14 +9,14 @@ real scalar abm_nw::parse_t(real scalar t)
 void abm_nw::is_valid_time(real scalar time)
 {
 	if (time != .) {
-		if (tdim == 1 & time > 1) {
+		if (network.tdim() == 1 & time > 1) {
 			_error(3000,"time is specified while there is no time dimension")
 		}
-		if (tdim==. & time > 1) {
+		if (network.tdim()==. & time > 1) {
 			_error(3000, "time is specified without specifying tdim")
 		}
 		is_posint(time)
-		if(time > tdim) {
+		if(time > network.tdim()) {
 			_error(3000,"specified time exceeds tdim")
 		}
 	}

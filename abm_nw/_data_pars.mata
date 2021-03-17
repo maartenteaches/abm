@@ -16,7 +16,6 @@ transmorphic nw_data::N_nodes( real scalar t, | real scalar N){
 transmorphic abm_nw::randomit(| real scalar bool)
 {
     if(args()==1) {
-	    is_bool(bool)
 		is_frozen()
 		randomit = bool
 	}
