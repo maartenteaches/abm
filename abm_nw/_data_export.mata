@@ -21,7 +21,7 @@ real matrix nw_data::export_adjmat(real scalar t)
 	return(res)
 }
 
-real matrix abm_nw::export_edgelist( real scalar t, | string scalar ego_all)
+real matrix abm_nw::export_edgelist( real scalar t, string scalar ego_all)
 {
     real matrix res, temp
 	real vector orig, cols, all_nodes, sel
@@ -40,7 +40,7 @@ real matrix abm_nw::export_edgelist( real scalar t, | string scalar ego_all)
 	if (directed == 0) {
 	    res = select(res,res[.,1]:<res[.,2])
 	}
-	if (args() == 1) {
+	if (ego_all == "") {
 		all_nodes = schedule(t)
 		sel=J(1,cols(all_nodes),1)
 		for(i=1; i <= rows(res); i++) {
