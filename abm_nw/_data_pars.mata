@@ -59,6 +59,17 @@ transmorphic abm_nw::weighted(| real scalar bool)
 	}
 }
 
+transmorphic abm_nw::nw_set(| real scalar bool)
+{
+	if (args()==1) {
+		is_bool(bool)
+		nw_set = bool
+	}
+	else {
+		return(nw_set)
+	}
+}
+
 
 
 end

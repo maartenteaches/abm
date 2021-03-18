@@ -35,6 +35,7 @@ class nw_data extends abm_bc
 		transmorphic                     randomit()
 		transmorphic                     weighted()  
 		transmorphic                     randomit()    
+		transmorphic                     nw_set()
 
 		// _data_setup.mata        
 		void                             setup()
