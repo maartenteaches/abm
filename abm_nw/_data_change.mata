@@ -183,7 +183,7 @@ void nw_data::copy_nw(real scalar t0, real scalar t1)
 	real scalar i, j, val
 	real vector cols, key0, key1
 
-s	is_frozen(t1)
+	is_frozen(t1)
 	is_setup()
 
 	copy_nodes(t0, t1)
