@@ -3,7 +3,7 @@ mata:
 void abm_nw::from_adjlist(real matrix adj)
 {
 	real scalar i,j, orig
-	
+	network.prepare()
 	if (network.nw_set()==1) {
 		_error(3000,"initial network already set")
 	}
@@ -11,8 +11,10 @@ void abm_nw::from_adjlist(real matrix adj)
 	if (cols(adj) < 1) _error("number of cols needs to be 1 or higher")
 	for (i=1 ; i<=rows(adj) ; i++) {
 		orig = adj[i,1]
+		is_valid_id(orig)
 		for (j=2 ; j<= cols(adj) ; j++) {
 			if (adj[i,j] != .) {
+				is_valid_id(adj[i,j])
 				network.add_edge(1,orig,adj[i,j])
 			}
 		}
@@ -24,7 +26,7 @@ void abm_nw::from_adjlist(real matrix adj)
 void abm_nw::from_edgelist(real matrix edges)
 {
 	real scalar    i
-
+	network.prepare()
 	if (network.nw_set()==1) {
 		_error(3000,"initial network already set")
 	}
@@ -41,6 +43,8 @@ void abm_nw::from_edgelist(real matrix edges)
 	    edges = edges , J(rows(edges),1,1)
 	}
 	for (i=1; i <= rows(edges); i++) {
+		is_valid_id(edges[i,1])
+		is_valid_id(edges[i,2])
 		network.add_edge(1,edges[i,1], edges[i,2], edges[i,3])
 	}
 	network.nw_set(1)
@@ -49,6 +53,7 @@ void abm_nw::from_edgelist(real matrix edges)
 void abm_nw::from_adjmatrix(real matrix adjmat)
 {
 	real scalar i, j, max
+	network.prepare()
 
 	if (network.nw_set()==1) {
 		_error(3000, "initial network already set")
@@ -76,24 +81,24 @@ void abm_nw::from_adjmatrix(real matrix adjmat)
 void abm_nw::random(real scalar pr) {                                         
 	
 	real scalar i, j, max
-	
-	if (nw_set==1) {
+
+	network.prepare()
+	if (network.nw_set()==1) {
 		_error(3000,"initial network already set")
 	}
-	is_nodesset()
-	if (dropped_nodes0!=J(1,0,.)) _error("nodes have been dropped")
-	if (weighted == .) weighted = 0
-	if (weighted == 1) _error("random makes unweighted an network")
+
+	if (network.weighted() == .) network.weighted(0)
+	if (network.weighted() == 1) _error("random makes unweighted an network")
 	is_pr(pr)
-	for(i=1; i<=N_nodes0;i++) {
-		max = ( directed == 0 ? i : N_nodes0 )
+	for(i=1; i<=network.N_nodes(1);i++) {
+		max = ( network.directed() == 0 ? i : network.N_nodes(1) )
 		for(j=1; j<=max; j++) {
 			if (i!=j & runiform(1,1)<=pr) {
-				add_edge(0,i,j)
+				network.add_edge(1,i,j)
 			}
 		}
 	}
-	nw_set = 1
+	network.nw_set(1)
 }
 
 void abm_nw::sw(real scalar degree, real scalar pr)
@@ -101,18 +106,18 @@ void abm_nw::sw(real scalar degree, real scalar pr)
 	real scalar left, right, i, j, alt_dest
 	real vector basedest, dest
 
-	if (nw_set==1) {
+	network.prepare()
+	if (network.nw_set()==1) {
 		_error(3000,"initial network already set")
 	}
-	is_nodesset()
-	if (dropped_nodes0!=J(1,0,.)) _error("nodes have been dropped")
-	if (weighted == .) weighted = 0
-	if (weighted == 1) _error("sw makes unweighted an network")
+
+	if (network.weighted() == .) network.weighted(0)
+	if (network.weighted() == 1) _error("sw makes unweighted an network")
 	is_posint(degree)
-	if (directed==0 & mod(degree,2)!= 0) {
+	if (network.directed()==0 & mod(degree,2)!= 0) {
 		_error(3000, "in an unidirected network the degree has to be even")
 	} 	
-	if (degree>N_nodes0) {
+	if (degree>network.N_nodes(1)) {
 		_error(3000, "degree has be less than the number of nodes")
 	}
 	is_pr(pr)
@@ -120,19 +125,19 @@ void abm_nw::sw(real scalar degree, real scalar pr)
 	left = -floor(degree/2)
 	right = ceil(degree/2)
 	
-	if (directed == 0) {
+	if (network.directed() == 0) {
 		basedest = 1..right
-		for(i=1; i <= N_nodes0 ; i++) {
+		for(i=1; i <= network.N_nodes(1) ; i++) {
 			dest = basedest :+ i
-			dest = mod(dest:-1, N_nodes0):+ 1
+			dest = mod(dest:-1, network.N_nodes(1)):+ 1
 			for(j=1; j <= right; j++) {
 				if (runiform(1,1)>pr) {
-					add_edge(0,i,dest[j],1,"replace", "fast")
+					add_edge(1,i,dest[j],1,"replace")
 				}
 				else {
-					alt_dest = ceil(runiform(1,1)*(N_nodes0-1))
+					alt_dest = ceil(runiform(1,1)*(network.N_nodes(1)-1))
 					alt_dest = alt_dest + (alt_dest>=i)
-					add_edge(0,i,alt_dest,1,"replace", "fast")
+					add_edge(1,i,alt_dest,1,"replace")
 				}
 			}
 		}
@@ -145,22 +150,22 @@ void abm_nw::sw(real scalar degree, real scalar pr)
 			basedest = J(1,0,.)
 		}
 		basedest = basedest , (1..right)
-		for(i=1; i<= N_nodes0; i++){
+		for(i=1; i<= network.N_nodes(1); i++){
 			dest = basedest :+ i
-			dest = mod(dest :-1, N_nodes0) :+ 1
+			dest = mod(dest :-1, network.N_nodes(1)) :+ 1
 			for(j=1; j<=degree;j++){
 				if (runiform(1,1)>pr) {
-					add_edge(0,i,dest[j],1,"replace", "fast")
+					add_edge(1,i,dest[j],1,"replace")
 				}
 				else {
-					alt_dest = ceil(runiform(1,1)*(N_nodes0-1))
+					alt_dest = ceil(runiform(1,1)*(network.N_nodes(1)-1))
 					alt_dest = alt_dest + (alt_dest>=i)
-					add_edge(0,i,alt_dest,1,"replace", "fast")
+					add_edge(1,i,alt_dest,1,"replace")
 				}
 			}
 		}
 	}
-	nw_set=1
+	network.nw_set(1)
 }
 
 end
