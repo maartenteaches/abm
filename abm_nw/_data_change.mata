@@ -3,7 +3,8 @@ void nw_data::add_edge(real scalar t, real scalar orig, real scalar dest, real s
 {
 	real rowvector key
 	real scalar change
-	
+	prepare()
+
 	if (replace == "") no_edge(t,orig, dest)
 	if (weight==0) {
 		if (edge_exists(orig,dest,t)) {
@@ -44,7 +45,7 @@ void nw_data::add_edge(real scalar t, real scalar orig, real scalar dest, real s
 void nw_data::remove_edge(real scalar t, real scalar orig, real scalar dest)
 {
     real rowvector key, adj, adj2
-	
+
  	is_frozen(t)
     if (!edge_exists(orig,dest,t)) {
 	    _error(3000, "no edge to remove")

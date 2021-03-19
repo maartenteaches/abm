@@ -13,6 +13,7 @@ class nw_data extends abm_bc
 		real                   scalar    nw_set
 		real                   scalar    setup
 		real                   vector    frozen
+		real                   scalar    prepared
 		
 		class AssociativeArray scalar    network
 		pointer(real vector)   matrix    adjlist
@@ -26,6 +27,7 @@ class nw_data extends abm_bc
 
 		// _data_setup.mata
 		void                             new()
+		void                             prepare()
 
     public:
 		// _data_pars.mata
