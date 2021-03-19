@@ -24,9 +24,11 @@ void abm_nw::is_valid_time(real scalar time)
 
 void abm_nw::is_valid_id(real scalar id, | real scalar time, string scalar dropped_ok)
 {
-    is_valid_time(time)
 	if (args()==1) {
 		time = 1
+	}
+	else {
+		is_valid_time(time)
 	}
 	if (dropped_ok == "") {
 		if(!anyof(network.nodes(time),id)) {
