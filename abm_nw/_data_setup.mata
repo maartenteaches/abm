@@ -24,6 +24,9 @@ void nw_data::prepare()
 	else {
 		nodes[1] = &(1..N_nodes[1])
 	}
+	for(i=2; i<=tdim; i++) {
+		nodes[i] = &(J(1,0,.))
+	}
 	maxnodes = N_nodes[1]
 	dropped_nodes = J(tdim,1,NULL)
 	for(i=1; i<=tdim; i++) {
