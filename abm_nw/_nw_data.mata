@@ -1,6 +1,6 @@
 mata:
 mata set matastrict on
-class nw_data extends abm_bc
+class nw_data extends abm_chk
 {
     protected:
 		real                   vector    N_edges
