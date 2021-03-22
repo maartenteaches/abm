@@ -21,7 +21,7 @@ real matrix nw_data::export_adjmat(real scalar t)
 	return(res)
 }
 
-real matrix abm_nw::export_edgelist( real scalar t, string scalar ego_all)
+real matrix nw_data::export_edgelist( real scalar t, string scalar ego_all)
 {
     real matrix res, temp
 	real vector orig, cols, all_nodes, sel

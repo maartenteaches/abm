@@ -29,6 +29,9 @@ class nw_data extends abm_bc
 		void                             new()
 		void                             prepare()
 
+		// _data_change.mata
+		void                             copy_adjlist()
+
     public:
 		// _data_pars.mata
    		transmorphic                     N_nodes()
@@ -36,7 +39,6 @@ class nw_data extends abm_bc
 		transmorphic                     directed()
 		transmorphic                     randomit()
 		transmorphic                     weighted()  
-		transmorphic                     randomit()    
 		transmorphic                     nw_set()
 
 		// _data_setup.mata        
@@ -49,7 +51,10 @@ class nw_data extends abm_bc
 		void                             return_node()
 		void                             remove_edge()
 		void                             change_weight()
-		void                             remove_node()     
+		void                             rewire()
+		void                             remove_node() 
+		void                             copy_nodes()   
+		void                             copy_nw() 
         
 		// _data_return.mata
         real                   scalar    N_edges()
@@ -68,4 +73,8 @@ class nw_data extends abm_bc
 end
 
 do abm_nw\_data_chks.mata
+do abm_nw\_data_pars.mata
 do abm_nw\_data_setup.mata
+do abm_nw\_data_change.mata
+do abm_nw\_data_return.mata
+do abm_nw\_data_export.mata

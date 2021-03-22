@@ -10,6 +10,8 @@ void nw_data::new(){
 
 void nw_data::prepare()
 {
+	real scalar i, j
+	
 	if (prepared) return
 	if (N_nodes == J(1,0,.)) _error("number of nodes need to be set first")
 	if (tdim == .) tdim = 1
@@ -44,8 +46,6 @@ void nw_data::prepare()
 
 void nw_data::setup()
 {
-	real scalar i,j
-
 	if (directed == .) {
 	    directed = 1
 	}

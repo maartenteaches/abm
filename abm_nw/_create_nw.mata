@@ -68,7 +68,7 @@ void abm_nw::from_adjmatrix(real matrix adjmat)
 	    _error("can't add weights to an unweighted matrix'")
 	}
 	for(i=1; i<= network.N_nodes(1); i++) {
-		max = (directed == 0 ? i: network.N_nodes(1))
+		max = (network.directed() == 0 ? i: network.N_nodes(1))
 		for(j=1; j<=max; j++) {
 			if (adjmat[i,j]!=0 & i!=j) {
 				network.add_edge(1,i,j,adjmat[i,j])

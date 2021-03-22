@@ -1,8 +1,6 @@
 mata:
 
 transmorphic nw_data::N_nodes( real scalar t, | real scalar N){
-		real scalar i
-		
 		if (args()==2){
 			if (t!=1) _error("number of nodes can only be set for t=1")
 			is_frozen()
@@ -13,7 +11,7 @@ transmorphic nw_data::N_nodes( real scalar t, | real scalar N){
 		}
 }
 
-transmorphic abm_nw::randomit(| real scalar bool)
+transmorphic nw_data::randomit(| real scalar bool)
 {
     if(args()==1) {
 		is_frozen()
@@ -24,10 +22,8 @@ transmorphic abm_nw::randomit(| real scalar bool)
 	}
 }
 
-transmorphic abm_nw::tdim(| real scalar t)
+transmorphic nw_data::tdim(| real scalar t)
 {
-    real scalar i,j
-	
 	if(args()==1) {
 	    is_frozen()
 		tdim = t
@@ -37,7 +33,7 @@ transmorphic abm_nw::tdim(| real scalar t)
 	}
 }
 
-transmorphic abm_nw::directed(| real scalar bool)
+transmorphic nw_data::directed(| real scalar bool)
 {
     if (args()==1)  {
 		is_frozen()
@@ -48,7 +44,7 @@ transmorphic abm_nw::directed(| real scalar bool)
 	}
 }
 
-transmorphic abm_nw::weighted(| real scalar bool)
+transmorphic nw_data::weighted(| real scalar bool)
 {
 	if(args()==1) {
 		is_frozen()
@@ -59,7 +55,7 @@ transmorphic abm_nw::weighted(| real scalar bool)
 	}
 }
 
-transmorphic abm_nw::nw_set(| real scalar bool)
+transmorphic nw_data::nw_set(| real scalar bool)
 {
 	if (args()==1) {
 		is_bool(bool)

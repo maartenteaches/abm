@@ -1,18 +1,16 @@
 mata:
 transmorphic abm_nw::N_nodes( real scalar t, | real scalar N){
-		real scalar i
-		t=parse_t(t)
-		is_valid_time(t)
-		
-		
-		if (args()==2){
-		    is_posint(N)
-			network.N_nodes(t,N)
-		}
-		else {
-			return(network.N_nodes(t))
-			}
-		}
+	t=parse_t(t)
+	is_valid_time(t)
+	
+	
+	if (args()==2){
+	    is_posint(N)
+		network.N_nodes(t,N)
+	}
+	else {
+		return(network.N_nodes(t))
+	}
 }
 
 transmorphic abm_nw::randomit(| real scalar bool)
@@ -28,8 +26,6 @@ transmorphic abm_nw::randomit(| real scalar bool)
 
 transmorphic abm_nw::tdim(| real scalar t)
 {
-    real scalar i,j
-	
 	if(args()==1) {
 		t=parse_t(t)	
 	    is_posint(t)

@@ -16,6 +16,10 @@ class abm_nw extends abm_chk
 
 		// _setup.mata
 		void                             new()
+
+		// _change_nw.mata
+		void                            copy_nodes()
+		void                            copy_adjlist()
 	
 	public:
 		// _create_nw.mata
@@ -61,6 +65,7 @@ class abm_nw extends abm_chk
 
 end
 
+do abm_nw\_nw_data.mata
 do abm_nw\_chks.mata
 do abm_nw\_pars.mata
 do abm_nw\_setup.mata
