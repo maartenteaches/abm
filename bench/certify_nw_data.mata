@@ -8,7 +8,6 @@ class nw_data_chk extends nw_data
     real vector chk_N_nodes()
     real vector chk_dropped_nodes()
     real vector chk_frozen()
-    real scalar chk_setup()
 }
 
 real scalar nw_data_chk::setup_value()
@@ -44,11 +43,6 @@ real vector nw_data_chk::chk_dropped_nodes(real scalar t)
 real vector nw_data_chk::chk_frozen()
 {
     return(frozen)
-}
-
-real scalar nw_data_chk::chk_setup()
-{
-    return(setup)
 }
 
 foo = nw_data_chk()
@@ -103,5 +97,5 @@ assert(foo.directed()==1)
 assert(foo.tdim()==1)
 assert(foo.randomit()==0)
 assert(foo.weighted()==1)
-assert(foo.chk_setup()==1)
+assert(foo.setup_value()==1)
 end
