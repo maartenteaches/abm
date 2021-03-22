@@ -8,6 +8,7 @@ class nw_data_chk extends nw_data
     real vector chk_N_nodes()
     real vector chk_dropped_nodes()
     real vector chk_frozen()
+    real scalar chk_setup()
 }
 
 real scalar nw_data_chk::setup_value()
@@ -45,13 +46,19 @@ real vector nw_data_chk::chk_frozen()
     return(frozen)
 }
 
+real scalar nw_data_chk::chk_setup()
+{
+    return(setup)
+}
+
 foo = nw_data_chk()
-// check new()
+// ------------------------------ check new()
 assert(foo.nw_set()==0)
 assert(foo.setup_value()==0)
 assert(foo.prepared_value()==0)
 assert(foo.nw_notfound()==0)
 
+// set some parameters to be able to check prepare()
 foo.abm_version("0.2.0")
 foo.N_nodes(1,10)
 assert(foo.N_nodes(1)==10)
@@ -60,6 +67,7 @@ assert(foo.tdim()==2)
 foo.randomit(0)
 assert(foo.randomit()==0)
 
+// ----------------------------- check prepare()
 foo.chk_prepare()
 assert(foo.prepared_value()==1)
 assert(foo.chk_N_nodes() == (10 \ .))
@@ -76,4 +84,24 @@ for(i=1; i<=10; i++) {
 assert(foo.N_edges(1)==0)
 assert(foo.N_edges(2)==0)
 assert(foo.chk_frozen()==J(2,1,0))
+
+// ----------------------------------- check setup()
+foo = nw_data_chk()
+foo.N_nodes(1,5)
+foo.setup()
+assert(foo.prepared_value()==1)
+assert(foo.chk_N_nodes() == 5 )
+assert(foo.schedule(1) == (1..5))
+assert(foo.maxnodes() == 5)
+assert(foo.chk_dropped_nodes(1) == J(1,0,.))
+for(i=1; i<=5; i++) {
+    assert(foo.neighbours(i,1)==J(1,0,.))
+}
+assert(foo.N_edges(1)==0)
+assert(foo.chk_frozen()==1)
+assert(foo.directed()==1)
+assert(foo.tdim()==1)
+assert(foo.randomit()==0)
+assert(foo.weighted()==1)
+assert(foo.chk_setup()==1)
 end
