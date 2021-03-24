@@ -8,8 +8,35 @@ class nw_data_chk extends nw_data
     real vector chk_N_nodes()
     real vector chk_dropped_nodes()
     real vector chk_frozen()
+    void        chk_is_setup()
+    void        chk_is_frozen()
+    void        chk_is_symmetric()
+    void        chk_is_prepared()
 }
 
+void nw_data_chk::chk_is_prepared()
+{
+    is_prepared()
+}
+void nw_data_chk::chk_is_frozen(| real scalar t)
+{
+    if (args()==0) {
+        is_frozen()
+    } 
+    else {
+        is_frozen(t)
+    }
+}
+
+void nw_data_chk::chk_is_setup()
+{
+    is_setup()
+}
+
+void nw_data_chk::chk_is_symmetric(real scalar t)
+{
+    is_symmetric(t)
+}
 real scalar nw_data_chk::setup_value()
 {
     return(setup)
@@ -157,4 +184,40 @@ assert(foo.chk_N_nodes() == 5)
 assert(foo.schedule(1) == (1..5))
 assert(foo.maxnodes() == 5)
 assert(foo.chk_dropped_nodes(1) == J(1,0,.))
+
+// --------------------------------------- check is_symmetric()
+foo = nw_data_chk()
+foo.N_nodes(1,5)
+foo.add_edge(1,1,2,1,"")
+foo.add_edge(1,2,1,1,"")
+foo.add_edge(1,3,2,1,"")
+foo.add_edge(1,2,3,1,"")
+foo.chk_is_symmetric(1)
+foo.add_edge(1,2,5,1,"")
 end
+rcof "mata: foo.chk_is_symmetric(1)" == 3000
+
+// ------------------------------------- check is_prepared() is_frozen() and is_setup()
+mata: 
+foo = nw_data_chk()
+foo.chk_is_prepared()
+foo.N_nodes(1,5)
+foo.chk_is_prepared()
+foo.add_edge(1,1,2,1,"")
+end
+rcof "mata: foo.chk_is_prepared()"==3000
+mata:
+foo.add_edge(1,2,1,1,"")
+foo.add_edge(1,3,2,1,"")
+foo.add_edge(1,2,3,1,"")
+foo.chk_is_frozen()
+foo.chk_is_frozen(1)
+end
+rcof "mata: foo.chk_is_setup()" == 3000
+mata:
+foo.setup()
+foo.chk_is_setup()
+end
+rcof "mata: foo.chk_is_frozen()" == 3498
+rcof "mata: foo.chk_is_frozen(1)" == 3498
+rcof "mata: foo.chk_is_prepared()"==3000

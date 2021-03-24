@@ -5,12 +5,12 @@ void nw_data::is_symmetric( real scalar t)
 	real scalar i, j, stop
 	real vector cols
 	
-	is_nodesset()
+	prepare()
 			
 	stop = 0
 
 	for(i=1; i <= maxnodes;i++) {
-		cols = neighbours(i,t, "dropped_ok")
+		cols = neighbours(i,t)
 		for(j=1; j<=length(cols);j++){
 			if (weight(i,cols[j],t) != weight(cols[j],i,t)) {
 				stop = 1
@@ -33,6 +33,11 @@ void nw_data::is_frozen(| real scalar t)
 void nw_data::is_setup()
 {
 	if(setup == 0) _error(3000,"setup is required")
+}
+
+void nw_data::is_prepared()
+{
+	if (prepared == 1) _error(3000, "initial parameters have already been set")
 }
 
 end

@@ -22,6 +22,7 @@ class nw_data extends abm_chk
 
 		// _data_chks.mata
 		void                             is_frozen()
+		void                             is_prepared()
 		void                             is_setup()
 		void                             is_symmetric() 
 
