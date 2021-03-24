@@ -25,6 +25,8 @@ void nw_data::is_symmetric( real scalar t)
 
 void nw_data::is_frozen(| real scalar t)
 {
+	if (prepared == 0) return
+	if (t==.) t=1
 	if (frozen[t]==1) _error("network has been frozen")
 }
 
