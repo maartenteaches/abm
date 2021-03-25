@@ -9,18 +9,17 @@ void nw_data::add_edge(real scalar t, real scalar orig, real scalar dest, real s
 	if (weight==0) {
 		if (edge_exists(orig,dest,t)) {
 			remove_edge(t,orig,dest)
+			return
 		}
 		else {
 			return
 		}
 	} 
-	
 	is_frozen(t)
 	if (weighted == 0 & (weight != . & weight != 0 & weight != 1)){
 		_error("can't set weights for unweighted network'")
 	} 
 	if (weight == .) weight = 1
-
 	change = edge_exists(orig,dest,t)
 	if (weighted) {
 		key = t, orig, dest
@@ -57,6 +56,7 @@ void nw_data::remove_edge(real scalar t, real scalar orig, real scalar dest)
 	}
     adj = *adjlist[orig, t]
 	adj = select(adj, adj:!=dest)
+	if (cols(adj)==0) adj = J(1,0,.)
 	adjlist[orig,t] = &adj
 	N_edges[t] = N_edges[t] - 1
 
@@ -67,6 +67,7 @@ void nw_data::remove_edge(real scalar t, real scalar orig, real scalar dest)
 		}
 		adj2 = *adjlist[dest, t]
 		adj2 = select(adj2, adj2:!=orig)
+		if (cols(adj2)==0) adj2 = J(1,0,.)
 		adjlist[dest,t] = &adj2
 		N_edges[t] = N_edges[t] - 1
 	}
