@@ -101,7 +101,7 @@ void nw_data::rewire(real scalar t, real scalar orig0, real scalar dest0,
 
 void nw_data::remove_node(real scalar t, real scalar id)
 {
-	real scalar i, j
+	real scalar i, j, count
 	real vector cols
 	
 	is_frozen(t)
@@ -120,10 +120,13 @@ void nw_data::remove_node(real scalar t, real scalar id)
 		}
 	}
 	adjlist[id,t] = &J(1,0,.)
+	count = 0
 	for(i=1;i<=maxnodes;i++) {
 		adjlist[i,t] = &(select(*adjlist[i,t],*adjlist[i,t]:!=id))
 		if (*adjlist[i,t] == J(0,0,.)) adjlist[i,t] = &(J(1,0,.))
+		count = count + cols(*adjlist[i,t])
 	}
+	N_edges = count
 }
 
 void nw_data::return_node(real scalar t, real scalar id) 
