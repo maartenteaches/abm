@@ -12,12 +12,19 @@ class nw_data_chk extends nw_data
     void        chk_is_frozen()
     void        chk_is_symmetric()
     void        chk_is_prepared()
+    void        chk_copy_adjlist()
+}
+
+void nw_data_chk::chk_copy_adjlist(real scalar t0, real scalar t1)
+{
+    copy_adjlist(t0,t1)
 }
 
 void nw_data_chk::chk_is_prepared()
 {
     is_prepared()
 }
+
 void nw_data_chk::chk_is_frozen(| real scalar t)
 {
     if (args()==0) {
@@ -682,6 +689,87 @@ assert(foo.neighbours(2,1)==5)
 assert(foo.neighbours(3,1)==5)
 assert(foo.neighbours(4,1)==J(1,0,.))
 assert(foo.neighbours(5,1)==J(1,0,.))
+
+// ----------------------------------------------- copy_adjlist()
+// unweighted undirected
+foo = nw_data_chk()
+foo.N_nodes(1,5)
+foo.tdim(2)
+foo.weighted(0)
+foo.directed(0)
+foo.randomit(0)
+foo.add_edge(1,1,2,.,"")
+foo.add_edge(1,1,3,.,"")
+foo.add_edge(1,3,5,.,"")
+foo.add_edge(1,2,5,.,"")
+foo.add_edge(1,4,1,.,"")
+foo.setup()
+foo.chk_copy_adjlist(1,2)
+assert(foo.neighbours(1,2) == (2,3,4))
+assert(foo.neighbours(2,2) == (1,5))
+assert(foo.neighbours(3,2) == (1,5))
+assert(foo.neighbours(4,2) == 1)
+assert(foo.neighbours(5,2) == (3,2))
+
+// weighted undirected
+foo = nw_data_chk()
+foo.N_nodes(1,5)
+foo.tdim(2)
+foo.weighted(1)
+foo.directed(0)
+foo.randomit(0)
+foo.add_edge(1,1,2,2,"")
+foo.add_edge(1,1,3,3,"")
+foo.add_edge(1,3,5,4,"")
+foo.add_edge(1,2,5,5,"")
+foo.add_edge(1,4,1,6,"")
+foo.setup()
+foo.chk_copy_adjlist(1,2)
+assert(foo.neighbours(1,2) == (2,3,4))
+assert(foo.neighbours(2,2) == (1,5))
+assert(foo.neighbours(3,2) == (1,5))
+assert(foo.neighbours(4,2) == 1)
+assert(foo.neighbours(5,2) == (3,2))
+
+// unweighted directed
+foo = nw_data_chk()
+foo.N_nodes(1,5)
+foo.tdim(2)
+foo.weighted(0)
+foo.directed(1)
+foo.randomit(0)
+foo.add_edge(1,1,2,.,"")
+foo.add_edge(1,1,3,.,"")
+foo.add_edge(1,3,5,.,"")
+foo.add_edge(1,2,5,.,"")
+foo.add_edge(1,4,1,.,"")
+foo.setup()
+foo.chk_copy_adjlist(1,2)
+assert(foo.neighbours(1,2) == (2,3))
+assert(foo.neighbours(2,2) == 5)
+assert(foo.neighbours(3,2) == 5)
+assert(foo.neighbours(4,2) == 1)
+assert(foo.neighbours(5,2) == J(1,0,.))
+
+// weighted directed
+foo = nw_data_chk()
+foo.N_nodes(1,5)
+foo.tdim(2)
+foo.weighted(1)
+foo.directed(1)
+foo.randomit(0)
+foo.add_edge(1,1,2,2,"")
+foo.add_edge(1,1,3,3,"")
+foo.add_edge(1,3,5,4,"")
+foo.add_edge(1,2,5,5,"")
+foo.add_edge(1,4,1,6,"")
+foo.setup()
+foo.chk_copy_adjlist(1,2)
+assert(foo.neighbours(1,2) == (2,3))
+assert(foo.neighbours(2,2) == 5)
+assert(foo.neighbours(3,2) == 5)
+assert(foo.neighbours(4,2) == 1)
+assert(foo.neighbours(5,2) == J(1,0,.))
 
 // ----------------------------------------------- copy_nw()
 // unweighted undirected
