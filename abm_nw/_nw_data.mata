@@ -16,9 +16,9 @@ class nw_data extends abm_chk
 		real                   scalar    prepared
 		
 		class AssociativeArray scalar    network
-		pointer(real vector)   matrix    adjlist
-		pointer(real vector)   vector    nodes
-		pointer(real vector)   vector    dropped_nodes
+		pointer(real vector)   matrix    adjlist 
+		pointer(real vector)   vector    nodes 
+		pointer(real vector)   vector    dropped_nodes 
 
 		// _data_chks.mata
 		void                             is_frozen()

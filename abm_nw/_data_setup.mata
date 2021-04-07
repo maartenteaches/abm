@@ -41,7 +41,6 @@ void nw_data::prepare()
 	}
 	
 	N_edges = J(tdim,1,0)
-			
 	frozen = J(tdim,1,0)
 
 	prepared = 1
