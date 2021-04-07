@@ -126,7 +126,7 @@ void nw_data::remove_node(real scalar t, real scalar id)
 		if (*adjlist[i,t] == J(0,0,.)) adjlist[i,t] = &(J(1,0,.))
 		count = count + cols(*adjlist[i,t])
 	}
-	N_edges = count
+	N_edges[t] = count
 }
 
 void nw_data::return_node(real scalar t, real scalar id) 
@@ -166,7 +166,6 @@ void nw_data::copy_nodes(real scalar t0, real scalar t1)
 	real vector orig, dropped
 	real scalar n
 	
-	if (nodes[t1] != NULL) _error("nodes for t1 already set")
 	orig    = *nodes[t0]
 	n       = N_nodes[t0]
 	dropped = *dropped_nodes[t0]
