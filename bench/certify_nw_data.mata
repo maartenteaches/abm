@@ -13,6 +13,12 @@ class nw_data_chk extends nw_data
     void        chk_is_symmetric()
     void        chk_is_prepared()
     void        chk_copy_adjlist()
+    void        chk_copy_nodes()
+}
+
+void nw_data_chk::chk_copy_nodes(real scalar t0, real scalar t1)
+{
+    copy_nodes(t0,t1)
 }
 
 void nw_data_chk::chk_copy_adjlist(real scalar t0, real scalar t1)
@@ -770,6 +776,25 @@ assert(foo.neighbours(2,2) == 5)
 assert(foo.neighbours(3,2) == 5)
 assert(foo.neighbours(4,2) == 1)
 assert(foo.neighbours(5,2) == J(1,0,.))
+
+// ----------------------------------------------- copy_nodes()
+// unweighted undirected
+foo = nw_data_chk()
+foo.N_nodes(1,5)
+foo.tdim(2)
+foo.weighted(0)
+foo.directed(0)
+foo.randomit(0)
+foo.add_edge(1,1,2,.,"")
+foo.add_edge(1,1,3,.,"")
+foo.add_edge(1,3,5,.,"")
+foo.add_edge(1,2,5,.,"")
+foo.add_edge(1,4,1,.,"")
+foo.setup()
+foo.chk_copy_nodes(1,2)
+assert(foo.N_nodes(2)==5)
+assert(foo.schedule(2) == (1..5))
+assert(foo.chk_dropped_nodes(2)==J(1,0,.))
 
 // ----------------------------------------------- copy_nw()
 // unweighted undirected
