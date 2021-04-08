@@ -147,6 +147,7 @@ void nw_data::add_node(real scalar t)
 	pointer (real vector) vector toadd
 	
 	is_frozen(t)
+    prepare()
 	maxnodes = maxnodes +1
 	
     nodes[t] = &(*nodes[t], maxnodes)
