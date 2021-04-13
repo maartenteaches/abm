@@ -1275,3 +1275,62 @@ foo.no_edge(1,1,4)
 end
 rcof "mata: foo.no_edge(1,1,2)" == 3000
 
+// -------------------------------------------- export adjmat
+mata:
+foo = nw_data_chk()
+foo.N_nodes(1,5)
+foo.tdim(2)
+foo.weighted(0)
+foo.directed(1)
+foo.randomit(0)
+foo.add_edge(1,1,2,.,"")
+foo.add_edge(1,1,3,.,"")
+foo.add_edge(1,4,5,.,"")
+foo.no_edge(1,1,4)
+foo.setup()
+true = J(5,5,0)
+true[1,2] = 1
+true[1,3] = 1
+true[4,5] = 1
+assert(foo.export_adjmat(1)==true)
+true = (1,2,1 \
+        1,3,1 \
+        4,5,1)
+assert(foo.export_edgelist(1,"") == true)
+true = (1,2,1 \
+        1,3,1 \ 
+        2,.,. \
+        3,.,. \
+        4,5,1 \
+        5,.,.)
+assert(foo.export_edgelist(1,"ego_all")== true)
+
+foo = nw_data_chk()
+foo.N_nodes(1,5)
+foo.tdim(2)
+foo.weighted(1)
+foo.directed(1)
+foo.randomit(0)
+foo.add_edge(1,1,2,2,"")
+foo.add_edge(1,1,3,3,"")
+foo.add_edge(1,4,5,4,"")
+foo.no_edge(1,1,4)
+foo.setup()
+true = J(5,5,0)
+true[1,2] = 2
+true[1,3] = 3
+true[4,5] = 4
+assert(foo.export_adjmat(1)==true)
+true = (1,2,2 \
+        1,3,3 \
+        4,5,4)
+assert(foo.export_edgelist(1,"") == true)
+true = (1,2,2 \
+        1,3,3 \ 
+        2,.,. \
+        3,.,. \
+        4,5,4 \
+        5,.,.)
+assert(foo.export_edgelist(1,"ego_all")== true)
+end
+

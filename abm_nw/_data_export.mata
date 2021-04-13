@@ -40,7 +40,7 @@ real matrix nw_data::export_edgelist( real scalar t, string scalar ego_all)
 	if (directed == 0) {
 	    res = select(res,res[.,1]:<res[.,2])
 	}
-	if (ego_all == "") {
+	if (ego_all != "") {
 		all_nodes = schedule(t)
 		sel=J(1,cols(all_nodes),1)
 		for(i=1; i <= rows(res); i++) {
