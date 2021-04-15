@@ -51,6 +51,7 @@ real vector nw_data::schedule( real scalar t)
 
 real vector nw_data::nodes(real scalar t)
 {
+	prepare()
 	return(*nodes[t])
 }
 

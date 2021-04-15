@@ -1,5 +1,7 @@
 set seed 123456789
 
+do bench/certify_nw_data.mata
+
 // ======================================================== setup the test class
 mata:
 class test_abm_nw extends abm_nw
@@ -19,17 +21,11 @@ class test_abm_nw extends abm_nw
 		real                   scalar    get_nodes_set()
 		real                   scalar    get_nw_set()
 		real                   scalar    get_setup()
-		real                   vector    get_N_nodes()
-		real                   scalar    get_N_nodes0() 
-		real                   vector    get_N_edges()
 		pointer(real vector)   vector    get_nodes()
-		real                   vector    get_nodes0()
-		pointer(real vector)   vector    get_adjlist0()
 		pointer(real vector)   matrix    get_adjlist()	
 		
 		
 		pointer(real vector)   vector    get_dropped_nodes()
-		real                   vector    get_dropped_nodes0()
 }
 		
 void test_abm_nw::tests_copy_nodes(real scalar t0, real scalar t1)
@@ -90,57 +86,6 @@ void test_abm_nw::tests_is_posint(real scalar val, | string scalar zero_ok)
 	}
 }
 
-real vector test_abm_nw::get_N_edges() {
-	return(N_edges)
-}
-real scalar test_abm_nw::get_maxnodes()
-{
-	return(maxnodes)
-}
-real scalar test_abm_nw::get_nodes_set()
-{
-	return(nodes_set)
-}
-real scalar test_abm_nw::get_nw_set()
-{
-	return(nw_set)
-}
-real scalar test_abm_nw::get_setup()
-{
-	return(setup)
-}
-pointer(real vector) vector test_abm_nw::get_dropped_nodes()
-{
-	return(dropped_nodes)
-}
-real vector test_abm_nw::get_dropped_nodes0()
-{
-	return(dropped_nodes0)
-}
-pointer(real vector) vector test_abm_nw::get_nodes()
-{
-	return(nodes)
-}
-real vector test_abm_nw::get_nodes0()
-{
-	return(nodes0)
-}
-pointer(real vector) vector test_abm_nw::get_adjlist0()
-{
-	return(adjlist0)
-}
-pointer(real vector) matrix test_abm_nw::get_adjlist()
-{
-	return(adjlist)
-}
-real scalar test_abm_nw::get_N_nodes0()
-{
-	return(N_nodes0)
-}
-real vector test_abm_nw::get_N_nodes()
-{
-	return(N_nodes)
-}
 
 
 end	
@@ -149,28 +94,16 @@ end
 mata:
 	foo = test_abm_nw()
 	// check new()
-	assert(foo.get_nodes_set() == 0)
-	assert(foo.get_nw_set()    == 0)
-	assert(foo.get_setup()     == 0)
-	assert(foo.N_edges()       == 0)
-end
-
-//---------------------------------------------------------------- is_nodesset()
-rcof "mata: foo.tests_is_nodesset()" == 3000
-mata:
-	foo.N_nodes(0,10)
-	foo.tests_is_nodesset()
-	
-	foo = test_abm_nw()
+	assert(foo.abm_version()==foo.abm_current())
 end
 
 // ----------------------------------------------------------------- is_valid_id
 // is_valid_id should return an error if N_nodes() has not been set
-rcof "mata: foo.tests_is_valid_id(1)" == 3000
+rcof "mata: foo.tests_is_valid_id(1)" == 3498
 
 mata:
 	// 10 nodes, so valid ids are 1..10
-	foo.N_nodes(0,10)
+	foo.N_nodes(1,10)
 	for(i=1;i<=10;i++) {
 		foo.tests_is_valid_id(i)
 	}
@@ -182,15 +115,17 @@ rcof "mata: foo.tests_is_valid_id(-1)" == 3000
 rcof "mata: foo.tests_is_valid_id(.5)" == 3000
 
 mata:
-	foo.remove_node(0,6)
-	foo.tests_is_valid_id(6,0,"dropped_ok")
+	foo.remove_node(1,6)
+	foo.tests_is_valid_id(6,1,"dropped_ok")
 end
-rcof "mata foo.tests_is_valid_id(6,0)" == 3000
-
+rcof "mata foo.tests_is_valid_id(6,1)" == 3000
 mata:
+	foo = test_abm_nw()
+	foo.N_nodes(1,10)
 	foo.tdim(10)
+	foo.remove_node(1,6)
 	foo.setup()
-	foo.copy_nw(0,1)
+	foo.copy_nw(1,2)
 	for(i=1;i<=10;i++) {
 		if (i==6){
 		    foo.tests_is_valid_id(i,1, "dropped_ok")
@@ -200,7 +135,7 @@ mata:
 		}
 	}
 end
-
+exit
 // ----------------------------------------------------------------is_valid_time
 // valid times when tdim() has not been set
 mata:
