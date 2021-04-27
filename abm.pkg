@@ -1,10 +1,94 @@
 v 0.1.1
-d 'ABM': abm
+d 'ABM': Agent Based Models in Mata
 d 
-d Agent Based Models in Mata
+d Collection of classes to help build Agent Based Models in Mata
 d 
 d Distribution-Date:   20210427
 d License: Creative Commons Attribution 4.0
 d 
 F docu\abm.sthlp
+F docu\abm_bc.sthlp
+F docu\abm_bc_abm_version.sthlp
+F docu\abm_bc_mod_geq.sthlp
+F docu\abm_bc_parse_version.sthlp
+F docu\abm_bc_protected.sthlp
+F docu\abm_bc_setup.sthlp
+F docu\abm_bc_valid_version.sthlp
+F docu\abm_chk.sthlp
+F docu\abm_grid.sthlp
+F docu\abm_grid_agent_id.sthlp
+F docu\abm_grid_agent_ids.sthlp
+F docu\abm_grid_agent_loc.sthlp
+F docu\abm_grid_basecoords.sthlp
+F docu\abm_grid_baserings.sthlp
+F docu\abm_grid_comp_line.sthlp
+F docu\abm_grid_copy_agent.sthlp
+F docu\abm_grid_copy_agents.sthlp
+F docu\abm_grid_copy_grid.sthlp
+F docu\abm_grid_create_agent.sthlp
+F docu\abm_grid_delete_agent.sthlp
+F docu\abm_grid_delete_agents.sthlp
+F docu\abm_grid_dist.sthlp
+F docu\abm_grid_extract.sthlp
+F docu\abm_grid_find_line.sthlp
+F docu\abm_grid_findring.sthlp
+F docu\abm_grid_findspiral.sthlp
+F docu\abm_grid_free_spot.sthlp
+F docu\abm_grid_has_agent.sthlp
+F docu\abm_grid_is_setup.sthlp
+F docu\abm_grid_is_valid_cell.sthlp
+F docu\abm_grid_lerp.sthlp
+F docu\abm_grid_make_key.sthlp
+F docu\abm_grid_move_agent.sthlp
+F docu\abm_grid_move_agents.sthlp
+F docu\abm_grid_neumann.sthlp
+F docu\abm_grid_protected.sthlp
+F docu\abm_grid_randit.sthlp
+F docu\abm_grid_random_cell.sthlp
+F docu\abm_grid_rdim.sthlp
+F docu\abm_grid_schedule.sthlp
+F docu\abm_grid_setup.sthlp
+F docu\abm_grid_size.sthlp
+F docu\abm_grid_torus.sthlp
+F docu\abm_grid_torus_closest.sthlp
+F docu\abm_nw.sthlp
+F docu\abm_nw_N_edges.sthlp
+F docu\abm_nw_N_nodes.sthlp
+F docu\abm_nw_add_edge.sthlp
+F docu\abm_nw_add_node.sthlp
+F docu\abm_nw_change_weight.sthlp
+F docu\abm_nw_clear.sthlp
+F docu\abm_nw_copy_nw.sthlp
+F docu\abm_nw_directed.sthlp
+F docu\abm_nw_error.sthlp
+F docu\abm_nw_export_adjmat.sthlp
+F docu\abm_nw_export_edgelist.sthlp
+F docu\abm_nw_from_adjlist.sthlp
+F docu\abm_nw_from_adjmatrix.sthlp
+F docu\abm_nw_from_edgelist.sthlp
+F docu\abm_nw_neighbours.sthlp
+F docu\abm_nw_no_edge.sthlp
+F docu\abm_nw_protected.sthlp
+F docu\abm_nw_random.sthlp
+F docu\abm_nw_randomit.sthlp
+F docu\abm_nw_remove_edge.sthlp
+F docu\abm_nw_remove_node.sthlp
+F docu\abm_nw_return_node.sthlp
+F docu\abm_nw_rewire.sthlp
+F docu\abm_nw_schedule.sthlp
+F docu\abm_nw_setup.sthlp
+F docu\abm_nw_store_nw.sthlp
+F docu\abm_nw_sw.sthlp
+F docu\abm_nw_tdim.sthlp
+F docu\abm_nw_weight.sthlp
+F docu\abm_pop.sthlp
+F docu\abm_pop_N.sthlp
+F docu\abm_pop_add.sthlp
+F docu\abm_pop_extract.sthlp
+F docu\abm_pop_get.sthlp
+F docu\abm_pop_get_t.sthlp
+F docu\abm_pop_k.sthlp
+F docu\abm_pop_protected.sthlp
+F docu\abm_pop_put.sthlp
+F docu\abm_pop_setup.sthlp
 F labm.mlib
