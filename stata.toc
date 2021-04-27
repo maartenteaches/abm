@@ -1,0 +1,8 @@
+v 0.1.1
+d Materials by Maarten Buis
+d University of Konstanz
+d maarten.buis@uni.kn
+
+d 'abm': Agent Based Models in Mata
+
+p abm
