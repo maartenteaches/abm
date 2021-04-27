@@ -1,7 +1,7 @@
 // class to manage backwards compatability
 
 // set current version
-local current (0,1,0)
+local current (0,1,1)
 
 mata:
 mata set matastrict on
@@ -73,7 +73,7 @@ real rowvector abm_bc::parse_version(string scalar valstr)
 		errmsg = strofreal(`current'[1]) + "." +
 		         strofreal(`current'[2]) + "." + 
 				 strofreal(`current'[3])
-		errmsg = "this is verison " + errmsg + " of ABM"
+		errmsg = "this is version " + errmsg + " of ABM"
 		_error(errmsg)
 	}
 	return(v)
