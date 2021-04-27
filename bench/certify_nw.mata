@@ -135,23 +135,22 @@ mata:
 		}
 	}
 end
-exit
+
 // ----------------------------------------------------------------is_valid_time
 // valid times when tdim() has not been set
 mata:
 	foo = test_abm_nw()
-	foo.N_nodes(0,10)
+	foo.N_nodes(1,10)
 	foo.tests_is_valid_time(.)
-	foo.tests_is_valid_time(0)
+	foo.tests_is_valid_time(1)
 end
-
 // invalid times without first specifying tdim() 
-rcof "mata: foo.tests_is_valid_time(1)" == 3000
+rcof "mata: foo.tests_is_valid_time(2)" == 3000
 
-// tdim=10, so valid times are now 0..10
+// tdim=10, so valid times are now 1..10
 mata:
 	foo.tdim(10)
-	for(i=0;i>=10;i++) {
+	for(i=1;i>=10;i++) {
 		foo.tests_is_valid_time(i)
 	}
 end
@@ -160,37 +159,11 @@ end
 rcof "mata: foo.tests_is_valid_time(11)" == 3000
 rcof "mata: foo.tests_is_valid_time(-1)" == 3300
 rcof "mata: foo.tests_is_valid_time(1.5)" == 3300
+rcof "mata: foo.tests_is_valid_time(0)" == 3300
 
-// ------------------------------------------------------------------- is_posint
-mata:
-	for(i=1; i <=100; i++) {
-		foo.tests_is_posint(i)
-	}
-	foo.tests_is_posint(0, "zero_ok")
-	foo.tests_is_posint(0, "maarten is great") // any (silly) string will make zero ok
-end
-rcof "mata: foo.tests_is_posint(0)" == 3300
-rcof "mata: foo.tests_is_posint(1.3)" == 3300
-rcof "mata: foo.tests_is_posint(-1)" == 3300
+exit
+// ------------------------------------------------------------------- parse_t()
 
-// --------------------------------------------------------------------- is_bool
-mata:
-	foo.tests_is_bool(0)
-	foo.tests_is_bool(1)
-end
-rcof "mata: foo.tests_is_bool(-1)" == 3300
-rcof "mata: foo.tests_is_bool(2)" == 3300
-rcof "mata: foo.tests_is_bool(0.5)" == 3300
-
-// ----------------------------------------------------------------------- is_pr
-mata:
-for(i=0; i<=100; i++) {
-	foo.tests_is_pr(i/100)
-}
-end
-
-rcof "mata: foo.tests_is_pr(-1)"==3300
-rcof "mata: foo.tests_is_pr(1.0000000001)"==3300
 
 // -------------------------------------------------------------------- directed
 mata:

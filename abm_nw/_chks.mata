@@ -6,19 +6,20 @@ real scalar abm_nw::parse_t(real scalar t)
 	return(t)
 }
 
-void abm_nw::is_valid_time(real scalar time)
+// time is assumed to be in "modern" format, 
+// i.e. parse_t() is supposed to have run _before_ is_valid_time()
+void abm_nw::is_valid_time(real scalar time) 
 {
-	if (time != .) {
-		if (network.tdim() == 1 & time > 1) {
-			_error(3000,"time is specified while there is no time dimension")
-		}
-		if (network.tdim()==. & time > 1) {
-			_error(3000, "time is specified without specifying tdim")
-		}
-		is_posint(time)
-		if(time > network.tdim()) {
-			_error(3000,"specified time exceeds tdim")
-		}
+	if (time==.) return
+	if (network.tdim() == 1 & time > 1) {
+		_error(3000,"time is specified while there is no time dimension")
+	}
+	if (network.tdim()==. & time > 1) {
+		_error(3000, "time is specified without specifying tdim")
+	}
+	is_posint(time)
+	if(time > network.tdim()) {
+		_error(3000,"specified time exceeds tdim")
 	}
 }
 
