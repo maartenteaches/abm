@@ -231,7 +231,7 @@ characteristics.
     }
     void immune::setup_grid()
     {
-        universe.abm_version("1.0.0")
+        universe.abm_version("0.1.1")
         if (universe.torus() == . ) {
             universe.torus(1)
         }
