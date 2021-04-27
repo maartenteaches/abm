@@ -208,7 +208,7 @@ class; the network is constant, so its {cmd:tdim()} is 0.
         if (degree==.) degree = 4
         if (pr==.) pr=.1
         
-        nw.abm_version("1.0.0")
+        nw.abm_version("0.1.1")
         nw.directed(0)
         nw.weighted(0)
         nw.tdim(0)
