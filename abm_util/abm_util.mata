@@ -1,13 +1,13 @@
 mata:
 mata set matastrict on
 
-class abm_int 
+class abm_util extends abm_chk
 {
     protected:
         void dots()
 }
 
-void abm_int::dots(real scalar t) 
+void abm_util::dots(real scalar t) 
 {
 	if (t==0) {
 		printf("----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5\n")
