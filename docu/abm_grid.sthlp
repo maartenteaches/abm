@@ -168,7 +168,7 @@ characteristics.
     }
     
     // the main agent based model
-    class immune
+    class immune extends abm_util
     {
         private:
             class grid scalar universe
@@ -205,6 +205,7 @@ characteristics.
     transmorphic immune::rdim(| real scalar dim) 
     {
         if (args() == 1) {
+            is_posint(dim)
             universe.rdim(dim)
         }
         else {
@@ -214,6 +215,7 @@ characteristics.
     transmorphic immune::cdim(| real scalar dim) 
     {
         if (args() == 1) {
+            is_posint(dim)
             universe.cdim(dim)
         }
         else {
@@ -223,6 +225,7 @@ characteristics.
     transmorphic immune::torus(| real scalar val)
     {
         if (args() == 1) {
+            is_bool(val)
             universe.torus(val)
         }
         else {
@@ -231,7 +234,7 @@ characteristics.
     }
     void immune::setup_grid()
     {
-        universe.abm_version("0.1.1")
+        universe.abm_version("0.1.2")
         if (universe.torus() == . ) {
             universe.torus(1)
         }
@@ -243,9 +246,7 @@ characteristics.
     transmorphic immune::not_vaccinated(| real scalar dim) 
     {
         if (args() == 1) {
-            if (dim <= 0 | mod(dim,1) != 0 ) {
-                _error(3000, "dim must be an integer larger than 0")
-            }
+            is_posint(dim)
             
             not_vaccinated = dim
         }
@@ -256,9 +257,7 @@ characteristics.
     transmorphic immune::tdim(| real scalar dim)
     {
         if (args() == 1) {
-            if (dim <= 0 | mod(dim,1) != 0) {
-                _error(3000, "dim must be an integer larger than 0")
-            }
+            is_posint(dim)
             tdim = dim
         }
         else {
@@ -269,9 +268,7 @@ characteristics.
     transmorphic immune::radius(| real scalar number)
     {
         if (args() == 1) {
-            if (number <= 0 | mod(number,1) != 0) {
-                _error(3000, "number must be an integer larger than 0")
-            }
+            is_posint(number)
             radius = number
         }
         else {
