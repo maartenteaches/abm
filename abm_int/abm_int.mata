@@ -1,7 +1,7 @@
 mata:
 mata set matastrict on
 
-class abm_int extends abm_chk
+class abm_int 
 {
     protected:
         void dots()
