@@ -1,4 +1,4 @@
-v 0.1.1
+v 0.1.2
 d Materials by Maarten Buis
 d University of Konstanz
 d maarten.buis@uni.kn
