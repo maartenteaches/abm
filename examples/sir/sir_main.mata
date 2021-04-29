@@ -5,7 +5,7 @@ mata:
 
 mata set matastrict on
 
-class sir extends abm_chk {
+class sir extends abm_util {
 	class abm_pop          scalar agents
 	
 	real                   scalar tdim
@@ -41,7 +41,6 @@ class sir extends abm_chk {
 	void                          progress()
 	void                          step()
 	void                          run()
-	void                          dots()
 	
 	// sir_export.do
 	void                          export_sir()
