@@ -7,7 +7,7 @@ class abm_int
         void dots()
 }
 
-void sir::dots(real scalar t) 
+void abm_int::dots(real scalar t) 
 {
 	if (t==0) {
 		printf("----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5\n")
