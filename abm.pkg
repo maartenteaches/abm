@@ -1,9 +1,9 @@
-v 0.1.1
+v 0.1.2
 d 'ABM': Agent Based Models in Mata
 d 
 d Collection of classes to help build Agent Based Models in Mata
 d 
-d Distribution-Date:   20210427
+d Distribution-Date:   20210429
 d License: Creative Commons Attribution 4.0
 d 
 F docu\abm.sthlp
@@ -91,4 +91,5 @@ F docu\abm_pop_k.sthlp
 F docu\abm_pop_protected.sthlp
 F docu\abm_pop_put.sthlp
 F docu\abm_pop_setup.sthlp
+F docu\abm_util.sthlp
 F labm.mlib

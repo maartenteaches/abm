@@ -7,3 +7,4 @@ do bench\certify_chk.mata
 do bench\certify_pop.mata
 do bench\certify_nw.mata
 do bench\certify_grid.mata
+do bench\certify_util.mata

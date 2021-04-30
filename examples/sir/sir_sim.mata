@@ -39,7 +39,7 @@ void sir::setup()
 	
 	agents.N(N)
 	agents.k(3)
-	agents.abm_version("0.1.0")
+	agents.abm_version("0.1.2")
 	agents.setup()
 	
 	id = jumble((1..N)')
@@ -150,19 +150,4 @@ real scalar sir::infect(real scalar id, real scalar t)
 	return(infected)
 }
 
-
-
-void sir::dots(real scalar t) 
-{
-	if (t==0) {
-		printf("----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5\n")
-	}
-	else if (mod(t, 50) == 0) {
-		printf(". %9.0f\n", t)
-	}
-	else {
-		printf(".")
-	}
-	displayflush()
-}
 end

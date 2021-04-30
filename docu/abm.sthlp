@@ -54,10 +54,14 @@ interact with who in your model. The network can be constant or changing over
 time, it can be directed or undirected, and the connections can be weighted
 or not.
 
+{pmore}
+The {helpb abm_util} class is intended to be inherrited by the model class. It
+contains a number of useful functions, that can help writing the model.  For 
+example, it inherrits the argument checking functions from {help abm_chk}. 
+
 {pstd}
 In addition, the {cmd:abm} package also contains two helper classes: {help abm_chk}
 and {help abm_bc}. The {cmd:abm_chk} class contains some functions for checking 
-parameters. For example, if a number is a positive integer or not. Inherriting the 
-{cmd:abm_chk} class into your model class can be useful if you want to perform
-such tests as well. The {cmd:abm_bc} class is there to help with assuring backwards 
-compatability for all the classes of the {cmd:abm} package. 
+parameters. For example, if a number is a positive integer or not. The {cmd:abm_bc} 
+class is there to help with assuring backwards compatability for all the classes of 
+the {cmd:abm} package. 

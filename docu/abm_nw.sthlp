@@ -135,7 +135,7 @@ class; the network is constant, so its {cmd:tdim()} is 0.
     mata set matastrict on
     
     // the main agent based model
-    class spread 
+    class spread extends abm_util
     {
         class abm_nw          scalar   nw
         real                  matrix   infected
@@ -160,6 +160,7 @@ class; the network is constant, so its {cmd:tdim()} is 0.
     transmorphic spread::N(| real scalar val)
     {
         if (args()==1) {
+            is_posint(val)
             nw.N_nodes(0,val)
             N = val
         }
@@ -171,6 +172,7 @@ class; the network is constant, so its {cmd:tdim()} is 0.
     transmorphic spread::tdim(| real scalar val)
     {
         if (args()==1) {
+            is_posint(val)
             tdim = val
         }
         else {
@@ -181,6 +183,7 @@ class; the network is constant, so its {cmd:tdim()} is 0.
     transmorphic spread::degree(| real scalar val) 
     {
         if (args()==1) {
+            is_posint(val)
             degree = val
         }
         else {
@@ -191,6 +194,7 @@ class; the network is constant, so its {cmd:tdim()} is 0.
     transmorphic spread::pr(| real scalar val)
     {
         if (args() == 1){
+            is_pr(val)
             pr = val
         }
         else {
@@ -208,7 +212,7 @@ class; the network is constant, so its {cmd:tdim()} is 0.
         if (degree==.) degree = 4
         if (pr==.) pr=.1
         
-        nw.abm_version("0.1.1")
+        nw.abm_version("0.1.2")
         nw.directed(0)
         nw.weighted(0)
         nw.tdim(0)

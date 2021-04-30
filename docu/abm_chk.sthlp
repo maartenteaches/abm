@@ -37,7 +37,7 @@ This class is intended to be inherrited by another class. When it is inherited, 
 will make some error checking functions available as protected functions.   
  These functions test whether common requirements are met, and aborts with an 
 error message when that is not the case. {cmd:abm_chk} is inherited 
-by {help abm_pop}, {help abm_nw}, and {help abm_grid}.
+by {help abm_pop}, {help abm_nw}, {help abm_grid}, and {help abm_util}.
 
 {pmore}
 {cmd:is_posint()} tests whether all elements in {it:val} are positive integers, 
