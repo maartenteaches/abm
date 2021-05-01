@@ -2,7 +2,7 @@
 {* *! version 0.1.2 01Feb2021 MLB}{...}
 {vieweralsosee "help abm" "help abm"}{...}
 {vieweralsosee "help abm_chk" "help abm_chk"}{...}
-{phang}{cmd:abm_int} {hline 2} Class with utility functions{p_end}
+{phang}{cmd:abm_util} {hline 2} Class with utility functions{p_end}
 
 
 {marker syntax}{...}
