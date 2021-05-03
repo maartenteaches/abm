@@ -1,4 +1,4 @@
-local current "(0,1,2)"
+local current "(0,1,4)"
 mata:
 
 class testing extends abm_bc {

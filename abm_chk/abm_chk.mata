@@ -8,6 +8,7 @@ class abm_chk extends abm_bc
 		void                             is_int()
 		void                             is_bool()
 		void                             is_pr()
+		void                             is_int_inrange()
 }
 
 void abm_chk::is_bool(real matrix val)
@@ -44,6 +45,18 @@ void abm_chk::is_posint(real matrix val, | string scalar zero_ok)
 			errmsg = "argument must contain all zero or positive integers"
 			_error(3300, errmsg)
 		}
+	}
+}
+
+void abm_chk::is_int_inrange(real matrix val, real scalar lb, real scalar ub) 
+{
+	string scalar errmsg
+	
+	is_int(val)
+
+	if (any((val :< lb) :| (val :> ub) ) ){
+		errmsg = "argument must contain all integers between " + strofreal(lb) + " and " + strofreal(ub)
+		_error(3300, errmsg)
 	}
 }
 
