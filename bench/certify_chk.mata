@@ -4,6 +4,7 @@ class chk extends abm_chk {
     void chk_is_bool()
     void chk_is_pr()
     void chk_is_int()
+    void chk_is_int_inrange()
 }
 
 void chk::chk_is_posint(real matrix val, | string scalar zero_ok) {
@@ -13,6 +14,11 @@ void chk::chk_is_posint(real matrix val, | string scalar zero_ok) {
     else {
         is_posint(val,zero_ok)
     }
+}
+
+void chk::chk_is_int_inrange(real matrix val, real scalar lb, real scalar ub)
+{
+    is_int_inrange(val,lb,ub)
 }
 
 void chk::chk_is_bool(real matrix val)
@@ -42,6 +48,15 @@ rcof "mata foo.chk_is_posint(-1)" == 3300
 rcof "mata foo.chk_is_posint(1.5)" == 3300
 rcof "mata foo.chk_is_posint((tocheck, (1.5\2)))" == 3300
 rcof "mata foo.chk_is_posint((tocheck, (1.5\2.2)))" == 3300
+
+mata:
+foo.chk_is_int_inrange(3,0,5)
+tocheck = 1,8, 3 \ 4, 2, 6
+foo.chk_is_int_inrange(tocheck,0,8)
+end
+rcof "mata foo.chk_is_int_inrange(-2,-1, 6)" == 3300
+rcof "mata foo.chk_is_int_inrange(-0.5,-1, 6)" == 3300
+rcof "mata foo.chk_is_int_inrange(tocheck,-1, 6)" == 3300
 
 mata:
 foo.chk_is_bool(1)

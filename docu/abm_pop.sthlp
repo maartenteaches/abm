@@ -94,7 +94,7 @@ These are documented {help abm_pop_protected:here}.
     agents = abm_pop()
     agents.N(10)
     agents.k(2)
-    agents.abm_version("0.1.2")
+    agents.abm_version("0.1.4")
     agents.setup()
     
     // store the value 3 for agent 1, characteristic 1, time 1
