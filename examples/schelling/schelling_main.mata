@@ -3,7 +3,7 @@ cd "d:\mijn documenten\projecten\stata\abm\abm"
 
 mata:
 mata set matastrict on
-class schelling extends abm_chk {
+class schelling extends abm_util {
 		class abm_grid  scalar    universe
 		string          colvector agents
 

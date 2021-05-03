@@ -42,12 +42,12 @@ void sir_nw::setup()
 	nw.directed(0)                                                       // <-- new
 	nw.tdim(0)                                                           // <-- new
 	nw.sw(degree,pr_long)                                                // <-- new 
-	nw.abm_version("0.1.0")   
+	nw.abm_version("0.1.4")   
 	nw.setup()                                                           // <-- new
 	
 	agents.N(N)
 	agents.k(4)
-	agents.abm_version("0.1.2")
+	agents.abm_version("0.1.4")
 	agents.setup()
 	
 	id = jumble((1..N)')
