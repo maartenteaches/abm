@@ -18,6 +18,10 @@ an error if arguments don't meet requirements{p_end}
 
 {p 8 12 2}
 {it:void}
+{cmd:is_int_inrange(}{it:real matrix val}, {it:real scalar lb}, {it:real scalar ub} {cmd:)}
+
+{p 8 12 2}
+{it:void}
 {cmd: is_int(}{it:real matrix val}{cmd:)}
 
 {p 8 12 2}
@@ -35,7 +39,7 @@ an error if arguments don't meet requirements{p_end}
 {p 4 4 2}
 This class is intended to be inherrited by another class. When it is inherited, it 
 will make some error checking functions available as protected functions.   
- These functions test whether common requirements are met, and aborts with an 
+These functions test whether common requirements are met, and aborts with an 
 error message when that is not the case. {cmd:abm_chk} is inherited 
 by {help abm_pop}, {help abm_nw}, {help abm_grid}, and {help abm_util}.
 
@@ -44,6 +48,10 @@ by {help abm_pop}, {help abm_nw}, {help abm_grid}, and {help abm_util}.
 and aborts with an error if that is not the case. The value 0 is allowed if the 
 {it:zero_ok} argument is also specified, otherwise the value 0 will also result 
 in an error.
+
+{pmore}
+{cmd:is_int_inrange} tests whether all elements in {it:val} are integers and 
+between {it:lb} and {it:ub}, including {it:lb} and {it:ub}. 
 
 {pmore}
 {cmd:is_int()} tests whether all elements in {it:val} are integers, and aborts 
@@ -102,6 +110,12 @@ set some parameter {it:N}, which has to be a positive integer. Than we can inher
            {it:result}:    {it:void}
            {it:val}:       {it:r x c}
            {it:zero_ok}:   1 {it:x} 1
+
+    {cmd:is_int_inrange(}{it:val}, {it:lb}, {it:ub} {cmd:)}:
+           {it:result}:    {it:void}
+           {it:val}:       {it:r x c}
+           {it:lb}:        1 {it:x} 1
+           {it:ub}:        1 {it:x} 1
 
     {cmd:is_int(}{it:val}{cmd:)}:
            {it:result}:    {it:void}
