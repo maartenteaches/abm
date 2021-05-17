@@ -161,7 +161,6 @@ rcof "mata: foo.tests_is_valid_time(-1)" == 3300
 rcof "mata: foo.tests_is_valid_time(1.5)" == 3300
 rcof "mata: foo.tests_is_valid_time(0)" == 3300
 
-exit
 // ------------------------------------------------------------------- parse_t()
 
 
@@ -171,7 +170,7 @@ mata:
 	foo.directed(0)
 	assert(foo.directed()==0)
 	foo = test_abm_nw()
-	foo.N_nodes(0,10)
+	foo.N_nodes(1,10)
 	foo.directed(1)
 	assert(foo.directed()==1)
 end
@@ -182,7 +181,8 @@ mata:
 	assert(foo.tdim()==.)
 	foo.tdim(10)
 	assert(foo.tdim() == 10)
-	assert(foo.get_nodes() == J(10,1,NULL))
+	foo.schedule(1) 
+	end
 	assert(foo.get_N_nodes()==J(10,1,.))
 	for(i=1; i<=10; i++) { // nodes
 		for(j=1; j<=10; j++) { // times
@@ -194,7 +194,7 @@ mata:
 	}
 	assert(foo.get_N_edges()==J(10,1,0))
 end
-
+exit
 // ------------------------------------------------------------- is_frozen setup
 mata:
 	foo = test_abm_nw()
