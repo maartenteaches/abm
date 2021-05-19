@@ -128,17 +128,18 @@ real matrix abm_grid::find_ring(real scalar r, real scalar c,
                                 real scalar radius)
 {
 	real matrix res, base
-	real scalar i
+	real scalar i, j
 	real rowvector neigh_pos, pos
 	
 	is_setup() 
 	
 	pos = r, c
 	
-	res = J(0,2,.)
+	
+	res = J((8-neumann*4)*radius,2,.)
 
 	base = basering(radius)
-
+	j = 1
 	for(i=1; i<= rows(base) ; i++) {
 		neigh_pos = base[i,.] :+ pos
 		if (torus) {
@@ -147,9 +148,9 @@ real matrix abm_grid::find_ring(real scalar r, real scalar c,
 		else if ( out_of_bounds(neigh_pos) ) {
 			continue
 		}
-		res = res \ neigh_pos
+		res[j++,.] = neigh_pos
 	}
-	return(res)	
+	return(res[|1,1\j-1,2|])	
 }
 
 real matrix abm_grid::find_spiral(real scalar r, real scalar c, real scalar radius)
