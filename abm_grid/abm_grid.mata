@@ -1,5 +1,3 @@
-version 16.1
-
 mata :
 mata set matastrict on
 
@@ -8,6 +6,7 @@ class abm_grid extends abm_chk
 	protected:
 		class AssociativeArray scalar universe 
 		class AssociativeArray scalar baserings
+		pointer (real matrix) colvector baserings2
 		
 		real scalar    rdim
 		real scalar    cdim
@@ -27,9 +26,13 @@ class abm_grid extends abm_chk
 
 		// _neighbours.mata
 		void           baserings()
+		void           baserings2()
 		real matrix    basering()
+		real matrix    basering2()
 		real matrix    neumannring()
 		real matrix    moorering()
+		void           neumannring2()
+		void           moorering2()
 		real colvector out_of_bounds()
 		real matrix    torus_adj()
 
@@ -59,9 +62,11 @@ class abm_grid extends abm_chk
 
 		// _setup.mata
 		void           setup()
+		void           setup2()
 
 		// _neighbours.mata
 		real matrix    find_ring()
+		real matrix    find_ring2()
 		real matrix    find_spiral()
 
 		// _agents.mata
