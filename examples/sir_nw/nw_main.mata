@@ -1,4 +1,3 @@
-version 16.1
 cd "d:\mijn documenten\projecten\stata\abm\abm"
 
 mata:
