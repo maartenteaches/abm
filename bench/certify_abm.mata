@@ -8,3 +8,7 @@ do bench\certify_pop.mata
 do bench\certify_nw.mata
 do bench\certify_grid.mata
 do bench\certify_util.mata
+
+do examples/schelling/schelling_run.mata
+do examples/sir/sir_run.mata
+do examples/sir_nw/nw_run.mata
