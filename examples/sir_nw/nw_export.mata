@@ -75,7 +75,7 @@ void sir_nw::export_r()
 	
 }
 
-void sir_nw::export_nw()                             // <-- new
+void sir_nw::export_nw()                            
 {
     real vector xid
     real matrix result, state

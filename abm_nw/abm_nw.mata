@@ -1,5 +1,3 @@
-version 16.1
-
 mata:
 
 mata set matastrict on

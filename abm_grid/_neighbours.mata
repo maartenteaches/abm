@@ -1,30 +1,34 @@
 mata:
+
 real matrix abm_grid::neumannring(real scalar radius) 
 {
 	real matrix basering
 	real rowvector pos, change
+	real scalar i
 	
 	pos = (radius, 0)
-	basering = pos
+	basering = J(radius*4,2,.)
+	basering[1,.] = pos
 	change = (-1,1)
+	i = 1
 	while (pos[1] != 0) {
 		pos = pos + change
-		basering = basering \ pos
+		basering[++i,.] = pos
 	}
 	change = (-1,-1)
 	while (pos[2] != 0) {
 		pos = pos + change
-		basering = basering \ pos
+		basering[++i,.] = pos 
 	}
 	change = (1,-1)
 	while (pos[1] != 0) {
 		pos = pos + change
-		basering = basering \ pos
+		basering[++i,.] = pos
 	}
 	change = (1,1)
 	while (pos[2] != -1) {
 		pos = pos + change
-		basering = basering \ pos
+		basering[++i,.] = pos 
 	}
 	return(basering)
 }
@@ -33,28 +37,31 @@ real matrix abm_grid::moorering(real scalar radius)
 {
 	real matrix basering
 	real rowvector pos, change
+	real scalar i
 	
 	pos = (radius, radius)
-	basering = pos
+	basering = J(radius*8,2, .)
+	basering[1,.] = pos
 	change = (-1,0)
+	i = 1
 	while (pos[1] != -radius) {
 		pos = pos + change
-		basering = basering \ pos
+		basering[++i,.] = pos
 	}
 	change = (0,-1)
 	while (pos[2] != -radius) {
 		pos = pos + change
-		basering = basering \ pos
+		basering[++i,.] = pos
 	}
 	change = (1,0)
 	while (pos[1] != radius) {
 		pos = pos + change
-		basering = basering \ pos
+		basering[++i,.] = pos
 	}
 	change = (0,1)
 	while (pos[2] != radius-1) {
 		pos = pos + change
-		basering = basering \ pos
+		basering[++i,.] = pos
 	}
 	return(basering)
 }
@@ -85,8 +92,8 @@ real matrix abm_grid::basering(real scalar radius)
 {
 	is_setup()
 	
-	if ( radius > max((rdim,cdim)) ) {
-	 _error(3300, "radius must be less than or equal to max(rdim,cdim)")
+	if ( radius >= max((rdim,cdim)) ) {
+	 _error(3300, "radius must be less than max(rdim,cdim)")
 	}
 	
 	return(baserings.get(radius))
@@ -121,17 +128,18 @@ real matrix abm_grid::find_ring(real scalar r, real scalar c,
                                 real scalar radius)
 {
 	real matrix res, base
-	real scalar i
+	real scalar i, j
 	real rowvector neigh_pos, pos
 	
 	is_setup() 
 	
 	pos = r, c
 	
-	res = J(0,2,.)
+	
+	res = J((8-neumann*4)*radius,2,.)
 
 	base = basering(radius)
-
+	j = 1
 	for(i=1; i<= rows(base) ; i++) {
 		neigh_pos = base[i,.] :+ pos
 		if (torus) {
@@ -140,9 +148,9 @@ real matrix abm_grid::find_ring(real scalar r, real scalar c,
 		else if ( out_of_bounds(neigh_pos) ) {
 			continue
 		}
-		res = res \ neigh_pos
+		res[j++,.] = neigh_pos
 	}
-	return(res)	
+	return(res[|1,1\j-1,2|])	
 }
 
 real matrix abm_grid::find_spiral(real scalar r, real scalar c, real scalar radius)

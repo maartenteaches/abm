@@ -1,5 +1,3 @@
-version 16.1
-
 mata :
 mata set matastrict on
 
@@ -27,6 +25,7 @@ class abm_grid extends abm_chk
 
 		// _neighbours.mata
 		void           baserings()
+		void           baserings2()
 		real matrix    basering()
 		real matrix    neumannring()
 		real matrix    moorering()
