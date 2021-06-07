@@ -1,0 +1,107 @@
+{smcl}
+{* 31 May 2021}{...}
+{hline}
+{p}{bf:What is an Agent Based Model?}{p_end}
+{hline}
+
+{center:{bf:Adding a network}}
+
+{pstd}
+The model thus far does not need a simulation; one can compute them with a set
+of differential equations. 
+
+{pstd}
+In Stata you can do that with {cmd:epimodels} by Sergiy Radyakin and Paolo Verme
+
+{pstd}
+However, the advantage of Agent Based Models is that it is much easier to expand
+the model.
+
+{pstd}
+For example, what if we don't believe that people contact each other randomly 
+but instead it is a network that determines who contacts who. 
+
+{pstd}
+A common model that works fairly well for a lot of social networks is a small 
+world network:
+
+{pmore}
+We assume all agents are on a circle, and that each agent is connected to the 4
+closes agents.
+
+{pmore}
+However, a small number of these connections are replaced by a connection to a
+random agent
+ 
+{* ex slide6ex1 }{...}
+{cmd}
+        clear mata
+        drop _all
+        set seed 28863
+        run nw_main.do
+        mata:
+        model = sir_nw()
+        model.N(100)
+        model.tdim(10)
+        model.outbreak(2)
+        model.degree(4)
+        model.pr_long(.05)
+        model.transmissibility(0.1)
+        model.mindur(5)
+        model.meandur(6)
+        model.pr_loss(0.00)
+        model.run()
+        model.export_nw()
+        end
+
+        gen x_ego = cos((ego-1)/`n'*2*_pi)*(1+mod(ego,2)*.2)
+        gen y_ego = sin((ego-1)/`n'*2*_pi)*(1+mod(ego,2)*.2)
+        gen x_alter = cos((alter-1)/`n'*2*_pi)*(1+mod(alter,2)*.2)
+        gen y_alter = sin((alter-1)/`n'*2*_pi)*(1+mod(alter,2)*.2)
+    
+
+        bys ego (alter) : gen first = _n == 1
+
+        forvalues t = 1/10{
+            twoway pcspike y_ego x_ego y_alter x_alter,                ///
+                          lcolor(gs8)                               || ///
+                scatter y_ego x_ego if first & state`t'==1 ,           ///
+                           mcolor(yellow) msymbol(O)                || ///
+                scatter y_ego x_ego if first & state`t'==2 ,           ///
+                           mcolor(red) msymbol(O)                   || ///
+                scatter y_ego x_ego if first & state`t'==3 ,           ///
+                           mcolor(black) msymbol(Oh)                   ///         
+                           aspect(1) xscale(off) yscale(off)           ///
+                           legend(order(2 "susceptible"                ///
+                                        3 "infected"                   ///
+                                        4 "recovered") rows(1))        ///
+                           name(t`t', replace) title(Time `t')     
+        }
+        drop _all
+{txt}{...}
+{pstd}({stata "do slide6ex1.do":{it:click to run}}){p_end}
+
+
+{* endex }{...}
+{* graph t1 }{...}
+{* graph t2 }{...}
+{* graph t3 }{...}
+{* graph t4 }{...}
+{* graph t5 }{...}
+{* graph t6 }{...}
+{* graph t7 }{...}
+{* graph t8 }{...}
+{* graph t9 }{...}
+{* graph t10 }{...}
+{pstd}
+Close knit networks tend to slow down the spread of a disease, while the long 
+distance ties tend 
+
+{pstd}
+So that is one way in which advise against unnecesary travel or "social buble"
+rules in countries like Belgium works
+ 
+ 
+{* /p}{hline}
+{* bottombar }{center:{view slide2.smcl:<<}   {view index.smcl:index}   {view slide8.smcl:>>}}
+{hline}

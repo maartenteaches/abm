@@ -1,0 +1,90 @@
+{smcl}
+{* 31 May 2021}{...}
+{hline}
+{p}{bf:What is an Agent Based Model?}{p_end}
+{hline}
+
+{center:{bf:Multiple towns on a grid}}
+
+{pstd}
+The basic SIR model could represent how a disease spreads in a specific town
+
+{pstd}
+we could place multiple SIR models on a grid (like a chessboard) and see how
+the disease spreads across this space 
+
+{pstd}
+In the first round a number of people in a single town is infected 
+
+{pstd}
+In all subsequent rounds
+
+{pmore}
+the disease spreads within each town as before, but then
+
+{pmore}
+some agents visit neighbouring town and potentially spread the disease there
+ 
+{* ex slide8ex1 }{...}
+{cmd}
+        set seed 123456789
+        clear mata
+        drop _all
+        run grid_main.do
+
+        mata:
+
+        model = sir_grid()
+        model.rdim(10)
+        model.cdim(10)
+        model.prop_close(0.15)
+        model.prop_far(0.01)
+
+        model.N(100)
+        model.tdim(50)
+        model.outbreak(5)
+        model.mcontacts(4)
+        model.transmissibility(0.045)
+        model.mindur(10)
+        model.meandur(14)
+        model.pr_loss(0)
+
+        model.run()
+        model.export_sir()
+
+        end
+
+        replace r = -r
+        foreach t of numlist 1 5(5) 50 {
+             heatplot I r c if t==`t',          /// 
+                  discrete title(Time = `t')    ///
+                  name(grid`t', replace)        ///
+                  cuts(0(0.05)0.7)              /// 
+                  colors(plasma)                ///
+                  yscale(off range(-10.5 -.5))  ///
+                  xscale(off  range(.5 10.5))   ///
+                  ylab(none) xlab(none)         ///
+                  plotregion(margin(zero))      ///
+                  aspect(1)                                        
+        }
+{txt}{...}
+{pstd}({stata "do slide8ex1.do":{it:click to run}}){p_end}
+
+
+{* endex }{...}
+{* graph grid1 }{...}
+{* graph grid5 }{...}
+{* graph grid10 }{...}
+{* graph grid15 }{...}
+{* graph grid20 }{...}
+{* graph grid25 }{...}
+{* graph grid30 }{...}
+{* graph grid35 }{...}
+{* graph grid40 }{...}
+{* graph grid45 }{...}
+{* graph grid50 }{...}
+ 
+ 
+{* /p}{hline}
+{* bottombar }{center:{view slide6.smcl:<<}   {view index.smcl:index}   {view slide10.smcl:>>}}
+{hline}

@@ -1,0 +1,22 @@
+{smcl}
+{* 31 May 2021}{...}
+{hline}
+{p}{bf:What is an Agent Based Model?}{p_end}
+{hline}
+
+{center:{bf:What is an Agent Based Model?}}
+
+{pstd}
+An Agent Based Model is a simulation in which agents, that each follow simple rules, 
+interact with one another and thus produce a often surprising outcome at the macro 
+level. 
+
+{pstd}
+The purpose of an ABM is to explore mechanisms through which actions of the 
+individual agents add up to a macro outcome, by varying the rules that agents have
+to follow or varying with whom the agent can interact. 
+ 
+ 
+{* /p}{hline}
+{* bottombar }{center:{view presentation.smcl:<<}   {view index.smcl:index}   {view slide2.smcl:>>}}
+{hline}

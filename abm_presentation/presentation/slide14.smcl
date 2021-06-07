@@ -1,0 +1,33 @@
+{smcl}
+{* 31 May 2021}{...}
+{hline}
+{p}{bf:How to implement an ABM in Mata}{p_end}
+{hline}
+
+{center:{bf:SIR model on a grid}}
+
+{pstd}
+The sir class remains largely unchanged
+
+{pstd}
+The main trick here is that one can create a 10x10 matrix of instances of a class, by 
+specifying {cmd:town=sir(10,10)}
+
+{pstd}
+The {helpb abm_grid} class is mainly used to find neighbouring towns.
+
+
+{* codefile grid_main.do }{pstd}{stata "doedit grid_main.do":main}{p_end}
+{* codefile grid_set_pars.do }{pstd}{stata "doedit grid_set_pars.do":set grid parameters}{p_end}
+{* codefile grid_sir_set_pars.do }{pstd}{stata "doedit grid_sir_set_pars.do":set SIR parameters}{p_end}
+{* codefile grid_chks.do }{pstd}{stata "doedit grid_chks.do":checks}{p_end}
+{* codefile grid_sir_sim.do }{pstd}{stata "doedit grid_sir_sim.do":simulate within the towns}{p_end}
+{* codefile grid_sim.do }{pstd}{stata "doedit grid_sim.do":simulate the grid}{p_end}
+{* codefile grid_locals.do }{pstd}{stata "doedit grid_locals.do":locals}{p_end}
+{* codefile grid_export.do }{pstd}{stata "doedit grid_export.do":export to Stata}{p_end}
+
+ 
+ 
+{* /p}{hline}
+{* bottombar }{center:{view slide13.smcl:<<}   {view index.smcl:index}   {view slide15.smcl:>>}}
+{hline}

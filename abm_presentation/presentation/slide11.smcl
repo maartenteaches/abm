@@ -1,0 +1,85 @@
+{smcl}
+{* 31 May 2021}{...}
+{hline}
+{p}{bf:digression}{p_end}
+{hline}
+
+{center:{bf:Class}}
+
+{pstd}
+We have a population of agents to keep track of
+
+{pstd}
+We need to repeatedly apply rules to them
+
+{pstd}
+Applying rules can be done by a function, but that function needs access to 
+settings and the population. 
+
+{pstd}
+This is a good case for a class.
+
+{pstd}
+A class can be thought of as a tray with named slots for functions and data
+
+{pstd}
+The functions are local to the class
+
+{pstd}
+Each function has access to all material stored in the class
+
+ 
+{* ex slide11ex1 }{...}
+{cmd}
+        clear mata
+
+        mata:
+
+        class arithmatic {
+
+            real scalar a
+            real scalar b
+    
+            real scalar sum()
+            real scalar prod()
+            void input()
+            void run()
+        }
+
+        void arithmatic::input(real scalar aval, real scalar bval)
+        {
+            a = aval
+            b = bval
+        }
+
+        real scalar arithmatic::sum()
+        {
+            return(a + b)
+        }
+
+        real scalar arithmatic::prod()
+        {
+            return(a * b)
+        }
+
+        void arithmatic::run()
+        {
+            sum()
+            prod()
+        }
+
+        // how the user interacts with this program
+        math = arithmatic()
+        math.input(2,4)
+        math.run()
+        end
+{txt}{...}
+{pstd}({stata "do slide11ex1.do":{it:click to run}}){p_end}
+
+
+{* endex }{...}
+ 
+ 
+{* /p}{hline}
+{* bottombar }{center:{view slide10.smcl:<<}   {view index.smcl:index}     }
+{hline}

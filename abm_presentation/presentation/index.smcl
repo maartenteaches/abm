@@ -1,0 +1,31 @@
+{smcl}
+
+{center:{bf:Table of Contents}}
+
+ 
+{* tocline }{p  4  4 2}{bf:What is an Agent Based Model?}{p_end}
+{* tocline }{p  8  8 2}{view slide1.smcl : What is an Agent Based Model?}{p_end}
+{* tocline }{p  8  8 2}{view slide2.smcl : Example: The spread of a disease}{p_end}
+{* tocline }{p 12 12 2}{view slide3.smcl : R0}{p_end}
+{* tocline }{p  8  8 2}{view slide4.smcl : Other Scenarios} (ancillary){p_end}
+{* tocline }{p  8  8 2}{view slide5.smcl : Quantifying uncertainty} (ancillary){p_end}
+{* tocline }{p  8  8 2}{view slide6.smcl : Adding a network}{p_end}
+{* tocline }{p  8  8 2}{view slide7.smcl : Other scenarios} (ancillary){p_end}
+{* tocline }{p  8  8 2}{view slide8.smcl : Multiple towns on a grid}{p_end}
+{* tocline }{p  8  8 2}{view slide9.smcl : Other scenarios} (ancillary){p_end}
+ 
+{* tocline }{p  4  4 2}{bf:How to implement an ABM in Mata}{p_end}
+{* tocline }{p  8  8 2}{view slide10.smcl : The ABM package}{p_end}
+{* tocline }{p 12 12 2}{view slide11.smcl : Class}{p_end}
+{* tocline }{p  8  8 2}{view slide12.smcl : Basic SIR model}{p_end}
+{* tocline }{p  8  8 2}{view slide13.smcl : SIR model in a network}{p_end}
+{* tocline }{p  8  8 2}{view slide14.smcl : SIR model on a grid}{p_end}
+ 
+{* tocline }{p  4  4 2}{bf:Final remarks}{p_end}
+{* tocline }{p  8  8 2}{view slide15.smcl : Conclusion}{p_end}
+{* tocline }{p  8  8 2}{view slide16.smcl : Alternative platforms} (ancillary){p_end}
+ 
+ 
+{* /p}{hline}
+{* bottombar }{center:{view presentation.smcl:<<}   {view index.smcl:index}   {view slide1.smcl:>>}}
+{hline}

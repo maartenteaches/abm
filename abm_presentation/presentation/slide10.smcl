@@ -1,0 +1,40 @@
+{smcl}
+{* 31 May 2021}{...}
+{hline}
+{p}{bf:How to implement an ABM in Mata}{p_end}
+{hline}
+
+{center:{bf:The ABM package}}
+
+{pstd}
+The Agent Based Models  implemented in Mata as a {* digr <a href="#slide11.smcl">&gt;&gt; class</a>}{view slide11.smcl:>> class}{* /digr}
+
+{pstd}
+They use a collection of helper classes available in the {browse "https://github.com/maartenteaches/abm":ABM}
+package. 
+
+{pstd}
+The main classes availbe in the {cmd:abm} package are:
+
+{pmore}
+o {help abm_pop} can store a list of agents and their properties. It is 
+particulary helpful when at each point in time most agents' properties are
+stable, but some change.
+
+{pmore}
+o {help abm_nw} for storing and managing a network
+
+{pmore}
+o {help abm_grid} for storing and managing a grid (like a chessboard) on which 
+agents can "live" and interact with one another.
+
+{pmore}
+o {help abm_util} useful functions that can be imported into the model class
+
+
+
+ 
+ 
+{* /p}{hline}
+{* bottombar }{center:{view slide8.smcl:<<}   {view index.smcl:index}   {view slide12.smcl:>>}}
+{hline}

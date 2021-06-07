@@ -1,0 +1,34 @@
+{smcl}
+{* 31 May 2021}{...}
+{hline}
+{p}{bf:How to implement an ABM in Mata}{p_end}
+{hline}
+
+{center:{bf:SIR model in a network}}
+
+{pstd}
+To add the network we make use the {helpb abm_nw} class.
+
+{pstd}
+This takes care of creating the network and keeps track of who can contact who.
+
+{pstd}
+With that the changes required are fairly small
+
+{pstd}
+The class definition is 
+
+{* codefile nw_main.do }{pstd}{stata "doedit nw_main.do":here}{p_end}
+
+{pstd}
+Checks and setting parameters are pretty much the same
+
+{pstd}
+The main simulation functions are
+
+{* codefile nw_sim.do }{pstd}{stata "doedit nw_sim.do":here}{p_end}
+ 
+ 
+{* /p}{hline}
+{* bottombar }{center:{view slide12.smcl:<<}   {view index.smcl:index}   {view slide14.smcl:>>}}
+{hline}

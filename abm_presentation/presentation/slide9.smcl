@@ -1,0 +1,92 @@
+{smcl}
+{* 31 May 2021}{...}
+{hline}
+{p}{bf:ancillary}{p_end}
+{hline}
+
+{center:{bf:Other scenarios}}
+
+{pstd}
+In the real world population is not uniformly distributed over space
+
+{pstd}
+We could try to capture that by including a "big city" in our model.
+
+{pstd}
+This can be done by increasing the population in one of the towns.
+ 
+{* ex slide9ex1 }{...}
+{cmd}
+        set seed 123456789
+        clear mata
+        drop _all
+        run grid_main.do
+
+        mata:
+
+        model = sir_grid()
+        model.rdim(10)
+        model.cdim(10)
+        model.prop_close(0.15)
+        model.prop_far(0.01)
+
+        N = J(10,10,100)
+        N[5,5] =2000
+        model.N(N)
+        model.tdim(100)
+        model.outbreak(5)
+        model.mcontacts(4)
+        model.transmissibility(0.045)
+        model.mindur(10)
+        model.meandur(14)
+        model.pr_loss(0)
+
+        model.run()
+        model.export_sir()
+
+        end
+
+        replace r = -r
+        foreach t of numlist 1 5(5) 100 {
+             heatplot I r c if t==`t',          /// 
+                  discrete title(Time = `t')    ///
+                  name(ancgrid`t', replace)        ///
+                  cuts(0(0.05)0.7)              /// 
+                  colors(plasma)                ///
+                  yscale(off range(-10.5 -.5))  ///
+                  xscale(off  range(.5 10.5))   ///
+                  ylab(none) xlab(none)         ///
+                  plotregion(margin(zero))      ///
+                  aspect(1)                                        
+        }
+{txt}{...}
+{pstd}({stata "do slide9ex1.do":{it:click to run}}){p_end}
+
+
+{* endex }{...}
+{* graph ancgrid1 }{...}
+{* graph ancgrid5 }{...}
+{* graph ancgrid10 }{...}
+{* graph ancgrid15 }{...}
+{* graph ancgrid20 }{...}
+{* graph ancgrid25 }{...}
+{* graph ancgrid30 }{...}
+{* graph ancgrid35 }{...}
+{* graph ancgrid40 }{...}
+{* graph ancgrid45 }{...}
+{* graph ancgrid50 }{...}
+{* graph ancgrid55 }{...}
+{* graph ancgrid60 }{...}
+{* graph ancgrid65 }{...}
+{* graph ancgrid70 }{...}
+{* graph ancgrid75 }{...}
+{* graph ancgrid80 }{...}
+{* graph ancgrid85 }{...}
+{* graph ancgrid90 }{...}
+{* graph ancgrid95 }{...}
+{* graph ancgrid100 }{...}
+ 
+ 
+{* /p}{hline}
+{* bottombar }{center:     {view index.smcl:index}     }
+{hline}
