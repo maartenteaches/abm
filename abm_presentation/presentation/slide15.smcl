@@ -1,0 +1,24 @@
+{smcl}
+{* 31 May 2021}{...}
+{hline}
+{p}{bf:Final remarks}{p_end}
+{hline}
+
+{center:{bf:Conclusion}}
+
+{pstd}
+Implementing an ABM is doable in Mata 
+
+{pstd}
+We have seen four "helper classes" from {cmd:abm}: 
+
+{pmore}{help abm_pop} for storing a population of agents{p_end}
+{pmore}{help abm_nw} for managing a network{p_end}
+{pmore}{help abm_grid} for managing a grid, like a chessboard.{p_end}
+{pmore}{help abm_util} for importing useful functions in the model class{p_end}
+
+ 
+ 
+{* /p}{hline}
+{* bottombar }{center:{view slide14.smcl:<<}   {view index.smcl:index}     }
+{hline}

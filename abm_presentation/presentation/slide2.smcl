@@ -1,0 +1,69 @@
+{smcl}
+{* 31 May 2021}{...}
+{hline}
+{p}{bf:What is an Agent Based Model?}{p_end}
+{hline}
+
+{center:{bf:Example: The spread of a disease}}
+
+{pstd}
+In this model each agent can be in one of three states:
+
+{pmore}{it:Susceptible}: the agent is healthy, but can get the disease.{p_end}
+{pmore}{it:Infectious}: the agent has the disease and can spread it to others.{p_end}
+{pmore}{it:Recovered}: the agent has had the disease and is now immune.{p_end}
+
+{pstd}
+In the first round one or more agents get infected.
+
+{pstd}
+In all subsequent rounds:
+
+{pmore}- All infectious agents have a chance to become recovered, and{p_end}
+{pmore}- all recovered agents get a chance to become susceptible.{p_end}
+{pmore}- All agents that are still infectious contact a random number of other 
+agents{p_end}
+{pmore}- Each of these contact has a chance of resulting in an infection if 
+someone is susceptible.
+ 
+{* ex slide2ex1 }{...}
+{cmd}
+        set seed 123456789
+        set scheme s1color
+        clear mata
+        drop _all
+        run sir_main.do
+
+        mata:
+
+        model = sir()
+        model.N(2000)
+        model.tdim(150)
+        model.outbreak(5)
+        model.mcontacts(4)
+        model.transmissibility(0.045)
+        model.mindur(10)
+        model.meandur(14)
+        model.pr_loss(0)
+        model.run()
+        model.export_sir()
+        end
+
+        twoway line S I R t,  name(sir1, replace)          ///
+           ylabel(,angle(0)) legend(rows(1)) lwidth(*1.5 ..) 
+   
+        drop _all
+{txt}{...}
+{pstd}({stata "do slide2ex1.do":{it:click to run}}){p_end}
+
+
+{* endex }{...}
+{* graph sir1 }{...}
+{pstd}
+The number 0.045 for transmissibility was chosen to get a {* digr <a href="#slide3.smcl">&gt;&gt; R0</a>}{view slide3.smcl:>> R0}{* /digr} of 2.5, which
+in line with COVID-19.
+ 
+ 
+{* /p}{hline}
+{* bottombar }{center:{view slide1.smcl:<<}   {view index.smcl:index}   {view slide6.smcl:>>}}
+{hline}

@@ -1,0 +1,19 @@
+{smcl}
+{* 31 May 2021}{...}
+
+{center:{bf:Agent based models in Mata: Modelling aggregate processes, like the spread of a disease}}
+
+{center:{it:using the }{cmd:abm}{it: package}}
+
+
+{center:Maarten Buis}
+{center:University of Konstanz}
+
+{center:maarten.buis@uni.kn}
+ 
+ 
+{* /p}{hline}
+{* bottombar }{center:     {view index.smcl:index}   {view slide1.smcl:>>}}
+{hline}
+{* slides presentation.smcl index.smcl slide1.smcl slide2.smcl slide6.smcl slide8.smcl slide10.smcl slide12.smcl slide13.smcl slide14.smcl slide15.smcl slide3.smcl slide4.smcl slide5.smcl slide7.smcl slide9.smcl slide11.smcl slide16.smcl }{...}
+{* bottomstyle arrow }{...}

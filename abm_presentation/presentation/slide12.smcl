@@ -1,0 +1,62 @@
+{smcl}
+{* 31 May 2021}{...}
+{hline}
+{p}{bf:How to implement an ABM in Mata}{p_end}
+{hline}
+
+{center:{bf:Basic SIR model}}
+
+{pstd}
+Lets take a look at the code for the basic SIR model: 
+
+{* codefile sir_main.do }{pstd}{stata "doedit sir_main.do":here}{p_end}
+
+{pstd}
+The model is implemented as a class {cmd:sir}
+
+{pstd}
+The sir class inherrits (extends) from {help abm_util}
+
+{pmore}
+This gives us access to several {help abm_chk:argument checking functions} and
+the {help abm_util:dots()} function
+
+{pstd}
+The population is stored is stored in an instance of the class {help abm_pop}.
+
+{pmore}
+Whatever is stored in {cmd:abm_pop} is assumed to persist until you store 
+something else. So you only have to store the disease state of an agent when it
+changes. This can save a lot of reading and writing and make the simulation run
+quicker.
+
+{pstd}
+There are various checks perfomed and we can see those 
+
+{* codefile sir_chks.do }{pstd}{stata "doedit sir_chks.do":here}{p_end}
+
+{pstd}
+The functions that set the parameters are shown 
+
+{* codefile sir_set_pars.do }{pstd}{stata "doedit sir_set_pars.do":here}{p_end}
+
+{pstd}
+The main simulation functions are
+
+{* codefile sir_sim.do }{pstd}{stata "doedit sir_sim.do":here}{p_end}
+
+{pstd}
+The "variables" in {it:agents} are actually numbered and not named. To make it 
+easier to read the code I use local macros defined in
+
+{* codefile sir_locals.do }{pstd}{stata "doedit sir_locals.do":here}{p_end}
+
+{pstd}
+The functions that allow you to export the results to Stata are
+
+{* codefile sir_export.do }{pstd}{stata "doedit sir_export.do":here}{p_end}
+ 
+ 
+{* /p}{hline}
+{* bottombar }{center:{view slide10.smcl:<<}   {view index.smcl:index}   {view slide13.smcl:>>}}
+{hline}

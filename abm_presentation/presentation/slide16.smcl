@@ -1,0 +1,38 @@
+{smcl}
+{* 31 May 2021}{...}
+{hline}
+{p}{bf:ancillary}{p_end}
+{hline}
+
+{center:{bf:Alternative platforms}}
+
+{pstd}
+There are various dedicated environments for creating ABMs. 
+
+{pmore}
+{bf:netlogo} (netlogo) {browse "http://ccl.northwestern.edu/netlogo/"}
+
+{pmore}
+{bf:repast} (java, python, C++, and others) {browse "https://repast.github.io/"}
+
+{pmore}
+{bf:mason} (java) {browse "https://cs.gmu.edu/~eclab/projects/mason/"}
+
+{pmore}
+{bf:mesa} (python) {browse "https://mesa.readthedocs.io/"}
+
+{pmore}
+{bf:agents.jl} (julia) {browse "https://juliadynamics.github.io/Agents.jl/stable/"}
+
+{pstd}
+People who primarily create ABMs are not going to move away from those, and 
+rightly so.
+
+{pstd}
+The toolkits discussed in this presentation are aimed at people who 
+primarily use Stata and occationally want to make an ABM.
+ 
+ 
+{* /p}{hline}
+{* bottombar }{center:     {view index.smcl:index}     }
+{hline}

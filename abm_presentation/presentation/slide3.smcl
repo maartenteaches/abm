@@ -1,0 +1,31 @@
+{smcl}
+{* 31 May 2021}{...}
+{hline}
+{p}{bf:digression}{p_end}
+{hline}
+
+{center:{bf:R0}}
+
+{pstd}
+14 days is a number that has floated around a lot for how long someone is 
+infectious when having COVID-19. 
+
+{pstd}
+On average 4 contacts is just a convenient number 
+
+{pstd}
+The transmissibility is then chosen to make the R0 close to 2.5, another number
+that has floated around a lot for COVID-19.
+
+{pmore}
+If someone is 14 days infectious, and contacts 4 persons each day, then there 
+are 14*4=56 opportunities to infect someone. 
+
+{pmore}
+These should result in 2.5 infections, so the chance of a contact leading to an
+infection is 2.5/56 = 0.045
+ 
+ 
+{* /p}{hline}
+{* bottombar }{center:{view slide2.smcl:<<}   {view index.smcl:index}     }
+{hline}

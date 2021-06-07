@@ -1,0 +1,2881 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+        background-color: white;
+}
+pre.output {
+    border-left-style: solid;
+    width: 650px;
+    max-height: 500px;
+    overflow: auto;
+    border-left-color:grey;
+    border-width: 5px;
+    background-color: #f0f0f0;
+    padding: 0px 5px 0px 10px;
+    margin: 0px auto 0px auto;
+}
+pre.code {
+    border-left-style: solid;
+    width: 650px;
+    max-height: 500px;
+    overflow: auto;
+    border-left-color:grey;
+    border-width: 5px;
+    background-color: #f0f0f0;
+    padding: 0px 5px 0px 10px;
+    margin: 0px auto 0px auto;
+}
+pre.code:before {
+    counter-reset: listing;
+}
+pre.code code {
+  counter-increment: listing;
+}
+pre.code code::before {
+  content: counter(listing) ". ";
+  display: inline-block;
+  width: 35px;
+  padding-left: auto;
+  margin-left: auto;
+  text-align: right;
+}
+pre {
+    margin: 0px;
+}
+div.slide { 
+    max-width: 680px;
+    display: block;
+    padding: 5px;
+    margin: 10px auto 10px auto;
+    border-style: solid;
+    border-width: 1px;
+    background-color: white ;
+}
+div.txt { 
+    margin: 0px auto 0px auto;
+    max-width: 650px;
+}
+div.flex-container {
+    display: flex;
+    justify-content: space-around;
+}
+p.bottom {
+    display: block;
+    margin: 0px;
+    text-align:center;
+}
+</style>
+</head>
+<body>
+<div class="slide" id="presentation.smcl">
+<div class="txt"><pre>
+<br>
+<b>Agent based models in Mata: Modelling aggregate processes, like the spread of a</b>
+<b>&gt;  disease</b>
+<br>
+                             <i>using the </i><b>abm</b><i> package</i>
+<br>
+<br>
+                                 Maarten Buis
+                            University of Konstanz
+<br>
+                              maarten.buis@uni.kn
+ 
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"> <a href="#index.smcl">index</a> <a href="#slide1.smcl">&gt;&gt;</a></a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="index.smcl">
+<div class="txt"><pre>
+<br>
+                               <b>Table of Contents</b>
+<br>
+ 
+</pre>
+<pre>
+    <b>What is an Agent Based Model?</b>
+</pre>
+<pre>
+</pre>
+<pre>
+       <a href="#slide1.smcl"> What is an Agent Based Model?</a>
+</pre>
+<pre>
+</pre>
+<pre>
+       <a href="#slide2.smcl"> Example: The spread of a disease</a>
+</pre>
+<pre>
+</pre>
+<pre>
+           <a href="#slide3.smcl"> R0</a>
+</pre>
+<pre>
+</pre>
+<pre>
+       <a href="#slide4.smcl"> Other Scenarios</a>(ancillary)
+</pre>
+<pre>
+</pre>
+<pre>
+       <a href="#slide5.smcl"> Quantifying uncertainty</a>(ancillary)
+</pre>
+<pre>
+</pre>
+<pre>
+       <a href="#slide6.smcl"> Adding a network</a>
+</pre>
+<pre>
+</pre>
+<pre>
+       <a href="#slide7.smcl"> Other scenarios</a>(ancillary)
+</pre>
+<pre>
+</pre>
+<pre>
+       <a href="#slide8.smcl"> Multiple towns on a grid</a>
+</pre>
+<pre>
+</pre>
+<pre>
+       <a href="#slide9.smcl"> Other scenarios</a>(ancillary)
+</pre>
+<pre>
+ 
+</pre>
+<pre>
+    <b>How to implement an ABM in Mata</b>
+</pre>
+<pre>
+</pre>
+<pre>
+       <a href="#slide10.smcl"> The ABM package</a>
+</pre>
+<pre>
+</pre>
+<pre>
+           <a href="#slide11.smcl"> Class</a>
+</pre>
+<pre>
+</pre>
+<pre>
+       <a href="#slide12.smcl"> Basic SIR model</a>
+</pre>
+<pre>
+</pre>
+<pre>
+       <a href="#slide13.smcl"> SIR model in a network</a>
+</pre>
+<pre>
+</pre>
+<pre>
+       <a href="#slide14.smcl"> SIR model on a grid</a>
+</pre>
+<pre>
+ 
+</pre>
+<pre>
+    <b>Final remarks</b>
+</pre>
+<pre>
+</pre>
+<pre>
+       <a href="#slide15.smcl"> Conclusion</a>
+</pre>
+<pre>
+</pre>
+<pre>
+       <a href="#slide16.smcl"> Alternative platforms</a>(ancillary)
+</pre>
+<pre>
+ 
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"><a href="#presentation.smcl">&lt;&lt;</a> <a href="#index.smcl">index</a> <a href="#slide1.smcl">&gt;&gt;</a></a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="slide1.smcl">
+<div class="txt"><pre>
+-------------------------------------------------------------------------------
+<b>What is an Agent Based Model?</b>
+-------------------------------------------------------------------------------
+<br>
+                         <b>What is an Agent Based Model?</b>
+<br>
+    An Agent Based Model is a simulation in which agents, that each follow
+    simple rules, interact with one another and thus produce a often
+    surprising outcome at the macro level.
+<br>
+    The purpose of an ABM is to explore mechanisms through which actions of
+    the individual agents add up to a macro outcome, by varying the rules
+    that agents have to follow or varying with whom the agent can interact.
+<br>
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"><a href="#presentation.smcl">&lt;&lt;</a> <a href="#index.smcl">index</a> <a href="#slide2.smcl">&gt;&gt;</a></a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="slide2.smcl">
+<div class="txt"><pre>
+-------------------------------------------------------------------------------
+<b>What is an Agent Based Model?</b>
+-------------------------------------------------------------------------------
+<br>
+                       <b>Example: The spread of a disease</b>
+<br>
+    In this model each agent can be in one of three states:
+<br>
+        <i>Susceptible</i>: the agent is healthy, but can get the disease.
+        <i>Infectious</i>: the agent has the disease and can spread it to others.
+        <i>Recovered</i>: the agent has had the disease and is now immune.
+<br>
+    In the first round one or more agents get infected.
+<br>
+    In all subsequent rounds:
+<br>
+        - All infectious agents have a chance to become recovered, and
+        - all recovered agents get a chance to become susceptible.
+        - All agents that are still infectious contact a random number of
+        other agents
+        - Each of these contact has a chance of resulting in an infection if
+        someone is susceptible.
+<br>
+</pre>
+</div><pre class="output">
+<br>
+<b>. set seed 123456789</b>
+<br>
+<b>. set scheme s1color</b>
+<br>
+<b>. clear mata</b>
+<br>
+<b>. drop _all</b>
+<br>
+<b>. run sir_main.do</b>
+<br>
+<b>. </b>
+<b>. mata:</b>
+------------------------------------------------- mata (type <b>end</b> to exit) -----
+<b>: </b>
+<b>: model = sir()</b>
+<br>
+<b>: model.N(2000)</b>
+<br>
+<b>: model.tdim(150)</b>
+<br>
+<b>: model.outbreak(5)</b>
+<br>
+<b>: model.mcontacts(4)</b>
+<br>
+<b>: model.transmissibility(0.045)</b>
+<br>
+<b>: model.mindur(10)</b>
+<br>
+<b>: model.meandur(14)</b>
+<br>
+<b>: model.pr_loss(0)</b>
+<br>
+<b>: model.run()</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<br>
+<b>: model.export_sir()</b>
+<br>
+<b>: end</b>
+-------------------------------------------------------------------------------
+<br>
+<b>. </b>
+<b>. twoway line S I R t,  name(sir1, replace)          ///</b>
+<b>&gt;    ylabel(,angle(0)) legend(rows(1)) lwidth(*1.5 ..) </b>
+<br>
+<b>.    </b>
+<b>. drop _all</b>
+<br>
+</pre>
+<div class="txt"><img src="sir1.png" width="630">
+<pre>
+    The number 0.045 for transmissibility was chosen to get a <a href="#slide3.smcl">&gt;&gt; R0</a>of
+    2.5, which in line with COVID-19.
+<br>
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"><a href="#slide1.smcl">&lt;&lt;</a> <a href="#index.smcl">index</a> <a href="#slide6.smcl">&gt;&gt;</a></a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="slide6.smcl">
+<div class="txt"><pre>
+-------------------------------------------------------------------------------
+<b>What is an Agent Based Model?</b>
+-------------------------------------------------------------------------------
+<br>
+                               <b>Adding a network</b>
+<br>
+    The model thus far does not need a simulation; one can compute them with
+    a set of differential equations.
+<br>
+    In Stata you can do that with <b>epimodels</b> by Sergiy Radyakin and Paolo
+    Verme
+<br>
+    However, the advantage of Agent Based Models is that it is much easier to
+    expand the model.
+<br>
+    For example, what if we don't believe that people contact each other
+    randomly but instead it is a network that determines who contacts who.
+<br>
+    A common model that works fairly well for a lot of social networks is a
+    small world network:
+<br>
+        We assume all agents are on a circle, and that each agent is
+        connected to the 4 closes agents.
+<br>
+        However, a small number of these connections are replaced by a
+        connection to a random agent
+<br>
+</pre>
+</div><pre class="output">
+<br>
+<b>. clear mata</b>
+<br>
+<b>. drop _all</b>
+<br>
+<b>. set seed 28863</b>
+<br>
+<b>. run nw_main.do</b>
+<br>
+<b>. mata:</b>
+------------------------------------------------- mata (type <b>end</b> to exit) -----
+<b>: model = sir_nw()</b>
+<br>
+<b>: model.N(100)</b>
+<br>
+<b>: model.tdim(10)</b>
+<br>
+<b>: model.outbreak(2)</b>
+<br>
+<b>: model.degree(4)</b>
+<br>
+<b>: model.pr_long(.05)</b>
+<br>
+<b>: model.transmissibility(0.1)</b>
+<br>
+<b>: model.mindur(5)</b>
+<br>
+<b>: model.meandur(6)</b>
+<br>
+<b>: model.pr_loss(0.00)</b>
+<br>
+<b>: model.run()</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..........</b>
+<b>: model.export_nw()</b>
+<br>
+<b>: end</b>
+-------------------------------------------------------------------------------
+<br>
+<b>. </b>
+<b>. gen x_ego = cos((ego-1)/`n'*2*_pi)*(1+mod(ego,2)*.2)</b>
+<br>
+<b>. gen y_ego = sin((ego-1)/`n'*2*_pi)*(1+mod(ego,2)*.2)</b>
+<br>
+<b>. gen x_alter = cos((alter-1)/`n'*2*_pi)*(1+mod(alter,2)*.2)</b>
+(1 missing value generated)
+<br>
+<b>. gen y_alter = sin((alter-1)/`n'*2*_pi)*(1+mod(alter,2)*.2)</b>
+(1 missing value generated)
+<br>
+<b>.     </b>
+<b>. </b>
+<b>. bys ego (alter) : gen first = _n == 1</b>
+<br>
+<b>. </b>
+<b>. forvalues t = 1/10{</b>
+  2<b>.     twoway pcspike y_ego x_ego y_alter x_alter,                ///</b>
+<b>&gt;                   lcolor(gs8)                               || ///</b>
+<b>&gt;         scatter y_ego x_ego if first &amp; state`t'==1 ,           ///</b>
+<b>&gt;                    mcolor(yellow) msymbol(O)                || ///</b>
+<b>&gt;         scatter y_ego x_ego if first &amp; state`t'==2 ,           ///</b>
+<b>&gt;                    mcolor(red) msymbol(O)                   || ///</b>
+<b>&gt;         scatter y_ego x_ego if first &amp; state`t'==3 ,           ///</b>
+<b>&gt;                    mcolor(black) msymbol(Oh)                   ///         </b>
+<b>&gt;                    aspect(1) xscale(off) yscale(off)           ///</b>
+<b>&gt;                    legend(order(2 "susceptible"                ///</b>
+<b>&gt;                                 3 "infected"                   ///</b>
+<b>&gt;                                 4 "recovered") rows(1))        ///</b>
+<b>&gt;                    name(t`t', replace) title(Time `t')     </b>
+  3<b>. }</b>
+<br>
+<b>. drop _all</b>
+<br>
+</pre>
+<div class="txt"><img src="t1.png" width="630">
+<img src="t2.png" width="630">
+<img src="t3.png" width="630">
+<img src="t4.png" width="630">
+<img src="t5.png" width="630">
+<img src="t6.png" width="630">
+<img src="t7.png" width="630">
+<img src="t8.png" width="630">
+<img src="t9.png" width="630">
+<img src="t10.png" width="630">
+<pre>
+    Close knit networks tend to slow down the spread of a disease, while the
+    long distance ties tend
+<br>
+    So that is one way in which advise against unnecesary travel or "social
+    buble" rules in countries like Belgium works
+<br>
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"><a href="#slide2.smcl">&lt;&lt;</a> <a href="#index.smcl">index</a> <a href="#slide8.smcl">&gt;&gt;</a></a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="slide8.smcl">
+<div class="txt"><pre>
+-------------------------------------------------------------------------------
+<b>What is an Agent Based Model?</b>
+-------------------------------------------------------------------------------
+<br>
+                           <b>Multiple towns on a grid</b>
+<br>
+    The basic SIR model could represent how a disease spreads in a specific
+    town
+<br>
+    we could place multiple SIR models on a grid (like a chessboard) and see
+    how the disease spreads across this space
+<br>
+    In the first round a number of people in a single town is infected
+<br>
+    In all subsequent rounds
+<br>
+        the disease spreads within each town as before, but then
+<br>
+        some agents visit neighbouring town and potentially spread the
+        disease there
+<br>
+</pre>
+</div><pre class="output">
+<br>
+<b>. set seed 123456789</b>
+<br>
+<b>. clear mata</b>
+<br>
+<b>. drop _all</b>
+<br>
+<b>. run grid_main.do</b>
+<br>
+<b>. </b>
+<b>. mata:</b>
+------------------------------------------------- mata (type <b>end</b> to exit) -----
+<b>: </b>
+<b>: model = sir_grid()</b>
+<br>
+<b>: model.rdim(10)</b>
+<br>
+<b>: model.cdim(10)</b>
+<br>
+<b>: model.prop_close(0.15)</b>
+<br>
+<b>: model.prop_far(0.01)</b>
+<br>
+<b>: </b>
+<b>: model.N(100)</b>
+<br>
+<b>: model.tdim(50)</b>
+<br>
+<b>: model.outbreak(5)</b>
+<br>
+<b>: model.mcontacts(4)</b>
+<br>
+<b>: model.transmissibility(0.045)</b>
+<br>
+<b>: model.mindur(10)</b>
+<br>
+<b>: model.meandur(14)</b>
+<br>
+<b>: model.pr_loss(0)</b>
+<br>
+<b>: </b>
+<b>: model.run()</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<br>
+<b>: model.export_sir()</b>
+<br>
+<b>: </b>
+<b>: end</b>
+-------------------------------------------------------------------------------
+<br>
+<b>. </b>
+<b>. replace r = -r</b>
+(5,000 real changes made)
+<br>
+<b>. foreach t of numlist 1 5(5) 50 {</b>
+  2<b>.      heatplot I r c if t==`t',          /// </b>
+<b>&gt;           discrete title(Time = `t')    ///</b>
+<b>&gt;           name(grid`t', replace)        ///</b>
+<b>&gt;           cuts(0(0.05)0.7)              /// </b>
+<b>&gt;           colors(plasma)                ///</b>
+<b>&gt;           yscale(off range(-10.5 -.5))  ///</b>
+<b>&gt;           xscale(off  range(.5 10.5))   ///</b>
+<b>&gt;           ylab(none) xlab(none)         ///</b>
+<b>&gt;           plotregion(margin(zero))      ///</b>
+<b>&gt;           aspect(1)                                        </b>
+  3<b>. }</b>
+<br>
+</pre>
+<div class="txt"><img src="grid1.png" width="630">
+<img src="grid5.png" width="630">
+<img src="grid10.png" width="630">
+<img src="grid15.png" width="630">
+<img src="grid20.png" width="630">
+<img src="grid25.png" width="630">
+<img src="grid30.png" width="630">
+<img src="grid35.png" width="630">
+<img src="grid40.png" width="630">
+<img src="grid45.png" width="630">
+<img src="grid50.png" width="630">
+<pre>
+ 
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"><a href="#slide6.smcl">&lt;&lt;</a> <a href="#index.smcl">index</a> <a href="#slide10.smcl">&gt;&gt;</a></a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="slide10.smcl">
+<div class="txt"><pre>
+-------------------------------------------------------------------------------
+<b>How to implement an ABM in Mata</b>
+-------------------------------------------------------------------------------
+<br>
+                                <b>The ABM package</b>
+<br>
+    The Agent Based Models implemented in Mata as a <a href="#slide11.smcl">&gt;&gt; class</a>
+<br>
+    They use a collection of helper classes available in the ABM package.
+<br>
+    The main classes availbe in the <b>abm</b> package are:
+<br>
+        o abm_pop can store a list of agents and their properties. It is
+        particulary helpful when at each point in time most agents'
+        properties are stable, but some change.
+<br>
+        o abm_nw for storing and managing a network
+<br>
+        o abm_grid for storing and managing a grid (like a chessboard) on
+        which agents can "live" and interact with one another.
+<br>
+        o abm_util useful functions that can be imported into the model class
+<br>
+<br>
+<br>
+ 
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"><a href="#slide8.smcl">&lt;&lt;</a> <a href="#index.smcl">index</a> <a href="#slide12.smcl">&gt;&gt;</a></a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="slide12.smcl">
+<div class="txt"><pre>
+-------------------------------------------------------------------------------
+<b>How to implement an ABM in Mata</b>
+-------------------------------------------------------------------------------
+<br>
+                                <b>Basic SIR model</b>
+<br>
+    Lets take a look at the code for the basic SIR model:
+<br>
+</pre>
+</div><pre class="code">
+<code>version 16.1</code>
+<code></code>
+<code>mata:</code>
+<code></code>
+<code>mata set matastrict on</code>
+<code></code>
+<code>class sir extends abm_util {</code>
+<code>	class abm_pop          scalar agents</code>
+<code>	</code>
+<code>	real                   scalar tdim</code>
+<code>	real                   scalar outbreak</code>
+<code>	real                   scalar removed</code>
+<code>	real                   scalar mcontacts</code>
+<code>	real                   scalar N</code>
+<code>	real                   scalar transmissibility</code>
+<code>	real                   scalar mindur</code>
+<code>	real                   scalar meandur</code>
+<code>	real                   scalar pr_heal</code>
+<code>	real                   scalar pr_loss</code>
+<code>	</code>
+<code>	// sir_chks.do</code>
+<code>	void                          isid()</code>
+<code>	void                          istime()</code>
+<code>	</code>
+<code>	// sir_set_pars.do</code>
+<code>	transmorphic                  N()</code>
+<code>	transmorphic                  tdim()</code>
+<code>	transmorphic                  outbreak()</code>
+<code>	transmorphic                  removed()</code>
+<code>	transmorphic                  mcontacts()</code>
+<code>	transmorphic                  transmissibility()</code>
+<code>	transmorphic                  mindur()</code>
+<code>	transmorphic                  meandur()</code>
+<code>	transmorphic                  pr_loss()</code>
+<code></code>
+<code>	// sir_sim.do</code>
+<code>	void                          setup()</code>
+<code>	real                   matrix meet()</code>
+<code>	real                   scalar infect()</code>
+<code>	void                          progress()</code>
+<code>	void                          step()</code>
+<code>	void                          run()</code>
+<code>	</code>
+<code>	// sir_export.do</code>
+<code>	void                          export_sir()</code>
+<code>	void                          export_r()</code>
+<code>}</code>
+<code>end </code>
+<code></code>
+<code>do sir_chks.do</code>
+<code>do sir_set_pars.do</code>
+<code>do sir_sim.do</code>
+<code>do sir_export.do</code>
+<code></code>
+<code>exit</code>
+</pre>
+<div class="txt"><pre>
+<br>
+    The model is implemented as a class <b>sir</b>
+<br>
+    The sir class inherrits (extends) from abm_util
+<br>
+        This gives us access to several argument checking functions and the
+        dots() function
+<br>
+    The population is stored is stored in an instance of the class abm_pop.
+<br>
+        Whatever is stored in <b>abm_pop</b> is assumed to persist until you store
+        something else. So you only have to store the disease state of an
+        agent when it changes. This can save a lot of reading and writing and
+        make the simulation run quicker.
+<br>
+    There are various checks perfomed and we can see those
+<br>
+</pre>
+</div><pre class="code">
+<code>include sir_locals.do</code>
+<code></code>
+<code>mata:</code>
+<code></code>
+<code>void sir::isid(real scalar id)</code>
+<code>{</code>
+<code>	is_int_inrange(id,1,N)</code>
+<code>}</code>
+<code></code>
+<code>void sir::istime(real scalar t)</code>
+<code>{</code>
+<code>    is_int_inrange(t,0,tdim)</code>
+<code>}</code>
+<code>end</code>
+</pre>
+<div class="txt"><pre>
+<br>
+    The functions that set the parameters are shown
+<br>
+</pre>
+</div><pre class="code">
+<code>include sir_locals.do</code>
+<code></code>
+<code>mata:</code>
+<code></code>
+<code>transmorphic sir::N(| real scalar val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_posint(val)</code>
+<code>		N = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(N)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir::tdim(| real scalar val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_posint(val)</code>
+<code>		tdim= val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(tdim)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code></code>
+<code>transmorphic sir::outbreak(| real scalar val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_posint(val)</code>
+<code>		outbreak= val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(outbreak)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir::removed(| real scalar val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_posint(val)</code>
+<code>		removed= val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(removed)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir::mcontacts(| real scalar val)</code>
+<code>{</code>
+<code>	if ( args()==1 ) {</code>
+<code>		if ( val &lt; 0) _error("arguments must be positive")</code>
+<code>		mcontacts = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(mcontacts)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir::transmissibility(| real scalar val)</code>
+<code>{</code>
+<code>	if ( args()==1 ) {</code>
+<code>		is_pr(val)</code>
+<code>		transmissibility = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(transmissibility)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir::mindur(| real scalar val)</code>
+<code>{</code>
+<code>	if ( args()==1 ) {</code>
+<code>		is_posint(val)</code>
+<code>		mindur = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(mindur)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir::meandur(| real scalar val)</code>
+<code>{</code>
+<code>	if ( args()==1 ) {</code>
+<code>		if (val &lt; 0) _error("argument must be positive")</code>
+<code>		meandur = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(meandur)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir::pr_loss(| real scalar val)</code>
+<code>{</code>
+<code>	if ( args()==1 ) {</code>
+<code>		is_pr(val)</code>
+<code>		pr_loss = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(pr_loss)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code></code>
+<code>end</code>
+</pre>
+<div class="txt"><pre>
+<br>
+    The main simulation functions are
+<br>
+</pre>
+</div><pre class="code">
+<code>include sir_locals.do</code>
+<code></code>
+<code>mata:</code>
+<code></code>
+<code>void sir::run()</code>
+<code>{</code>
+<code>	real scalar i, t</code>
+<code>	setup()</code>
+<code></code>
+<code>	dots(0)</code>
+<code>	dots(1)</code>
+<code></code>
+<code>	for (t=2; t&lt;=tdim; t++) {</code>
+<code>		dots(t)</code>
+<code>		for(i=1; i&lt;=N ; i++) {</code>
+<code>			step(i,t)</code>
+<code>		}</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>void sir::setup()</code>
+<code>{</code>
+<code>	real vector id, key</code>
+<code>	real scalar i</code>
+<code>	</code>
+<code>	if (N==.)                   _error("N has not been set")</code>
+<code>	if (tdim==.)                _error("tdim has not been set")</code>
+<code>	if (outbreak==.)            _error("outbreak has not been set")</code>
+<code>	if (outbreak &gt; N)           _error("the initial outbreak is larger than population")</code>
+<code>	if (removed==.)             removed = 0</code>
+<code>	if (removed + outbreak &gt; N) _error("intial outbreak + removed agents is larger than the population")</code>
+<code>	if (mcontacts==.)           _error("mcontacts has not been set")</code>
+<code>	if (mcontacts &gt; N)          _error("average number of mcontacts is larger than population")</code>
+<code>	if (transmissibility==.)    _error("transmissibility has not been set")</code>
+<code>	if (mindur==.)              _error("mindur has not been specified")</code>
+<code>	if (meandur==.)             _error("meandur has not been specified")</code>
+<code>	if (meandur &lt;= mindur)      _error("meandur must be larger than mindur")</code>
+<code>	if (pr_loss==.)             pr_loss = 0</code>
+<code>	</code>
+<code>	agents.abm_version("0.1.5")</code>
+<code>	agents.N(N)</code>
+<code>	agents.k(3)</code>
+<code>	agents.setup()</code>
+<code>	</code>
+<code>	id = jumble((1..N)')</code>
+<code>	</code>
+<code>	for (i = 1; i&lt;= N; i++) {</code>
+<code>		key = id[i],`state',1</code>
+<code>		agents.put(key,(i&lt;=outbreak ? `infectious' : (i &lt;= outbreak+removed ? `removed' : `susceptible')))</code>
+<code>		key[2] = `exposes'</code>
+<code>		if (i &lt;= outbreak) agents.put(key, J(2,0,.) )</code>
+<code>		</code>
+<code>		key[2] = `dur'</code>
+<code>		agents.put(key,1)</code>
+<code>	}</code>
+<code></code>
+<code>	</code>
+<code>// if meandur - mindur &lt; 1 then pr_heal &gt; 1, so there is no randomness to the duration</code>
+<code>// and the fixed duration of the disease is mindur	</code>
+<code>	pr_heal = 1/(meandur-mindur)</code>
+<code>}</code>
+<code></code>
+<code>void sir::step(real scalar id, real scalar t)</code>
+<code>{</code>
+<code>	real matrix exposed</code>
+<code>	real scalar i, k</code>
+<code>	real rowvector key</code>
+<code>	</code>
+<code>	isid(id)</code>
+<code>	istime(t)</code>
+<code></code>
+<code>	key = id, `dur',t</code>
+<code></code>
+<code>	agents.put(key, agents.get(key, "last")+1)</code>
+<code>	progress(id,t)</code>
+<code>	key = id, `state',t</code>
+<code>	if (agents.get(key, "last") == `infectious' ) {</code>
+<code>		exposed = meet(id, t)</code>
+<code>		for(i=1; i&lt;= cols(exposed); i++) {</code>
+<code>			exposed[2,i] = infect(exposed[1,i],t) </code>
+<code>		}</code>
+<code>		key[2] = `exposes'</code>
+<code>		agents.put(key,exposed)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>void sir::progress(real scalar id, real scalar t)</code>
+<code>{</code>
+<code>    real rowvector key1, key2, key3</code>
+<code>	</code>
+<code>	isid(id)</code>
+<code>	istime(t)</code>
+<code>	</code>
+<code>	key1 = id, `state',t</code>
+<code>	key2 = id, `dur',t</code>
+<code>	if (agents.get(key1, "last") == `infectious'  & agents.get(key2, "last") &gt; mindur) {</code>
+<code>		if (runiform(1,1) &lt; pr_heal) {</code>
+<code>			agents.put(key1, `removed')</code>
+<code>			agents.put(key2,1)</code>
+<code>			key3 = id, `exposes',t</code>
+<code>			agents.put(key3,NULL)</code>
+<code>		}</code>
+<code>	}</code>
+<code>    if (agents.get(key1, "last") == `removed' & runiform(1,1) &lt; pr_loss) {</code>
+<code>		agents.put(key1, `susceptible')</code>
+<code>		agents.put(key2,1)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>real matrix sir::meet(real scalar id, real scalar t)</code>
+<code>{</code>
+<code>	real scalar k</code>
+<code>	real colvector res</code>
+<code>	real rowvector key</code>
+<code></code>
+<code>	isid(id)</code>
+<code>	</code>
+<code>	k = rpoisson(1,1,mcontacts)</code>
+<code>	if (k == 0) {</code>
+<code>		return(J(2,0,.))</code>
+<code>	}</code>
+<code>	else{</code>
+<code>		res =  ceil(runiform(1,k):*(N-1))</code>
+<code>		res = res + (res:&gt;=id)</code>
+<code>		res = res \ J(1,k,.)</code>
+<code>		return (res)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>real scalar sir::infect(real scalar id, real scalar t)</code>
+<code>{</code>
+<code>	real vector key</code>
+<code>	real scalar infected</code>
+<code></code>
+<code>	isid(id)</code>
+<code>	istime(t)</code>
+<code></code>
+<code>	infected = 0</code>
+<code>	key = id,`state', t</code>
+<code>	if (agents.get(key, "last")==`susceptible') {</code>
+<code>		if (runiform(1,1) &lt; transmissibility) {</code>
+<code>			agents.put(key, `infectious')</code>
+<code>			key[2] = `dur'</code>
+<code>			agents.put(key, 1)</code>
+<code>			key[2] = `exposes'</code>
+<code>			agents.put(key,J(2,0,.))</code>
+<code>			infected = 1</code>
+<code>		}</code>
+<code>	}</code>
+<code>	return(infected)</code>
+<code>}</code>
+<code></code>
+<code>end</code>
+</pre>
+<div class="txt"><pre>
+<br>
+    The "variables" in <i>agents</i> are actually numbered and not named. To make it
+    easier to read the code I use local macros defined in
+<br>
+</pre>
+</div><pre class="code">
+<code>// address in abm_pop class agents</code>
+<code>local state       = 1</code>
+<code>local dur         = 2</code>
+<code>local exposes     = 3</code>
+<code></code>
+<code>// states</code>
+<code>local susceptible = 1</code>
+<code>local infectious  = 2 </code>
+<code>local removed     = 3</code>
+<code></code>
+</pre>
+<div class="txt"><pre>
+<br>
+    The functions that allow you to export the results to Stata are
+<br>
+</pre>
+</div><pre class="code">
+<code>include sir_locals.do</code>
+<code></code>
+<code>mata:</code>
+<code></code>
+<code>void sir::export_sir(| string rowvector names)</code>
+<code>{</code>
+<code>    real matrix res</code>
+<code>	pointer matrix p</code>
+<code>    string rowvector varnames</code>
+<code>	real scalar xid, n, i, j</code>
+<code></code>
+<code>	if (args() == 1) {</code>
+<code>		if (cols(names)!= 4) _error("4 variable names need to be specified")</code>
+<code>		varnames = names</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		varnames = "t", "S", "I", "R"</code>
+<code>	}</code>
+<code></code>
+<code>	res = J(N,tdim,.)</code>
+<code>	p = agents.extract(`state', tdim)</code>
+<code>	for (i=1; i&lt;=N; i++) {</code>
+<code>		for(j=1; j&lt;=tdim; j++) {</code>
+<code>			res[i,j] = *p[i,j]</code>
+<code>		}</code>
+<code>	}</code>
+<code>	res =  (1..tdim)', mean(res:==`susceptible')', </code>
+<code>	                   mean(res:==`infectious')', </code>
+<code>					   mean(res:==`removed')'</code>
+<code></code>
+<code>	xid = st_addvar("float", varnames)</code>
+<code>    n = st_nobs()</code>
+<code>    n = rows(res) - n</code>
+<code>    if (n &gt; 0) {</code>
+<code>        st_addobs(n)</code>
+<code>    }</code>
+<code>    st_store(.,xid, res)</code>
+<code>}</code>
+<code></code>
+<code>void sir::export_r()</code>
+<code>{</code>
+<code>	real matrix res</code>
+<code>	pointer matrix p_exposes, p_state</code>
+<code>	real scalar xid, n, i, j, t</code>
+<code>	string rowvector varnames</code>
+<code>	real colvector n_ill</code>
+<code></code>
+<code>	t = .</code>
+<code>	</code>
+<code>	res = (1..tdim)',J(tdim,1,0)</code>
+<code>	n_ill = J(tdim,1,0)</code>
+<code>	p_exposes = agents.extract(`exposes',tdim)</code>
+<code>	p_state = agents.extract(`state',tdim)</code>
+<code>	for (i=1; i&lt;=N; i++) {</code>
+<code>		if (*p_state[i,1]==`infectious') {</code>
+<code>			t=1  </code>
+<code>		} </code>
+<code>		else {</code>
+<code>		    t=.</code>
+<code>		}</code>
+<code>		for(j=2;j&lt;=tdim;j++) {</code>
+<code>			if (*p_state[i,j-1]==`susceptible' & </code>
+<code>			    *p_state[i,j]  ==`infectious') {</code>
+<code>					t=j</code>
+<code>					n_ill[t] = n_ill[t] + 1</code>
+<code>				}</code>
+<code>			if (*p_state[i,j-1]==`infectious' & </code>
+<code>			    (*p_state[i,j]  ==`removed' | *p_state[i,j]  ==`susceptible')) t = .</code>
+<code>			if (t!=.) {</code>
+<code>			    res[t,2] = res[t,2] + rowsum((*p_exposes[i,j])[2,.])</code>
+<code>			}</code>
+<code>		}</code>
+<code>	}</code>
+<code>	res[.,2] = res[.,2]:/n_ill</code>
+<code>	varnames = "t", "reprod"</code>
+<code>    xid = st_addvar("float", varnames)</code>
+<code>    n = st_nobs()</code>
+<code>    n = rows(res) - n</code>
+<code>    if (n &gt; 0) {</code>
+<code>        st_addobs(n)</code>
+<code>    }</code>
+<code>    st_store(.,xid, res)</code>
+<code>	</code>
+<code>}</code>
+<code></code>
+<code></code>
+<code>end</code>
+</pre>
+<div class="txt"><pre>
+ 
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"><a href="#slide10.smcl">&lt;&lt;</a> <a href="#index.smcl">index</a> <a href="#slide13.smcl">&gt;&gt;</a></a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="slide13.smcl">
+<div class="txt"><pre>
+-------------------------------------------------------------------------------
+<b>How to implement an ABM in Mata</b>
+-------------------------------------------------------------------------------
+<br>
+                            <b>SIR model in a network</b>
+<br>
+    To add the network we make use the <b>abm_nw</b> class.
+<br>
+    This takes care of creating the network and keeps track of who can
+    contact who.
+<br>
+    With that the changes required are fairly small
+<br>
+    The class definition is
+<br>
+</pre>
+</div><pre class="code">
+<code>version 16.1</code>
+<code></code>
+<code>mata:</code>
+<code></code>
+<code>mata set matastrict on</code>
+<code></code>
+<code>class sir_nw extends abm_util {</code>
+<code>	class abm_pop          scalar agents</code>
+<code>	class abm_nw           scalar nw                     // &lt;-- new</code>
+<code>	</code>
+<code>	real                   scalar tdim</code>
+<code>	real                   scalar outbreak</code>
+<code>	real                   scalar removed</code>
+<code>//	real                   scalar mcontacts              // &lt;-- no longer necessary</code>
+<code>	real                   scalar N</code>
+<code>	real                   scalar transmissibility</code>
+<code>	real                   scalar mindur</code>
+<code>	real                   scalar meandur</code>
+<code>	real                   scalar pr_heal</code>
+<code>	real                   scalar pr_loss</code>
+<code>	real                   scalar degree                 // &lt;-- new</code>
+<code>	real                   scalar pr_long                // &lt;-- new</code>
+<code>	</code>
+<code>	// sir_chks.do</code>
+<code>	void                          isid()</code>
+<code>	void                          istime()</code>
+<code>	</code>
+<code>	// sir_set_pars.do</code>
+<code>	transmorphic                  N()</code>
+<code>	transmorphic                  tdim()</code>
+<code>	transmorphic                  outbreak()</code>
+<code>	transmorphic                  removed()</code>
+<code>//	transmorphic                  mcontacts()           // &lt;-- no longer necessary</code>
+<code>	transmorphic                  transmissibility()</code>
+<code>	transmorphic                  mindur()</code>
+<code>	transmorphic                  meandur()</code>
+<code>	transmorphic                  pr_loss()</code>
+<code>	transmorphic                  degree()              // &lt;-- new</code>
+<code>	transmorphic                  pr_long()             // &lt;-- new</code>
+<code></code>
+<code>	// sir_sim.do</code>
+<code>	void                          setup()</code>
+<code>//	real                   matrix meet()                // &lt;-- no longer necessary</code>
+<code>	real                   scalar infect()</code>
+<code>	void                          progress()</code>
+<code>	void                          step()</code>
+<code>	void                          run()</code>
+<code>	</code>
+<code>	// sir_export.do</code>
+<code>	void                          export_sir()</code>
+<code>	void                          export_r()</code>
+<code>	void                          export_nw()          // &lt;-- new</code>
+<code>}</code>
+<code>end </code>
+<code></code>
+<code>do nw_chks.do</code>
+<code>do nw_set_pars.do</code>
+<code>do nw_sim.do</code>
+<code>do nw_export.do</code>
+<code></code>
+<code>exit</code>
+</pre>
+<div class="txt"><pre>
+<br>
+    Checks and setting parameters are pretty much the same
+<br>
+    The main simulation functions are
+<br>
+</pre>
+</div><pre class="code">
+<code>include nw_locals.do</code>
+<code></code>
+<code>mata:</code>
+<code></code>
+<code>void sir_nw::run()</code>
+<code>{</code>
+<code>	real scalar i, t</code>
+<code>	setup()</code>
+<code></code>
+<code>	dots(0)</code>
+<code>	dots(1)</code>
+<code></code>
+<code>	for (t=2; t&lt;=tdim; t++) {</code>
+<code>		dots(t)</code>
+<code>		for(i=1; i&lt;=N ; i++) {</code>
+<code>			step(i,t)</code>
+<code>		}</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>void sir_nw::setup()</code>
+<code>{</code>
+<code>	real vector id, key</code>
+<code>	real scalar i</code>
+<code>	</code>
+<code>	if (N==.)                   _error("N has not been set")</code>
+<code>	if (tdim==.)                _error("tdim has not been set")</code>
+<code>	if (outbreak==.)            _error("outbreak has not been set")</code>
+<code>	if (outbreak &gt; N)           _error("the initial outbreak is larger than population")</code>
+<code>	if (removed==.)             removed = 0</code>
+<code>	if (removed + outbreak &gt; N) _error("intial outbreak + removed agents is larger than the population")</code>
+<code>	if (transmissibility==.)    _error("transmissibility has not been set")</code>
+<code>	if (mindur==.)              _error("mindur has not been specified")</code>
+<code>	if (meandur==.)             _error("meandur has not been specified")</code>
+<code>	if (meandur &lt;= mindur)      _error("meandur must be larger than mindur")</code>
+<code>	if (pr_loss==.)             pr_loss = 0</code>
+<code>	if (degree==.)              _error("degree has not been specified")  // &lt;-- new</code>
+<code>	if (pr_long==.)             _error("pr_long has not been specified") // &lt;-- new</code>
+<code>	</code>
+<code>	nw.abm_version("0.1.5")                                              // &lt;-- new</code>
+<code>	nw.clear()                                                           // &lt;-- new   </code>
+<code>	nw.N_nodes(0,N)                                                      // &lt;-- new</code>
+<code>	nw.directed(0)                                                       // &lt;-- new</code>
+<code>	nw.tdim(0)                                                           // &lt;-- new</code>
+<code>	nw.sw(degree,pr_long)                                                // &lt;-- new    </code>
+<code>	nw.setup()                                                           // &lt;-- new</code>
+<code>	</code>
+<code>	agents.abm_version("0.1.5")</code>
+<code>	agents.N(N)</code>
+<code>	agents.k(4)</code>
+<code>	agents.setup()</code>
+<code>	</code>
+<code>	id = jumble((1..N)')</code>
+<code>	</code>
+<code>	for (i = 1; i&lt;= N; i++) {</code>
+<code>		key = id[i],`state',1</code>
+<code>		agents.put(key,(i&lt;=outbreak ? `infectious' : (i &lt;= outbreak+removed ? `removed' : `susceptible')))</code>
+<code>		key[2] = `exposes'</code>
+<code>		if (i &lt;= outbreak) agents.put(key, J(2,0,.) )</code>
+<code>		</code>
+<code>		key[2] = `dur'</code>
+<code>		agents.put(key,1)</code>
+<code>	}</code>
+<code></code>
+<code>	</code>
+<code>// if meandur - mindur &lt; 1 then pr_heal &gt; 1, so there is no randomness to the duration</code>
+<code>// and the fixed duration of the disease is mindur	</code>
+<code>	pr_heal = 1/(meandur-mindur)</code>
+<code>}</code>
+<code></code>
+<code>void sir_nw::step(real scalar id, real scalar t)</code>
+<code>{</code>
+<code>	real matrix exposed</code>
+<code>	real scalar i, k</code>
+<code>	real rowvector key</code>
+<code>	</code>
+<code>	isid(id)</code>
+<code>	istime(t)</code>
+<code></code>
+<code>	key = id, `dur',t</code>
+<code></code>
+<code>	agents.put(key, agents.get(key, "last")+1)</code>
+<code>	progress(id,t)</code>
+<code>	key = id, `state',t</code>
+<code>	if (agents.get(key, "last") == `infectious' ) {</code>
+<code>		exposed = nw.neighbours(id)                        // &lt;-- new</code>
+<code>		exposed = exposed \ J(1,cols(exposed),.)           // &lt;-- new</code>
+<code>		for(i=1; i&lt;= cols(exposed); i++) {</code>
+<code>			exposed[2,i] = infect(exposed[1,i],t) </code>
+<code>		}</code>
+<code>		key[2] = `exposes'</code>
+<code>		agents.put(key,exposed)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>void sir_nw::progress(real scalar id, real scalar t)</code>
+<code>{</code>
+<code>    real rowvector key1, key2, key3</code>
+<code>	</code>
+<code>	isid(id)</code>
+<code>	istime(t)</code>
+<code>	</code>
+<code>	key1 = id, `state',t</code>
+<code>	key2 = id, `dur',t</code>
+<code>	if (agents.get(key1, "last") == `infectious'  & agents.get(key2, "last") &gt; mindur) {</code>
+<code>		if (runiform(1,1) &lt; pr_heal) {</code>
+<code>			agents.put(key1, `removed')</code>
+<code>			agents.put(key2,1)</code>
+<code>			key3 = id, `exposes',t</code>
+<code>			//agents.put(key3,NULL)</code>
+<code>		}</code>
+<code>	}</code>
+<code>    if (agents.get(key1, "last") == `removed' & runiform(1,1) &lt; pr_loss) {</code>
+<code>		agents.put(key1, `susceptible')</code>
+<code>		agents.put(key2,1)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>real scalar sir_nw::infect(real scalar id, real scalar t)</code>
+<code>{</code>
+<code>	real vector key</code>
+<code>	real scalar infected</code>
+<code></code>
+<code>	isid(id)</code>
+<code>	istime(t)</code>
+<code></code>
+<code>	infected = 0</code>
+<code>	key = id,`state', t</code>
+<code>	if (agents.get(key, "last")==`susceptible') {</code>
+<code>		if (runiform(1,1) &lt; transmissibility) {</code>
+<code>			agents.put(key, `infectious')</code>
+<code>			key[2] = `dur'</code>
+<code>			agents.put(key, 1)</code>
+<code>			key[2] = `exposes'</code>
+<code>			agents.put(key,J(2,0,.))</code>
+<code>			infected = 1</code>
+<code>		}</code>
+<code>	}</code>
+<code>	return(infected)</code>
+<code>}</code>
+<code></code>
+<code>end</code>
+</pre>
+<div class="txt"><pre>
+ 
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"><a href="#slide12.smcl">&lt;&lt;</a> <a href="#index.smcl">index</a> <a href="#slide14.smcl">&gt;&gt;</a></a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="slide14.smcl">
+<div class="txt"><pre>
+-------------------------------------------------------------------------------
+<b>How to implement an ABM in Mata</b>
+-------------------------------------------------------------------------------
+<br>
+                              <b>SIR model on a grid</b>
+<br>
+    The sir class remains largely unchanged
+<br>
+    The main trick here is that one can create a 10x10 matrix of instances of
+    a class, by specifying <b>town=sir(10,10)</b>
+<br>
+    The <b>abm_grid</b> class is mainly used to find neighbouring towns.
+<br>
+<br>
+</pre>
+</div><pre class="code">
+<code>version 16.1</code>
+<code></code>
+<code>mata:</code>
+<code></code>
+<code>mata set matastrict on</code>
+<code></code>
+<code>class sir_grid extends abm_util {                 // &lt;-- new</code>
+<code>    class sir              matrix town</code>
+<code>    class abm_grid         scalar grid</code>
+<code>    </code>
+<code>    real                   scalar rdim</code>
+<code>    real                   scalar cdim</code>
+<code>    real                   scalar prop_close</code>
+<code>    real                   scalar prop_medium</code>
+<code>    real                   scalar prop_far    </code>
+<code>    </code>
+<code>	real                   scalar tdim</code>
+<code>	real                   scalar outbreak</code>
+<code>	real                   scalar removed</code>
+<code>	real                   scalar mcontacts</code>
+<code>	real                   scalar N</code>
+<code>	real                   scalar transmissibility</code>
+<code>	real                   scalar mindur</code>
+<code>	real                   scalar meandur</code>
+<code>	real                   scalar pr_heal</code>
+<code>	real                   scalar pr_loss    </code>
+<code></code>
+<code>    // grid_set_pars.do</code>
+<code>	transmorphic                  N()</code>
+<code>    transmorphic                  rdim()</code>
+<code>    transmorphic                  cdim()</code>
+<code>	transmorphic                  tdim()</code>
+<code>	transmorphic                  outbreak()</code>
+<code>	transmorphic                  removed()</code>
+<code>	transmorphic                  mcontacts()</code>
+<code>	transmorphic                  transmissibility()</code>
+<code>	transmorphic                  mindur()</code>
+<code>	transmorphic                  meandur()</code>
+<code>	transmorphic                  pr_loss()  </code>
+<code>    transmorphic                  prop_close()</code>
+<code>    transmorphic                  prop_medium()</code>
+<code>    transmorphic                  prop_far()</code>
+<code>    </code>
+<code>    // grid_chks.do</code>
+<code>    void                          is_valid_address()</code>
+<code>    </code>
+<code>    // grid_sim.do</code>
+<code>    void                          setup()</code>
+<code>    void                          run()</code>
+<code>    void                          travel()</code>
+<code>    void                          travel_contact()</code>
+<code>    </code>
+<code>    // grid_export</code>
+<code>    void                          export_sir()</code>
+<code>}</code>
+<code></code>
+<code>class sir extends abm_util {</code>
+<code>	class abm_pop          scalar agents</code>
+<code>	</code>
+<code>	real                   scalar tdim         </code>
+<code>	real                   scalar outbreak</code>
+<code>	real                   scalar removed</code>
+<code>	real                   scalar mcontacts</code>
+<code>	real                   scalar N</code>
+<code>	real                   scalar transmissibility</code>
+<code>	real                   scalar mindur</code>
+<code>	real                   scalar meandur</code>
+<code>	real                   scalar pr_heal</code>
+<code>	real                   scalar pr_loss</code>
+<code>    real                   scalar vil_id</code>
+<code>	</code>
+<code>	// grid_chks.do</code>
+<code>	void                          isid()</code>
+<code>	void                          istime()</code>
+<code>	</code>
+<code>	// gird_sir_set_pars.do</code>
+<code>	transmorphic                  N()</code>
+<code>	transmorphic                  tdim()        </code>
+<code>	transmorphic                  outbreak()</code>
+<code>	transmorphic                  removed()</code>
+<code>	transmorphic                  mcontacts()</code>
+<code>	transmorphic                  transmissibility()</code>
+<code>	transmorphic                  mindur()</code>
+<code>	transmorphic                  meandur()</code>
+<code>	transmorphic                  pr_loss()</code>
+<code>    transmorphic                  vil_id()     // &lt;-- new</code>
+<code></code>
+<code>	// grid_sir_sim.do</code>
+<code>	void                          setup()</code>
+<code>	real                   matrix meet()</code>
+<code>	real                   scalar infect()</code>
+<code>	void                          progress()</code>
+<code>	void                          step()</code>
+<code>    void                          run()         </code>
+<code>    real                   scalar state()    // &lt;-- new</code>
+<code>	</code>
+<code>	// grid_export.do</code>
+<code>	real matrix                   export_sir()</code>
+<code>}</code>
+<code>end </code>
+<code></code>
+<code>do grid_chks.do</code>
+<code>do grid_set_pars.do</code>
+<code>do grid_sir_set_pars.do</code>
+<code>do grid_sir_sim.do</code>
+<code>do grid_sim.do</code>
+<code>do grid_export.do</code>
+<code></code>
+<code>exit</code>
+</pre>
+<div class="txt"><pre>
+</pre>
+</div><pre class="code">
+<code>include grid_locals.do</code>
+<code></code>
+<code>mata:</code>
+<code></code>
+<code>transmorphic sir_grid::prop_close(| real scalar val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_pr(val)</code>
+<code>		prop_close = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(prop_close)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir_grid::prop_medium(| real scalar val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_pr(val)</code>
+<code>		prop_medium = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(prop_medium)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir_grid::prop_far(| real scalar val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_pr(val)</code>
+<code>		prop_far = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(prop_far)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir_grid::rdim(| real scalar val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_posint(val)</code>
+<code>		rdim = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(rdim)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir_grid::cdim(| real scalar val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_posint(val)</code>
+<code>		cdim = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(cdim)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir_grid::N(| real matrix val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_posint(val)</code>
+<code>		N = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(N)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code></code>
+<code>transmorphic sir_grid::tdim(| real scalar val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_posint(val)</code>
+<code>		tdim= val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(tdim)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code></code>
+<code>transmorphic sir_grid::outbreak(| real scalar val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_posint(val)</code>
+<code>		outbreak= val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(outbreak)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir_grid::removed(| real matrix val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_posint(val)</code>
+<code>		removed= val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(removed)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir_grid::mcontacts(| real matrix val)</code>
+<code>{</code>
+<code>	if ( args()==1 ) {</code>
+<code>		if ( val &lt; 0) _error("arguments must be positive")</code>
+<code>		mcontacts = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(mcontacts)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir_grid::transmissibility(| real scalar val)</code>
+<code>{</code>
+<code>	if ( args()==1 ) {</code>
+<code>		is_pr(val)</code>
+<code>		transmissibility = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(transmissibility)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir_grid::mindur(| real scalar val)</code>
+<code>{</code>
+<code>	if ( args()==1 ) {</code>
+<code>		is_posint(val)</code>
+<code>		mindur = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(mindur)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir_grid::meandur(| real scalar val)</code>
+<code>{</code>
+<code>	if ( args()==1 ) {</code>
+<code>		if (val &lt; 0) _error("argument must be positive")</code>
+<code>		meandur = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(meandur)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir_grid::pr_loss(| real scalar val)</code>
+<code>{</code>
+<code>	if ( args()==1 ) {</code>
+<code>		is_pr(val)</code>
+<code>		pr_loss = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(pr_loss)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code></code>
+<code>end</code>
+</pre>
+<div class="txt"><pre>
+</pre>
+</div><pre class="code">
+<code>include grid_locals.do</code>
+<code></code>
+<code>mata:</code>
+<code></code>
+<code>transmorphic sir::N(| real scalar val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_posint(val)</code>
+<code>		N = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(N)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir::tdim(| real scalar val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_posint(val)</code>
+<code>		tdim= val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(tdim)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code></code>
+<code>transmorphic sir::outbreak(| real scalar val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_posint(val, "zero_ok")</code>
+<code>		outbreak= val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(outbreak)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir::removed(| real scalar val)</code>
+<code>{</code>
+<code>	if (args() == 1) {</code>
+<code>		is_posint(val, "zero_ok")</code>
+<code>		removed= val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(removed)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir::mcontacts(| real scalar val)</code>
+<code>{</code>
+<code>	if ( args()==1 ) {</code>
+<code>		if ( val &lt; 0) _error("arguments must be positive")</code>
+<code>		mcontacts = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(mcontacts)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir::transmissibility(| real scalar val)</code>
+<code>{</code>
+<code>	if ( args()==1 ) {</code>
+<code>		is_pr(val)</code>
+<code>		transmissibility = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(transmissibility)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir::mindur(| real scalar val)</code>
+<code>{</code>
+<code>	if ( args()==1 ) {</code>
+<code>		is_posint(val)</code>
+<code>		mindur = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(mindur)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir::meandur(| real scalar val)</code>
+<code>{</code>
+<code>	if ( args()==1 ) {</code>
+<code>		if (val &lt; 0) _error("argument must be positive")</code>
+<code>		meandur = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(meandur)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir::pr_loss(| real scalar val)</code>
+<code>{</code>
+<code>	if ( args()==1 ) {</code>
+<code>		is_pr(val)</code>
+<code>		pr_loss = val</code>
+<code>	}</code>
+<code>	else {</code>
+<code>		return(pr_loss)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>transmorphic sir::vil_id(| real scalar val)</code>
+<code>{</code>
+<code>    if (args()==1) {</code>
+<code>        is_posint(val)</code>
+<code>        vil_id = val</code>
+<code>    }</code>
+<code>    else {</code>
+<code>        return(vil_id)</code>
+<code>    }</code>
+<code>}</code>
+<code></code>
+<code>end</code>
+</pre>
+<div class="txt"><pre>
+</pre>
+</div><pre class="code">
+<code>include grid_locals.do</code>
+<code></code>
+<code>mata:</code>
+<code></code>
+<code>void sir_grid::is_valid_address(real rowvector address)</code>
+<code>{</code>
+<code>	if (cols(address) != 2) _error("an address ")</code>
+<code>    is_int_inrange(address[1],1,rdim)</code>
+<code>    is_int_inrange(address[2],1,cdim)</code>
+<code>}</code>
+<code></code>
+<code>void sir::isid(real scalar id, real scalar from)</code>
+<code>{</code>
+<code>	is_int_inrange(id,from,N)</code>
+<code>}</code>
+<code></code>
+<code>void sir::istime(real scalar t)</code>
+<code>{</code>
+<code>    is_int_inrange(t,0,tdim)</code>
+<code>}</code>
+<code>end</code>
+</pre>
+<div class="txt"><pre>
+</pre>
+</div><pre class="code">
+<code>include grid_locals.do</code>
+<code></code>
+<code>mata:</code>
+<code></code>
+<code>void sir::setup()</code>
+<code>{</code>
+<code>	real vector id, key</code>
+<code>	real scalar i</code>
+<code>	</code>
+<code>	if (N==.)                   _error("N has not been set")</code>
+<code>	if (tdim==.)                _error("tdim has not been set")</code>
+<code>	if (outbreak==.)            _error("outbreak has not been set")</code>
+<code>	if (outbreak &gt; N)           _error("the initial outbreak is larger than population")</code>
+<code>	if (removed==.)             removed = 0</code>
+<code>	if (removed + outbreak &gt; N) _error("intial outbreak + removed agents is larger than the population")</code>
+<code>	if (mcontacts==.)           _error("mcontacts has not been set")</code>
+<code>	if (mcontacts &gt; N)          _error("average number of mcontacts is larger than population")</code>
+<code>	if (transmissibility==.)    _error("transmissibility has not been set")</code>
+<code>	if (mindur==.)              _error("mindur has not been specified")</code>
+<code>	if (meandur==.)             _error("meandur has not been specified")</code>
+<code>	if (meandur &lt;= mindur)      _error("meandur must be larger than mindur")</code>
+<code>	if (pr_loss==.)             pr_loss = 0</code>
+<code>    if (vil_id==.)              _error("village id has not been specified")      // &lt;-- new</code>
+<code>	</code>
+<code>	agents.abm_version("0.1.5")</code>
+<code>	agents.N(N)</code>
+<code>	agents.k(3)</code>
+<code>	agents.setup()</code>
+<code>	</code>
+<code>	id = jumble((1..N)')</code>
+<code>	</code>
+<code>	for (i = 1; i&lt;= N; i++) {</code>
+<code>		key = id[i],`state',1</code>
+<code>		agents.put(key,(i&lt;=outbreak ? `infectious' : (i &lt;= outbreak+removed ? `removed' : `susceptible')))</code>
+<code>		key[2] = `exposes'</code>
+<code>		if (i &lt;= outbreak) agents.put(key, J(2,0,.) )</code>
+<code>		</code>
+<code>		key[2] = `dur'</code>
+<code>		agents.put(key,1)</code>
+<code>	}</code>
+<code></code>
+<code>	</code>
+<code>// if meandur - mindur &lt; 1 then pr_heal &gt; 1, so there is no randomness to the duration</code>
+<code>// and the fixed duration of the disease is mindur	</code>
+<code>	pr_heal = 1/(meandur-mindur)</code>
+<code>}</code>
+<code></code>
+<code>void sir::run(real scalar t)</code>
+<code>{</code>
+<code>    real scalar i</code>
+<code>    </code>
+<code>    for (i=1; i&lt;=N; i++) {</code>
+<code>        step(i,t)</code>
+<code>    }</code>
+<code>}</code>
+<code></code>
+<code>void sir::step(real scalar id, real scalar t)</code>
+<code>{</code>
+<code>	real matrix exposed</code>
+<code>	real scalar i</code>
+<code>	real rowvector key</code>
+<code>	</code>
+<code>	isid(id, `internal')                           // &lt;- internal to distinguish from inside and outside town</code>
+<code>	istime(t)</code>
+<code></code>
+<code>	key = id, `dur',t</code>
+<code></code>
+<code>	agents.put(key, agents.get(key, "last")+1)</code>
+<code>	progress(id,t)</code>
+<code>	key = id, `state',t</code>
+<code>	if (agents.get(key, "last") == `infectious' ) {</code>
+<code>		exposed = meet(id, vil_id)                 // &lt;-- vil_id to keep track of town</code>
+<code>		for(i=1; i&lt;= cols(exposed); i++) {</code>
+<code>			exposed[3,i] = infect(exposed[1,i],t)  // &lt;- exposure now needs three rows: town, id, infection</code>
+<code>		}</code>
+<code>		key[2] = `exposes'</code>
+<code>		agents.put(key,exposed)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>void sir::progress(real scalar id, real scalar t)</code>
+<code>{</code>
+<code>    real rowvector key1, key2, key3</code>
+<code>	</code>
+<code>	isid(id, `internal')</code>
+<code>	istime(t)</code>
+<code>	</code>
+<code>	key1 = id, `state',t</code>
+<code>	key2 = id, `dur',t</code>
+<code>	if (agents.get(key1, "last") == `infectious'  & agents.get(key2, "last") &gt; mindur) {</code>
+<code>		if (runiform(1,1) &lt; pr_heal) {</code>
+<code>			agents.put(key1, `removed')</code>
+<code>			agents.put(key2,1)</code>
+<code>			key3 = id, `exposes',t</code>
+<code>			agents.put(key3,NULL)</code>
+<code>		}</code>
+<code>	}</code>
+<code>    if (agents.get(key1, "last") == `removed' & runiform(1,1) &lt; pr_loss) {</code>
+<code>		agents.put(key1, `susceptible')</code>
+<code>		agents.put(key2,1)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>real matrix sir::meet(real scalar id, real scalar from)</code>
+<code>{</code>
+<code>	real scalar k</code>
+<code>	real colvector res</code>
+<code></code>
+<code>    id = (from==vil_id ? id : 0)</code>
+<code>	isid(id, from==vil_id)</code>
+<code></code>
+<code>	k = rpoisson(1,1,mcontacts)</code>
+<code>	if (k == 0) {</code>
+<code>		return(J(3,0,.))</code>
+<code>	}</code>
+<code>	else{</code>
+<code>		res =  ceil(runiform(1,k):*(N-1))</code>
+<code>		res = res + (res:&gt;=id)</code>
+<code>		res = res \ J(1,k,from) \ J(1,k,.)</code>
+<code>		return (res)</code>
+<code>	}</code>
+<code>}</code>
+<code></code>
+<code>real scalar sir::infect(real scalar id, real scalar t)</code>
+<code>{</code>
+<code>	real vector key</code>
+<code>	real scalar infected</code>
+<code></code>
+<code>	isid(id, `internal')</code>
+<code>	istime(t)</code>
+<code></code>
+<code>	infected = 0</code>
+<code>	key = id,`state', t</code>
+<code>	if (agents.get(key, "last")==`susceptible') {</code>
+<code>		if (runiform(1,1) &lt; transmissibility) {</code>
+<code>			agents.put(key, `infectious')</code>
+<code>			key[2] = `dur'</code>
+<code>			agents.put(key, 1)</code>
+<code>			key[2] = `exposes'</code>
+<code>			agents.put(key,J(3,0,.))</code>
+<code>			infected = 1</code>
+<code>		}</code>
+<code>	}</code>
+<code>	return(infected)</code>
+<code>}</code>
+<code></code>
+<code>real scalar sir::state(real scalar id, real scalar t) // &lt;-- new</code>
+<code>{</code>
+<code>    real vector key</code>
+<code>    </code>
+<code>    key = id, `state', t</code>
+<code>    return(agents.get(key, "last"))</code>
+<code>}</code>
+<code></code>
+<code>end</code>
+</pre>
+<div class="txt"><pre>
+</pre>
+</div><pre class="code">
+<code>include grid_locals.do</code>
+<code></code>
+<code>mata:</code>
+<code></code>
+<code>void sir_grid::run()</code>
+<code>{</code>
+<code>    real scalar t, r, c</code>
+<code>    setup()</code>
+<code>    dots(0)</code>
+<code>    dots(1)</code>
+<code>    for (t=2; t&lt;=tdim; t++) {</code>
+<code>        for (r=1; r&lt;=rdim; r++) {</code>
+<code>            for (c=1; c&lt;=cdim; c++) {</code>
+<code>                town[r,c].run(t)</code>
+<code>            }</code>
+<code>        }</code>
+<code>        for (r=1; r&lt;=rdim; r++) {</code>
+<code>            for (c=1; c&lt;=cdim; c++) {</code>
+<code>                travel(r,c,t)</code>
+<code>            }</code>
+<code>        }</code>
+<code>        dots(t)</code>
+<code>    }  </code>
+<code>}</code>
+<code></code>
+<code>void sir_grid::setup()</code>
+<code>{</code>
+<code>    real scalar r, c, j, initial</code>
+<code>        </code>
+<code>	if (N==J(0,0,.))                   _error("N has not been set")</code>
+<code>	if (tdim==.)                       _error("tdim has not been set")</code>
+<code>	if (outbreak==.)                   _error("outbreak has not been set")</code>
+<code>	if (removed==J(0,0,.))             removed = 0</code>
+<code>	if (mcontacts==J(0,0,.))           _error("mcontacts has not been set")</code>
+<code>	if (transmissibility==.)           _error("transmissibility has not been set")</code>
+<code>	if (mindur==.)                     _error("mindur has not been specified")</code>
+<code>	if (meandur==.)                    _error("meandur has not been specified")</code>
+<code>	if (pr_loss==.)                    pr_loss = 0</code>
+<code>    if (prop_close==.)                 _error("N_close has not been specified")</code>
+<code>    if (prop_medium==.)                prop_medium = 0</code>
+<code>    if (prop_far==.)                   prop_far = 0</code>
+<code>    </code>
+<code>    if (rows(N) == 1 & cols(N) == 1){</code>
+<code>    	N = J(rdim, cdim, N)</code>
+<code>    }</code>
+<code>    else if (rows(N)!=rdim | cols(N)!= cdim) {</code>
+<code>    	_error("N can either be a scalar or a rdim x cdim matrix")</code>
+<code>    }</code>
+<code>    if (rows(removed) == 1 & cols(removed) == 1 ) {</code>
+<code>    	removed = J(rdim,cdim,removed)</code>
+<code>    }</code>
+<code>    else if (rows(removed)!= rdim | cols(removed)!= cdim) {</code>
+<code>    	_error("removed can either be a scalar or a rdim x cdim matrix")</code>
+<code>    }</code>
+<code>    if (rows(mcontacts) == 1 & cols(mcontacts)==1) {</code>
+<code>    	mcontacts = J(rdim,cdim,mcontacts)</code>
+<code>    }</code>
+<code>    else if (rows(mcontacts)!=rdim | cols(mcontacts)!= cdim) {</code>
+<code>    	_error("mcontacts can either be a scalar or rdim x cdim matrix")</code>
+<code>    }</code>
+<code>    </code>
+<code>    grid.abm_version("0.1.5")</code>
+<code>    grid.rdim(rdim)</code>
+<code>    grid.cdim(cdim)</code>
+<code>    grid.neumann(0)</code>
+<code>    grid.torus(0)</code>
+<code>    grid.setup()</code>
+<code>    </code>
+<code>    town = sir(rdim,cdim)</code>
+<code>    initial = ceil(runiform(1,1)*rdim*cdim)</code>
+<code>    j= 0</code>
+<code>    for(r=1; r&lt;=rdim; r++) {</code>
+<code>        for(c=1; c&lt;=cdim; c++) {</code>
+<code>            j = ++j</code>
+<code>            town[r,c].N(N[r,c])</code>
+<code>            town[r,c].tdim(tdim)</code>
+<code>            town[r,c].outbreak((j==initial)*outbreak)</code>
+<code>            town[r,c].removed(removed[r,c])</code>
+<code>            town[r,c].mcontacts(mcontacts[r,c])</code>
+<code>            town[r,c].transmissibility(transmissibility)</code>
+<code>            town[r,c].mindur(mindur)</code>
+<code>            town[r,c].meandur(meandur)</code>
+<code>            town[r,c].pr_loss(pr_loss)</code>
+<code>            town[r,c].vil_id(j)</code>
+<code>            town[r,c].setup()</code>
+<code>        }</code>
+<code>    } </code>
+<code>}</code>
+<code></code>
+<code>void sir_grid::travel(real scalar r, real scalar c, real scalar t)</code>
+<code>{</code>
+<code>    travel_contact(r,c,t,"close")</code>
+<code>    travel_contact(r,c,t,"medium")</code>
+<code>    travel_contact(r,c,t,"far")</code>
+<code>}</code>
+<code></code>
+<code>void sir_grid::travel_contact(real scalar r, real scalar c, real scalar t, string scalar where)</code>
+<code>{</code>
+<code>    real scalar i, j, k, tr, tc, N_travel, target</code>
+<code>    real vector traveling, key</code>
+<code>    real matrix neigh, exposed</code>
+<code></code>
+<code>    if (where == "close") {</code>
+<code>        N_travel = ceil(prop_close*N[r,c])</code>
+<code>        traveling = ceil(runiform(1,N_travel)*N[r,c])</code>
+<code>        neigh = grid.find_ring(r,c,1)</code>
+<code>        </code>
+<code>    }</code>
+<code>    else if (where == "medium") {</code>
+<code>        N_travel = ceil(prop_medium*N[r,c])</code>
+<code>        traveling = ceil(runiform(1,N_travel)*N[r,c])</code>
+<code>        neigh = grid.find_ring(r,c,2)</code>
+<code>        </code>
+<code>    }</code>
+<code>    else {</code>
+<code>        N_travel = ceil(prop_far*N[r,c])</code>
+<code>        traveling = ceil(runiform(1,N_travel)*N[r,c])</code>
+<code>        neigh = grid.schedule()</code>
+<code>        </code>
+<code>    }</code>
+<code>    k = rows(neigh)</code>
+<code></code>
+<code>    for(i=1; i&lt;=N_travel; i++) {</code>
+<code>        if (town[r,c].state(traveling[i],t)== `infectious') {</code>
+<code>            target = ceil(runiform(1,1)*k)</code>
+<code>            tr = neigh[target,1]</code>
+<code>            tc = neigh[target,2]</code>
+<code>            exposed = town[tr, tc].meet(traveling[i],town[r,c].vil_id)</code>
+<code>         	for(j=1; j&lt;= cols(exposed); j++) {</code>
+<code>                exposed[3,j] = town[tr,tc].infect(exposed[1,j],t) </code>
+<code>            }</code>
+<code>            key = traveling[i],`exposes', t</code>
+<code>            exposed = town[r,c].agents.get(key), exposed</code>
+<code>            town[r,c].agents.put(key,exposed)</code>
+<code>        }</code>
+<code>    }</code>
+<code>}</code>
+<code></code>
+<code>end</code>
+</pre>
+<div class="txt"><pre>
+</pre>
+</div><pre class="code">
+<code>// address in abm_pop class agents</code>
+<code>local state       = 1</code>
+<code>local dur         = 2</code>
+<code>local exposes     = 3</code>
+<code></code>
+<code>// states</code>
+<code>local susceptible = 1</code>
+<code>local infectious  = 2 </code>
+<code>local removed     = 3</code>
+<code></code>
+<code>// from</code>
+<code>local internal    = 1</code>
+<code>local external    = 0</code>
+</pre>
+<div class="txt"><pre>
+</pre>
+</div><pre class="code">
+<code>include grid_locals.do</code>
+<code></code>
+<code>mata:</code>
+<code></code>
+<code>real matrix sir::export_sir()</code>
+<code>{</code>
+<code>    real matrix res</code>
+<code>	pointer matrix p</code>
+<code>	real scalar i, j</code>
+<code></code>
+<code>	res = J(N,tdim,.)</code>
+<code>	p = agents.extract(`state', tdim)</code>
+<code>	for (i=1; i&lt;=N; i++) {</code>
+<code>		for(j=1; j&lt;=tdim; j++) {</code>
+<code>			res[i,j] = *p[i,j]</code>
+<code>		}</code>
+<code>	}</code>
+<code>	res =  (1..tdim)', mean(res:==`susceptible')', </code>
+<code>	                   mean(res:==`infectious')', </code>
+<code>					   mean(res:==`removed')'</code>
+<code></code>
+<code>    return(res)</code>
+<code>}</code>
+<code></code>
+<code>void sir_grid::export_sir()</code>
+<code>{</code>
+<code>    real scalar r, c, i, xid, n</code>
+<code>    real matrix res</code>
+<code>    string rowvector varnames</code>
+<code>    </code>
+<code>    res = J(rdim*cdim*tdim, 6,.)</code>
+<code></code>
+<code>    i = 0</code>
+<code>    for(r=1; r&lt;=rdim; r++) {</code>
+<code>        for(c=1; c&lt;=cdim; c++) {</code>
+<code>            res[|1+tdim*i++ ,1 \ (i+1)*tdim,6|] = J(tdim,1,(r,c)),town[r,c].export_sir()</code>
+<code>        }</code>
+<code>    }</code>
+<code>    varnames = "r", "c", "t", "S", "I", "R"</code>
+<code>    xid = st_addvar("float", varnames)</code>
+<code>    n = st_nobs()</code>
+<code>    n = rows(res) - n</code>
+<code>    if (n &gt; 0) {</code>
+<code>        st_addobs(n)</code>
+<code>    }</code>
+<code>    st_store(.,xid, res)</code>
+<code>}</code>
+<code></code>
+<code>end</code>
+</pre>
+<div class="txt"><pre>
+<br>
+ 
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"><a href="#slide13.smcl">&lt;&lt;</a> <a href="#index.smcl">index</a> <a href="#slide15.smcl">&gt;&gt;</a></a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="slide15.smcl">
+<div class="txt"><pre>
+-------------------------------------------------------------------------------
+<b>Final remarks</b>
+-------------------------------------------------------------------------------
+<br>
+                                  <b>Conclusion</b>
+<br>
+    Implementing an ABM is doable in Mata
+<br>
+    We have seen four "helper classes" from <b>abm</b>:
+<br>
+        abm_pop for storing a population of agents
+        abm_nw for managing a network
+        abm_grid for managing a grid, like a chessboard.
+        abm_util for importing useful functions in the model class
+<br>
+ 
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"><a href="#slide14.smcl">&lt;&lt;</a> <a href="#index.smcl">index</a> </a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="slide3.smcl">
+<div class="txt"><pre>
+-------------------------------------------------------------------------------
+<b>digression</b>
+-------------------------------------------------------------------------------
+<br>
+                                      <b>R0</b>
+<br>
+    14 days is a number that has floated around a lot for how long someone is
+    infectious when having COVID-19.
+<br>
+    On average 4 contacts is just a convenient number
+<br>
+    The transmissibility is then chosen to make the R0 close to 2.5, another
+    number that has floated around a lot for COVID-19.
+<br>
+        If someone is 14 days infectious, and contacts 4 persons each day,
+        then there are 14*4=56 opportunities to infect someone.
+<br>
+        These should result in 2.5 infections, so the chance of a contact
+        leading to an infection is 2.5/56 = 0.045
+<br>
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"><a href="#slide2.smcl">&lt;&lt;</a> <a href="#index.smcl">index</a> </a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="slide4.smcl">
+<div class="txt"><pre>
+-------------------------------------------------------------------------------
+<b>ancillary</b>
+-------------------------------------------------------------------------------
+<br>
+                                <b>Other Scenarios</b>
+<br>
+    What if the immunity against COVID-19 obtained from getting the disease
+    does not persist?
+<br>
+    We can change to model to see how that impacts the spread of the disease
+<br>
+</pre>
+</div><pre class="output">
+<br>
+<b>. clear mata</b>
+<br>
+<b>. drop _all</b>
+<br>
+<b>. run sir_main.do</b>
+<br>
+<b>. </b>
+<b>. mata:</b>
+------------------------------------------------- mata (type <b>end</b> to exit) -----
+<b>: </b>
+<b>: model = sir()</b>
+<br>
+<b>: model.N(2000)</b>
+<br>
+<b>: model.tdim(250)</b>
+<br>
+<b>: model.outbreak(5)</b>
+<br>
+<b>: model.mcontacts(4)</b>
+<br>
+<b>: model.transmissibility(0.045)</b>
+<br>
+<b>: model.mindur(10)</b>
+<br>
+<b>: model.meandur(14)</b>
+<br>
+<b>: model.pr_loss(0.02)</b>
+<br>
+<b>: model.run()</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<b>..................................................       200</b>
+<b>..................................................       250</b>
+<br>
+<b>: model.export_sir()</b>
+<br>
+<b>: end</b>
+-------------------------------------------------------------------------------
+<br>
+<b>. </b>
+<b>. twoway line S I R t,  name(anc1, replace)          ///</b>
+<b>&gt;    ylabel(,angle(0)) legend(rows(1)) lwidth(*1.5 ..) </b>
+<br>
+<b>. drop _all</b>
+<br>
+</pre>
+<div class="txt"><img src="anc1.png" width="630">
+<pre>
+    Similarly, we can study the potential impact of policies encouraging
+    social distancing or the wearing of masks by changing the
+    transmissibility
+<br>
+</pre>
+</div><pre class="output">
+<br>
+<b>. mata:</b>
+------------------------------------------------- mata (type <b>end</b> to exit) -----
+<b>: model.pr_loss(0)</b>
+<br>
+<b>: model.tdim(150)</b>
+<br>
+<b>: model.transmissibility(0.03)</b>
+<br>
+<b>: model.run()</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<br>
+<b>: model.export_sir()</b>
+<br>
+<b>: end</b>
+-------------------------------------------------------------------------------
+<br>
+<b>. </b>
+<b>. twoway line S I R t,  name(anc2, replace)          ///</b>
+<b>&gt;    ylabel(,angle(0)) legend(rows(1)) lwidth(*1.5 ..) </b>
+<br>
+<b>. drop _all</b>
+<br>
+</pre>
+<div class="txt"><img src="anc2.png" width="630">
+<pre>
+    or the potential impact of a lockdown, which would influence the number
+    of people someone is in contact with
+<br>
+</pre>
+</div><pre class="output">
+<br>
+<b>. mata:</b>
+------------------------------------------------- mata (type <b>end</b> to exit) -----
+<b>: model.transmissibility(0.045)</b>
+<br>
+<b>: model.mcontacts(3)</b>
+<br>
+<b>: model.run()</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<br>
+<b>: model.export_sir()</b>
+<br>
+<b>: end</b>
+-------------------------------------------------------------------------------
+<br>
+<b>. </b>
+<b>. twoway line S I R t,  name(anc3, replace)          ///</b>
+<b>&gt;    ylabel(,angle(0)) legend(rows(1)) lwidth(*1.5 ..) </b>
+<br>
+<b>. drop _all</b>
+<br>
+</pre>
+<div class="txt"><img src="anc3.png" width="630">
+<pre>
+    or the impact of vaccinating a quarter of the population
+<br>
+</pre>
+</div><pre class="output">
+<br>
+<b>. mata:</b>
+------------------------------------------------- mata (type <b>end</b> to exit) -----
+<b>: model.mcontacts(4)</b>
+<br>
+<b>: model.removed(500)</b>
+<br>
+<b>: model.run()</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<br>
+<b>: model.export_sir()</b>
+<br>
+<b>: end</b>
+-------------------------------------------------------------------------------
+<br>
+<b>. </b>
+<b>. twoway line S I R t,  name(anc4, replace)          ///</b>
+<b>&gt;    ylabel(,angle(0)) legend(rows(1)) lwidth(*1.5 ..) </b>
+<br>
+<b>. drop _all</b>
+<br>
+</pre>
+<div class="txt"><img src="anc4.png" width="630">
+<pre>
+ 
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"> <a href="#index.smcl">index</a> </a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="slide5.smcl">
+<div class="txt"><pre>
+-------------------------------------------------------------------------------
+<b>ancillary</b>
+-------------------------------------------------------------------------------
+<br>
+                            <b>Quantifying uncertainty</b>
+<br>
+    ABMs are simulations, so the outcome could easily differ from run to run
+<br>
+    One could display the outcome from multiple runs
+<br>
+        Either because this gives a more complete description of an ABM
+<br>
+        or because this variation is interesting in and of itself
+<br>
+</pre>
+</div><pre class="output">
+<br>
+<b>. set seed 123456789</b>
+<br>
+<b>. clear mata</b>
+<br>
+<b>. drop _all</b>
+<br>
+<b>. run sir_main.do</b>
+<br>
+<b>. </b>
+<b>. mata:</b>
+------------------------------------------------- mata (type <b>end</b> to exit) -----
+<b>: </b>
+<b>: model = sir()</b>
+<br>
+<b>: model.N(2000)</b>
+<br>
+<b>: model.tdim(150)</b>
+<br>
+<b>: model.outbreak(5)</b>
+<br>
+<b>: model.mcontacts(4)</b>
+<br>
+<b>: model.transmissibility(0.045)</b>
+<br>
+<b>: model.mindur(10)</b>
+<br>
+<b>: model.meandur(14)</b>
+<br>
+<b>: model.pr_loss(0)</b>
+<br>
+<b>: </b>
+<b>: base = "t", "S", "I", "R"</b>
+<br>
+<b>: for(i=1; i&lt;=10; i++){</b>
+<b>&gt;     model.run()</b>
+<b>&gt;     names = J(1,4,"")</b>
+<b>&gt;     for(j=1; j&lt;=4; j++) {</b>
+<b>&gt;         names[j] = base[j] + strofreal(i)</b>
+<b>&gt;     }</b>
+<b>&gt;     model.export_sir(names)</b>
+<b>&gt; }</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<br>
+<b>: end</b>
+-------------------------------------------------------------------------------
+<br>
+<b>. </b>
+<b>. twoway line S* t1, lcolor(green ..)            || ///</b>
+<b>&gt;        line I* t1 , lcolor(orange ..)          || ///</b>
+<b>&gt;        line R* t1, lcolor(blue ..)                ///</b>
+<b>&gt;        legend(order(1 "S" 11 "I" 21 "R") cols(3)) ///</b>
+<b>&gt;        ylab(,angle(0)) name(anc5, replace)</b>
+<br>
+</pre>
+<div class="txt"><img src="anc5.png" width="630">
+<pre>
+ 
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"> <a href="#index.smcl">index</a> </a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="slide7.smcl">
+<div class="txt"><pre>
+-------------------------------------------------------------------------------
+<b>ancillary</b>
+-------------------------------------------------------------------------------
+<br>
+                                <b>Other scenarios</b>
+<br>
+    We can try to quantify the impact of reducing the number of long distance
+    by comparing the following models:
+<br>
+</pre>
+</div><pre class="output">
+<br>
+<b>. clear mata</b>
+<br>
+<b>. set seed 28863</b>
+<br>
+<b>. run nw_main.do</b>
+<br>
+<b>. mata:</b>
+------------------------------------------------- mata (type <b>end</b> to exit) -----
+<b>: model = sir_nw()</b>
+<br>
+<b>: model.N(2000)</b>
+<br>
+<b>: model.tdim(150)</b>
+<br>
+<b>: model.outbreak(10)</b>
+<br>
+<b>: model.degree(10)</b>
+<br>
+<b>: model.pr_long(.2)</b>
+<br>
+<b>: model.transmissibility(.018)</b>
+<br>
+<b>: model.mindur(10)</b>
+<br>
+<b>: model.meandur(14)</b>
+<br>
+<b>: model.pr_loss(0.00)</b>
+<br>
+<b>: model.run()</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<br>
+<b>: model.export_sir()</b>
+<br>
+<b>: end</b>
+-------------------------------------------------------------------------------
+<br>
+<b>. </b>
+<b>. twoway line S I R t,  name(sir3, replace)          ///</b>
+<b>&gt;    ylabel(,angle(0)) legend(rows(1)) lwidth(*1.5 ..) </b>
+<br>
+<b>. drop _all</b>
+<br>
+<b>. </b>
+<b>. mata:</b>
+------------------------------------------------- mata (type <b>end</b> to exit) -----
+<b>: model.pr_long(.05)</b>
+<br>
+<b>: model.run()</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<b>..................................................       150</b>
+<br>
+<b>: model.export_sir()</b>
+<br>
+<b>: end</b>
+-------------------------------------------------------------------------------
+<br>
+<b>. </b>
+<b>. twoway line S I R t,  name(sir4, replace)          ///</b>
+<b>&gt;    ylabel(,angle(0)) legend(rows(1)) lwidth(*1.5 ..) </b>
+<br>
+<b>. </b>
+<b>. drop _all</b>
+<br>
+</pre>
+<div class="txt"><img src="sir3.png" width="630">
+<img src="sir4.png" width="630">
+<pre>
+ 
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"> <a href="#index.smcl">index</a> </a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="slide9.smcl">
+<div class="txt"><pre>
+-------------------------------------------------------------------------------
+<b>ancillary</b>
+-------------------------------------------------------------------------------
+<br>
+                                <b>Other scenarios</b>
+<br>
+    In the real world population is not uniformly distributed over space
+<br>
+    We could try to capture that by including a "big city" in our model.
+<br>
+    This can be done by increasing the population in one of the towns.
+<br>
+</pre>
+</div><pre class="output">
+<br>
+<b>. set seed 123456789</b>
+<br>
+<b>. clear mata</b>
+<br>
+<b>. drop _all</b>
+<br>
+<b>. run grid_main.do</b>
+<br>
+<b>. </b>
+<b>. mata:</b>
+------------------------------------------------- mata (type <b>end</b> to exit) -----
+<b>: </b>
+<b>: model = sir_grid()</b>
+<br>
+<b>: model.rdim(10)</b>
+<br>
+<b>: model.cdim(10)</b>
+<br>
+<b>: model.prop_close(0.15)</b>
+<br>
+<b>: model.prop_far(0.01)</b>
+<br>
+<b>: </b>
+<b>: N = J(10,10,100)</b>
+<br>
+<b>: N[5,5] =2000</b>
+<br>
+<b>: model.N(N)</b>
+<br>
+<b>: model.tdim(100)</b>
+<br>
+<b>: model.outbreak(5)</b>
+<br>
+<b>: model.mcontacts(4)</b>
+<br>
+<b>: model.transmissibility(0.045)</b>
+<br>
+<b>: model.mindur(10)</b>
+<br>
+<b>: model.meandur(14)</b>
+<br>
+<b>: model.pr_loss(0)</b>
+<br>
+<b>: </b>
+<b>: model.run()</b>
+<b>----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5</b>
+<b>..................................................        50</b>
+<b>..................................................       100</b>
+<br>
+<b>: model.export_sir()</b>
+<br>
+<b>: </b>
+<b>: end</b>
+-------------------------------------------------------------------------------
+<br>
+<b>. </b>
+<b>. replace r = -r</b>
+(10,000 real changes made)
+<br>
+<b>. foreach t of numlist 1 5(5) 100 {</b>
+  2<b>.      heatplot I r c if t==`t',          /// </b>
+<b>&gt;           discrete title(Time = `t')    ///</b>
+<b>&gt;           name(ancgrid`t', replace)        ///</b>
+<b>&gt;           cuts(0(0.05)0.7)              /// </b>
+<b>&gt;           colors(plasma)                ///</b>
+<b>&gt;           yscale(off range(-10.5 -.5))  ///</b>
+<b>&gt;           xscale(off  range(.5 10.5))   ///</b>
+<b>&gt;           ylab(none) xlab(none)         ///</b>
+<b>&gt;           plotregion(margin(zero))      ///</b>
+<b>&gt;           aspect(1)                                        </b>
+  3<b>. }</b>
+<br>
+</pre>
+<div class="txt"><img src="ancgrid1.png" width="630">
+<img src="ancgrid5.png" width="630">
+<img src="ancgrid10.png" width="630">
+<img src="ancgrid15.png" width="630">
+<img src="ancgrid20.png" width="630">
+<img src="ancgrid25.png" width="630">
+<img src="ancgrid30.png" width="630">
+<img src="ancgrid35.png" width="630">
+<img src="ancgrid40.png" width="630">
+<img src="ancgrid45.png" width="630">
+<img src="ancgrid50.png" width="630">
+<img src="ancgrid55.png" width="630">
+<img src="ancgrid60.png" width="630">
+<img src="ancgrid65.png" width="630">
+<img src="ancgrid70.png" width="630">
+<img src="ancgrid75.png" width="630">
+<img src="ancgrid80.png" width="630">
+<img src="ancgrid85.png" width="630">
+<img src="ancgrid90.png" width="630">
+<img src="ancgrid95.png" width="630">
+<img src="ancgrid100.png" width="630">
+<pre>
+ 
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"> <a href="#index.smcl">index</a> </a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="slide11.smcl">
+<div class="txt"><pre>
+-------------------------------------------------------------------------------
+<b>digression</b>
+-------------------------------------------------------------------------------
+<br>
+                                     <b>Class</b>
+<br>
+    We have a population of agents to keep track of
+<br>
+    We need to repeatedly apply rules to them
+<br>
+    Applying rules can be done by a function, but that function needs access
+    to settings and the population.
+<br>
+    This is a good case for a class.
+<br>
+    A class can be thought of as a tray with named slots for functions and
+    data
+<br>
+    The functions are local to the class
+<br>
+    Each function has access to all material stored in the class
+<br>
+ 
+</pre>
+</div><pre class="output">
+<br>
+<b>. clear mata</b>
+<br>
+<b>. </b>
+<b>. mata:</b>
+------------------------------------------------- mata (type <b>end</b> to exit) -----
+<b>: </b>
+<b>: class arithmatic {</b>
+<b>&gt; </b>
+<b>&gt;     real scalar a</b>
+<b>&gt;     real scalar b</b>
+<b>&gt;     </b>
+<b>&gt;     real scalar sum()</b>
+<b>&gt;     real scalar prod()</b>
+<b>&gt;     void input()</b>
+<b>&gt;     void run()</b>
+<b>&gt; }</b>
+<br>
+<b>: </b>
+<b>: void arithmatic::input(real scalar aval, real scalar bval)</b>
+<b>&gt; {</b>
+<b>&gt;     a = aval</b>
+<b>&gt;     b = bval</b>
+<b>&gt; }</b>
+<br>
+<b>: </b>
+<b>: real scalar arithmatic::sum()</b>
+<b>&gt; {</b>
+<b>&gt;     return(a + b)</b>
+<b>&gt; }</b>
+<br>
+<b>: </b>
+<b>: real scalar arithmatic::prod()</b>
+<b>&gt; {</b>
+<b>&gt;     return(a * b)</b>
+<b>&gt; }</b>
+<br>
+<b>: </b>
+<b>: void arithmatic::run()</b>
+<b>&gt; {</b>
+<b>&gt;     sum()</b>
+<b>&gt;     prod()</b>
+<b>&gt; }</b>
+<br>
+<b>: </b>
+<b>: // how the user interacts with this program</b>
+<b>: math = arithmatic()</b>
+<br>
+<b>: math.input(2,4)</b>
+<br>
+<b>: math.run()</b>
+<b>  6</b>
+<b>  8</b>
+<br>
+<b>: end</b>
+-------------------------------------------------------------------------------
+<br>
+</pre>
+<div class="txt"><pre>
+ 
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"><a href="#slide10.smcl">&lt;&lt;</a> <a href="#index.smcl">index</a> </a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+<div class="slide" id="slide16.smcl">
+<div class="txt"><pre>
+-------------------------------------------------------------------------------
+<b>ancillary</b>
+-------------------------------------------------------------------------------
+<br>
+                             <b>Alternative platforms</b>
+<br>
+    There are various dedicated environments for creating ABMs.
+<br>
+        <b>netlogo</b> (netlogo) http://ccl.northwestern.edu/netlogo/
+<br>
+        <b>repast</b> (java, python, C++, and others) https://repast.github.io/
+<br>
+        <b>mason</b> (java) https://cs.gmu.edu/~eclab/projects/mason/
+<br>
+        <b>mesa</b> (python) https://mesa.readthedocs.io/
+<br>
+        <b>agents.jl</b> (julia) https://juliadynamics.github.io/Agents.jl/stable/
+<br>
+    People who primarily create ABMs are not going to move away from those,
+    and rightly so.
+<br>
+    The toolkits discussed in this presentation are aimed at people who
+    primarily use Stata and occationally want to make an ABM.
+<br>
+ 
+-------------------------------------------------------------------------------
+</pre>
+<pre><p class="bottom"> <a href="#index.smcl">index</a> </a></pre>
+<pre>
+-------------------------------------------------------------------------------
+</pre>
+</div>
+</div>
+</body>
+</html>
