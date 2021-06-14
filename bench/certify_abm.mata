@@ -12,3 +12,4 @@ do bench\certify_util.mata
 do examples/schelling/schelling_run.mata
 do examples/sir/sir_run.mata
 do examples/sir_nw/nw_run.mata
+do examples/game_of_life/gol_run.do

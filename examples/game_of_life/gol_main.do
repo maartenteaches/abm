@@ -22,7 +22,6 @@ class gol extends abm_util
     // gol_sim.do
     void                  setup()
     void                  step()
-    real           scalar N_alive() 
     real           scalar make_id()
     void                  born()
     void                  died()
