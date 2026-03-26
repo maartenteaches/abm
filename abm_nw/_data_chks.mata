@@ -1,5 +1,6 @@
 mata: 
 
+**# is_symmetric()
 void nw_data::is_symmetric( real scalar t)
 {
 	real scalar i, j, stop
@@ -23,6 +24,7 @@ void nw_data::is_symmetric( real scalar t)
 
 }
 
+**# is_frozen()
 void nw_data::is_frozen(| real scalar t)
 {
 	if (prepared == 0) return
@@ -30,11 +32,13 @@ void nw_data::is_frozen(| real scalar t)
 	if (frozen[t]==1) _error("network has been frozen")
 }
 
+**# is_setup()
 void nw_data::is_setup()
 {
 	if(setup == 0) _error(3000,"setup is required")
 }
 
+**# is_prepared()
 void nw_data::is_prepared()
 {
 	if (prepared == 1) _error(3000, "initial parameters have already been set")

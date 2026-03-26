@@ -1,4 +1,5 @@
 mata:
+**# add_edge()
 void nw_data::add_edge(real scalar t, real scalar orig, real scalar dest, real scalar weight, string scalar replace)
 {
 	real rowvector key
@@ -41,6 +42,7 @@ void nw_data::add_edge(real scalar t, real scalar orig, real scalar dest, real s
 	}
 }
 
+**# remove_edge()
 void nw_data::remove_edge(real scalar t, real scalar orig, real scalar dest)
 {
     real rowvector key, adj, adj2
@@ -73,6 +75,7 @@ void nw_data::remove_edge(real scalar t, real scalar orig, real scalar dest)
 	}
 }
 
+**# change_weight()
 void nw_data::change_weight(real scalar t, real scalar orig, real scalar dest, real scalar val)
 {
 	is_frozen(t)
@@ -84,6 +87,7 @@ void nw_data::change_weight(real scalar t, real scalar orig, real scalar dest, r
 	add_edge(t, orig, dest, val, "replace")
 }
 
+**# rewire()
 void nw_data::rewire(real scalar t, real scalar orig0, real scalar dest0,
     real scalar orig1, real scalar dest1)
 {
@@ -99,6 +103,7 @@ void nw_data::rewire(real scalar t, real scalar orig0, real scalar dest0,
 	add_edge(t, orig1, dest1, val, "replace")
 }
 
+**# remove_node()
 void nw_data::remove_node(real scalar t, real scalar id)
 {
 	real scalar i, j, count
@@ -129,6 +134,7 @@ void nw_data::remove_node(real scalar t, real scalar id)
 	N_edges[t] = count
 }
 
+**# return_node()
 void nw_data::return_node(real scalar t, real scalar id) 
 {
 	is_frozen(t)
@@ -141,6 +147,7 @@ void nw_data::return_node(real scalar t, real scalar id)
 	N_nodes[t] = N_nodes[t] + 1
 }
 
+**# add_node()
 void nw_data::add_node(real scalar t)
 {
     real scalar i
@@ -162,6 +169,7 @@ void nw_data::add_node(real scalar t)
 	adjlist = adjlist \ toadd
 }
 
+**# copy_nodes()
 void nw_data::copy_nodes(real scalar t0, real scalar t1)
 {
 	real vector orig, dropped
@@ -175,6 +183,7 @@ void nw_data::copy_nodes(real scalar t0, real scalar t1)
 	dropped_nodes[t1] = &dropped
 }
 
+**# copy_adjlist()
 void nw_data::copy_adjlist(real scalar t0, real scalar t1)
 {
 	real scalar i
@@ -183,6 +192,8 @@ void nw_data::copy_adjlist(real scalar t0, real scalar t1)
 		adjlist[i,t1] = &(*adjlist[i, t0])
 	}		
 }
+
+**# copy_nw()
 void nw_data::copy_nw(real scalar t0, real scalar t1)
 {
 	real scalar i, j, val

@@ -4,6 +4,7 @@ mata:
 
 mata set matastrict on
 
+**# define abm_nw class
 class abm_nw extends abm_chk
 {
 	protected: 
@@ -64,6 +65,8 @@ class abm_nw extends abm_chk
 }
 
 end
+
+**# fill abm_nw class
 
 do abm_nw\_nw_data.mata
 do abm_nw\_chks.mata

@@ -1,4 +1,6 @@
 mata:
+
+**# new
 void nw_data::new(){
 	bc_setup()
 	nw_set    = 0
@@ -8,6 +10,7 @@ void nw_data::new(){
 	network.notfound(0)
 }
 
+**# prepare()
 void nw_data::prepare()
 {
 	real scalar i, j
@@ -46,6 +49,7 @@ void nw_data::prepare()
 	prepared = 1
 }
 
+**# setup()
 void nw_data::setup()
 {
 	if (directed == .) {
@@ -66,6 +70,7 @@ void nw_data::setup()
 	setup = 1
 }
 
+**# clear()
 void nw_data::clear()
 {
 	if (prepared==0) return

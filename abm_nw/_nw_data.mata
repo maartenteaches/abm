@@ -1,5 +1,6 @@
 mata:
 mata set matastrict on
+**# define nw_data class
 class nw_data extends abm_chk
 {
     protected:
@@ -73,6 +74,7 @@ class nw_data extends abm_chk
 }
 end
 
+**# fill nw_data class
 do abm_nw\_data_chks.mata
 do abm_nw\_data_pars.mata
 do abm_nw\_data_setup.mata
