@@ -1,5 +1,5 @@
 mata: 
-**# parse_t()
+//# parse_t()
 real scalar abm_nw::parse_t(real scalar t)
 {
 	t = (t==. ? 1 : t + mod_leq((0,1,0)))
@@ -7,7 +7,7 @@ real scalar abm_nw::parse_t(real scalar t)
 	return(t)
 }
 
-**# is_valid_time()
+//# is_valid_time()
 // time is assumed to be in "modern" format, 
 // i.e. parse_t() is supposed to have run _before_ is_valid_time()
 void abm_nw::is_valid_time(real scalar time) 
@@ -25,7 +25,7 @@ void abm_nw::is_valid_time(real scalar time)
 	}
 }
 
-**# is_valid_id()
+//# is_valid_id()
 void abm_nw::is_valid_id(real scalar id, | real scalar time, string scalar dropped_ok)
 {
 	if (args()==1) {

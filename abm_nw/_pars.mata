@@ -1,5 +1,5 @@
 mata:
-**# N_nodes()
+//# N_nodes()
 transmorphic abm_nw::N_nodes( real scalar t, | real scalar N){
 	t=parse_t(t)
 	is_valid_time(t)
@@ -14,7 +14,7 @@ transmorphic abm_nw::N_nodes( real scalar t, | real scalar N){
 	}
 }
 
-**# randomit()
+//# randomit()
 transmorphic abm_nw::randomit(| real scalar bool)
 {
     if(args()==1) {
@@ -26,7 +26,7 @@ transmorphic abm_nw::randomit(| real scalar bool)
 	}
 }
 
-**# tdim()
+//# tdim()
 transmorphic abm_nw::tdim(| real scalar t)
 {
 	if(args()==1) {
@@ -39,7 +39,7 @@ transmorphic abm_nw::tdim(| real scalar t)
 	}
 }
 
-**# directed()
+//# directed()
 transmorphic abm_nw::directed(| real scalar bool)
 {
     if (args()==1)  {
@@ -51,7 +51,7 @@ transmorphic abm_nw::directed(| real scalar bool)
 	}
 }
 
-**# weighted
+//# weighted
 transmorphic abm_nw::weighted(| real scalar bool)
 {
 	if(args()==1) {

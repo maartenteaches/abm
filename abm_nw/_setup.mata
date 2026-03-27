@@ -1,16 +1,16 @@
 mata:
-**# new()
+//# new()
 void abm_nw::new(){
 	bc_setup()
 }
 
-**# setup()
+//# setup()
 void abm_nw::setup()
 {
 	network.setup()
 }
 
-**# clear()
+//# clear()
 void abm_nw::clear()
 {
 	network.clear()

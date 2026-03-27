@@ -1,5 +1,5 @@
 mata:
-**# export_adjmat()
+//# export_adjmat()
 real matrix nw_data::export_adjmat(real scalar t) 
 {
 	real matrix res
@@ -21,7 +21,7 @@ real matrix nw_data::export_adjmat(real scalar t)
 	return(res)
 }
 
-**# export_edgelist()
+//# export_edgelist()
 real matrix nw_data::export_edgelist( real scalar t, string scalar ego_all)
 {
     real matrix res, temp

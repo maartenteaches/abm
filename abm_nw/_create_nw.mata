@@ -1,5 +1,5 @@
 mata:
-**# from_adjlist()
+//# from_adjlist()
 void abm_nw::from_adjlist(real matrix adj)
 {
 	real scalar i,j, orig
@@ -22,7 +22,7 @@ void abm_nw::from_adjlist(real matrix adj)
 	network.nw_set(1)
 }
 
-**# from_edgelist()
+//# from_edgelist()
 void abm_nw::from_edgelist(real matrix edges)
 {
 	real scalar    i
@@ -50,7 +50,7 @@ void abm_nw::from_edgelist(real matrix edges)
 	network.nw_set(1)
 }
 
-**# from_adjmatrix()
+//# from_adjmatrix()
 void abm_nw::from_adjmatrix(real matrix adjmat)
 {
 	real scalar i, j, max
@@ -79,7 +79,7 @@ void abm_nw::from_adjmatrix(real matrix adjmat)
 	network.nw_set(1)
 }
 
-**# random()
+//# random()
 void abm_nw::random(real scalar pr) {                                         
 	
 	real scalar i, j, max
@@ -103,7 +103,7 @@ void abm_nw::random(real scalar pr) {
 	network.nw_set(1)
 }
 
-**# sw()
+//# sw()
 void abm_nw::sw(real scalar degree, real scalar pr)
 {
 	real scalar left, right, i, j, alt_dest

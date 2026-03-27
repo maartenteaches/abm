@@ -4,7 +4,7 @@ mata:
 
 mata set matastrict on
 
-**# define abm_nw class
+//# define abm_nw class
 class abm_nw extends abm_chk
 {
 	protected: 

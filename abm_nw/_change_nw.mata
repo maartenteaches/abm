@@ -1,5 +1,5 @@
 mata:
-**# add_edge()
+//# add_edge()
 void abm_nw::add_edge(real scalar t, real scalar orig, real scalar dest,| real scalar weight, string scalar replace)
 {
 	t = parse_t(t)
@@ -9,7 +9,7 @@ void abm_nw::add_edge(real scalar t, real scalar orig, real scalar dest,| real s
 	network.add_edge(t, orig, dest, weight, replace)
 }
 
-**# remove_edge()
+//# remove_edge()
 void abm_nw::remove_edge(real scalar t, real scalar orig, real scalar dest)
 {
 	t = parse_t(t)
@@ -19,7 +19,7 @@ void abm_nw::remove_edge(real scalar t, real scalar orig, real scalar dest)
 	network.remove_edge(t, orig, dest)
 }
 
-**# change_weight()
+//# change_weight()
 void abm_nw::change_weight(real scalar t, real scalar orig, real scalar dest, real scalar val)
 {
 	t = parse_t(t)
@@ -29,7 +29,7 @@ void abm_nw::change_weight(real scalar t, real scalar orig, real scalar dest, re
 	network.change_weight(t,orig,dest, val)
 }
 
-**# rewire()
+//# rewire()
 void abm_nw::rewire(real scalar t, real scalar orig0, real scalar dest0,
     real scalar orig1, real scalar dest1)
 {
@@ -42,7 +42,7 @@ void abm_nw::rewire(real scalar t, real scalar orig0, real scalar dest0,
 	network.rewire(t, orig0, dest0, orig1, dest1)
 }
 
-**# remove_node()
+//# remove_node()
 void abm_nw::remove_node(real scalar t, real scalar id)
 {
 	t = parse_t(t)	
@@ -50,7 +50,7 @@ void abm_nw::remove_node(real scalar t, real scalar id)
 	network.remove_node(t,id)
 }
 
-**# return_node()
+//# return_node()
 void abm_nw::return_node(real scalar t, real scalar id) 
 {
 	t = parse_t(t)
@@ -59,7 +59,7 @@ void abm_nw::return_node(real scalar t, real scalar id)
 	network.return_node(t,id)
 }
 
-**# add_node()
+//# add_node()
 void abm_nw::add_node(real scalar t)
 {
 	t = parse_t(t)
@@ -68,7 +68,7 @@ void abm_nw::add_node(real scalar t)
 	network.add_node(t)
 }
 
-**# copy_nodes()
+//# copy_nodes()
 void abm_nw::copy_nodes(real scalar t0, real scalar t1)
 {
 	t0 = parse_t(t0)
@@ -79,7 +79,7 @@ void abm_nw::copy_nodes(real scalar t0, real scalar t1)
 	network.copy_nodes(t0, t1)
 }
 
-**# copy_adjlist()
+//# copy_adjlist()
 void abm_nw::copy_adjlist(real scalar t0, real scalar t1)
 {
 	t0 = parse_t(t0)
@@ -90,7 +90,7 @@ void abm_nw::copy_adjlist(real scalar t0, real scalar t1)
 	network.copy_adjlist(t0,t1)
 }
 
-**# copy_nw()
+//# copy_nw()
 void abm_nw::copy_nw(real scalar t0, real scalar t1)
 {
 	t0 = parse_t(t0)

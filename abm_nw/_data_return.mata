@@ -1,5 +1,5 @@
 mata:
-**# edge_exists()
+//# edge_exists()
 real scalar nw_data::edge_exists(real scalar ego, real scalar alter, real scalar t)
 {
 	real scalar res
@@ -8,7 +8,7 @@ real scalar nw_data::edge_exists(real scalar ego, real scalar alter, real scalar
 	return(res)
 }
 
-**# neighbours()
+//# neighbours()
 real rowvector nw_data::neighbours(real scalar ego, real scalar t)
 {
 	return(*adjlist[ego,t])
@@ -19,7 +19,7 @@ real scalar nw_data::N_edges( real scalar t)
 	return(N_edges[t])
 }
 	
-**# no_edge()	
+//# no_edge()	
 void nw_data::no_edge(real scalar t, real scalar orig, real scalar dest) 
 {
 	if(edge_exists(orig, dest, t)) {
@@ -32,7 +32,7 @@ void nw_data::no_edge(real scalar t, real scalar orig, real scalar dest)
 	}
 }
 
-**# weight()
+//# weight()
 real scalar nw_data::weight(real scalar ego, real scalar alter, real scalar t)
 {
 	if (weighted) {
@@ -43,7 +43,7 @@ real scalar nw_data::weight(real scalar ego, real scalar alter, real scalar t)
 	}
 }
 
-**# schedule()
+//# schedule()
 real vector nw_data::schedule( real scalar t)
 {
 	real vector res
@@ -53,14 +53,14 @@ real vector nw_data::schedule( real scalar t)
 	return(res)
 }
 
-**# nodes()
+//# nodes()
 real vector nw_data::nodes(real scalar t)
 {
 	prepare()
 	return(*nodes[t])
 }
 
-**# maxnodes()
+//# maxnodes()
 real scalar nw_data::maxnodes()
 {
 	return(maxnodes)
