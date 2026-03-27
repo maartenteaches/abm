@@ -14,6 +14,7 @@ real rowvector nw_data::neighbours(real scalar ego, real scalar t)
 	return(*adjlist[ego,t])
 } 
 
+//# N_edges()
 real scalar nw_data::N_edges( real scalar t)
 {
 	return(N_edges[t])
@@ -47,7 +48,6 @@ real scalar nw_data::weight(real scalar ego, real scalar alter, real scalar t)
 real vector nw_data::schedule( real scalar t)
 {
 	real vector res
-
     res = *nodes[t]
 	if (randomit) res = jumble(res')'
 	return(res)

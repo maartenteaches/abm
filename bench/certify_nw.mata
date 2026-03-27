@@ -16,16 +16,18 @@ class test_abm_nw extends abm_nw
 		void                             tests_is_nodesset()
 		void                             tests_copy_nodes()
 		void                             tests_copy_adjlist()
-		
+
+		class nw_data          scalar    nw()
 		real                   scalar    get_maxnodes()
 		real                   scalar    get_nodes_set()
 		real                   scalar    get_nw_set()
 		real                   scalar    get_setup()
 		pointer(real vector)   vector    get_nodes()
 		pointer(real vector)   matrix    get_adjlist()	
+}
 		
-		
-		pointer(real vector)   vector    get_dropped_nodes()
+class nw_data scalar test_abm_nw::nw(){
+	return(network)
 }
 		
 void test_abm_nw::tests_copy_nodes(real scalar t0, real scalar t1)
@@ -181,18 +183,18 @@ mata:
 	assert(foo.tdim()==.)
 	foo.tdim(10)
 	assert(foo.tdim() == 10)
-	foo.schedule(1) 
-	end
-	assert(foo.get_N_nodes()==J(10,1,.))
+	foo.setup()
+	assert(foo.schedule(1) == (1..10))
+
 	for(i=1; i<=10; i++) { // nodes
 		for(j=1; j<=10; j++) { // times
-			assert(*(foo.get_adjlist()[i,j])==J(1,0,.))
+			assert(foo.neighbours(i,j)==J(1,0,.))
 		}
 	}
-	for(i=1; i<=10; i++) {
-		assert(*(foo.get_dropped_nodes()[i])==J(1,0,.))
+	for(j=1; j<=10; j++) { // time
+		assert(foo.nw().N_edges(j)==0)	
 	}
-	assert(foo.get_N_edges()==J(10,1,0))
+	
 end
 exit
 // ------------------------------------------------------------- is_frozen setup

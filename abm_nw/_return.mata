@@ -13,7 +13,7 @@ real scalar abm_nw::edge_exists(real scalar ego, real scalar alter, | real scala
 real rowvector abm_nw::neighbours(real scalar ego, | real scalar t, string scalar dropped_ok)
 {
 	t = parse_t(t)
-	is_valid_id(ego, t, dropped_ok)
+	is_valid_id(ego, t, "dropped_ok")
 
 	return(network.neighbours(ego, t))
 } 
