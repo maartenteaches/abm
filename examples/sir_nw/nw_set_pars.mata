@@ -1,7 +1,7 @@
 include examples/sir_nw/nw_locals.mata
 
 mata:
-
+//# N()
 transmorphic sir_nw::N(| real scalar val)
 {
 	if (args() == 1) {
@@ -13,6 +13,7 @@ transmorphic sir_nw::N(| real scalar val)
 	}
 }
 
+//# tdim()
 transmorphic sir_nw::tdim(| real scalar val)
 {
 	if (args() == 1) {
@@ -24,7 +25,7 @@ transmorphic sir_nw::tdim(| real scalar val)
 	}
 }
 
-
+//# outbreak()
 transmorphic sir_nw::outbreak(| real scalar val)
 {
 	if (args() == 1) {
@@ -36,6 +37,7 @@ transmorphic sir_nw::outbreak(| real scalar val)
 	}
 }
 
+//# removed()
 transmorphic sir_nw::removed(| real scalar val)
 {
 	if (args() == 1) {
@@ -47,6 +49,7 @@ transmorphic sir_nw::removed(| real scalar val)
 	}
 }
 
+//# transmissibility()
 transmorphic sir_nw::transmissibility(| real scalar val)
 {
 	if ( args()==1 ) {
@@ -58,6 +61,7 @@ transmorphic sir_nw::transmissibility(| real scalar val)
 	}
 }
 
+//# mindur()
 transmorphic sir_nw::mindur(| real scalar val)
 {
 	if ( args()==1 ) {
@@ -69,6 +73,7 @@ transmorphic sir_nw::mindur(| real scalar val)
 	}
 }
 
+//# meandur()
 transmorphic sir_nw::meandur(| real scalar val)
 {
 	if ( args()==1 ) {
@@ -80,6 +85,7 @@ transmorphic sir_nw::meandur(| real scalar val)
 	}
 }
 
+//# pr_loss()
 transmorphic sir_nw::pr_loss(| real scalar val)
 {
 	if ( args()==1 ) {
@@ -91,7 +97,8 @@ transmorphic sir_nw::pr_loss(| real scalar val)
 	}
 }
 
-transmorphic sir_nw::degree(| real scalar val)            // <-- new
+//# degree()
+transmorphic sir_nw::degree(| real scalar val)            
 {
 	if ( args()==1 ) {
 		is_posint(val)
@@ -102,7 +109,8 @@ transmorphic sir_nw::degree(| real scalar val)            // <-- new
 	}
 }
 
-transmorphic sir_nw::pr_long(| real scalar val)        // <-- new
+//# pr_long()
+transmorphic sir_nw::pr_long(| real scalar val)        
 {
 	if ( args()==1 ) {
 		is_pr(val)

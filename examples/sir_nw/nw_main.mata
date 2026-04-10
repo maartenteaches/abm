@@ -21,11 +21,11 @@ class sir_nw extends abm_chk {
 	real                   scalar degree                 
 	real                   scalar pr_long                
 	
-	// sir_chks.do
+	// nw_chks.do
 	void                          is_id()
 	void                          is_time()
 	
-	// sir_set_pars.do
+	// nw_set_pars.do
 	transmorphic                  N()
 	transmorphic                  tdim()
 	transmorphic                  outbreak()
@@ -37,7 +37,7 @@ class sir_nw extends abm_chk {
 	transmorphic                  degree()              
 	transmorphic                  pr_long()             
 
-	// sir_sim.do
+	// nw_sim.do
 	void                          setup()
 	real                   scalar infect()
 	void                          progress()
@@ -45,7 +45,7 @@ class sir_nw extends abm_chk {
 	void                          run()
 	void                          dots()
 	
-	// sir_export.do
+	// nw_export.do
 	void                          export_sir()
 	void                          export_r()
 	void                          export_nw()          
