@@ -123,7 +123,7 @@ Notice that only the properties of the agents change, but the network remains
 constant. So the {cmd:tdim()} of the {cmd:spread()} class influences the 
 dimension of the matrix that stores whether or not an agent heared the rumor.
 This {cmd:tdim()} is not passed on to the {cmd:tdim()} of the {cmd:abm_nw()} 
-class; the network is constant, so its {cmd:tdim()} is 0. 
+class; the network is constant, so its {cmd:tdim()} is 1. 
 
 {cmd}
     set seed 12345678
@@ -160,7 +160,7 @@ class; the network is constant, so its {cmd:tdim()} is 0.
     transmorphic spread::N(| real scalar val)
     {
         if (args()==1) {
-            nw.N_nodes(0,val)
+            nw.N_nodes(1,val)
             N = val
         }
         else {
@@ -211,7 +211,7 @@ class; the network is constant, so its {cmd:tdim()} is 0.
         nw.abm_version("1.0.0")
         nw.directed(0)
         nw.weighted(0)
-        nw.tdim(0)
+        nw.tdim(1)
         nw.sw(degree, pr)
         nw.setup()
         
@@ -255,7 +255,7 @@ class; the network is constant, so its {cmd:tdim()} is 0.
         string vector varnames
         
         // collect what we want to export in a matrix
-        result = nw.export_edgelist(0, "ego_all") 
+        result = nw.export_edgelist(1, "ego_all") 
         result = result, J(rows(result),tdim,.)
         for (i=1; i<=rows(result);i++) {
             result[|i,4 \ i, .|] = infected[result[i,1],.]
