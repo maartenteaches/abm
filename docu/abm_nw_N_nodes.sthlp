@@ -23,7 +23,7 @@
 
 {p 4 4 2}
 {cmd:N_nodes(}{it:t}{cmd:)} returns the number of Nodes in the network at time
-{it:t}. {cmd:N_nodes(}0,{it:val}{cmd:)} sets the initial number of nodes to 
+{it:t}. {cmd:N_nodes(}1,{it:val}{cmd:)} sets the initial number of nodes to 
 {it:val}. This will create a list of nodes numbered from 1 till {it:val}, and
 individual nodes will be referred to by this id number. You can use this id 
 number to track the properties of those nodes. 
@@ -55,10 +55,10 @@ functions, or decreased using the {help abm_nw_add_node:remove_node()} function.
 {title:Diagnostics}
 
 {p 4 4 2}
-{cmd:N_nodes()} aborts with an error if {it:t} is negative or not an integer.
+{cmd:N_nodes()} aborts with an error if {it:t} is negative, or 0, or not an integer.
 
 {p 4 4 2}
-{cmd:N_nodes()} aborts with an error if {it:val} is specified and {it:t} is not 0.
+{cmd:N_nodes()} aborts with an error if {it:val} is specified and {it:t} is not 1.
 
 {p 4 4 2}
 {cmd:N_nodes()} aborts with an error if {it:val} less than or equal to 0 or 
@@ -66,7 +66,7 @@ functions, or decreased using the {help abm_nw_add_node:remove_node()} function.
 
 {p 4 4 2}
 {cmd:N_nodes(}{it:val}{cmd:)} aborts with an error if {it:val} is specified and 
-the network at time 0 is frozen, that is after 
+the network at time 1 is frozen, that is after 
 {help abm_nw_setup:setup()} has been run. {help abm_nw_clear:clear()} unfreezes 
 the network.
 		   
