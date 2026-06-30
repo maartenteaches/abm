@@ -17,7 +17,6 @@ void nw_data::prepare()
 	
 	if (prepared) return
 	if (N_nodes == J(1,0,.)) _error("number of nodes need to be set first")
-	if (tdim == .) tdim = 1
 
 	N_nodes = N_nodes[1]\J(tdim-1,1,.)
 	nodes = J(tdim,1,NULL)
@@ -60,6 +59,9 @@ void nw_data::setup()
 	}
 	if (randomit == .) {
 	    randomit = 0
+	}
+	if (tdim == .) {
+		tdim = 1
 	}
 	if (weighted == .) weighted = 1
 	if (N_nodes[1] == .) N_nodes[1] = 0

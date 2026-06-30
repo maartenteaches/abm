@@ -29,7 +29,7 @@ and sets anything not set to its default.
 The defaults are:
 
 {p 8 8 2}
-{help abm_nw_tdim:tdim} = 0 
+{help abm_nw_tdim:tdim} = 1 
 
 {p 8 8 2}
 {help abm_nw_directed:directed} = 1
