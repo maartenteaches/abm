@@ -46,6 +46,6 @@ over nodes. Sometimes the order in which agents can take actions matter.
 {cmd:randomit(}{it:val}{cmd:)} aborts with an error if {it:val} is not 0 or 1.
 
 {p 4 4 2}
-{cmd:randomit(}{it:val}{cmd:)} aborts with an error if the network at time 0 is frozen, that is after 
+{cmd:randomit(}{it:val}{cmd:)} aborts with an error if the network at time 1 is frozen, that is after 
 {help abm_nw_setup:setup()} has been run. {help abm_nw_clear:clear()} unfreezes 
 the network.
