@@ -31,7 +31,7 @@ the number of iterations to {it:val}.
 {p 4 4 2}
 In many Agent Based Models only the properties of the agents change, but the 
 network remains constant. In that case you should set the time dimension for the
-network to 0. 
+network to 1. 
 
 
 {marker conformability}{...}
@@ -53,9 +53,9 @@ network to 0.
 set.
 
 {p 4 4 2}
-{cmd:tdim(}{it:val}{cmd:)} aborts with an error if {it:val} is negative or not an integer.
+{cmd:tdim(}{it:val}{cmd:)} aborts with an error if {it:val} is negative, or 0, or not an integer.
 
 {p 4 4 2}
-{cmd:tdim(}{it:val}{cmd:)} aborts with an error if the network at time 0 is frozen, that is after 
+{cmd:tdim(}{it:val}{cmd:)} aborts with an error if the network at time 1 is frozen, that is after 
 {help abm_nw_setup:setup()} has been run. {help abm_nw_clear:clear()} unfreezes 
 the network.		   
