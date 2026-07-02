@@ -17,7 +17,7 @@ void nw_data::prepare()
 	
 	if (prepared) return
 	if (N_nodes == J(1,0,.)) _error("number of nodes need to be set first")
-
+	if (tdim == .) tdim = mod_geq((1,0,0))
 	N_nodes = N_nodes[1]\J(tdim-1,1,.)
 	nodes = J(tdim,1,NULL)
 	if (N_nodes[1] == 0) {
