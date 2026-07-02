@@ -54,16 +54,16 @@ was set to 0, then this edgelist will add connections between nodes 1 and 2,
                
     // start the network           
     model = abm_nw()
-    model.N_nodes(0,5)
+    model.N_nodes(1,5)
     model.directed(0)
-	model.weighted(0)
+    model.weighted(0)
     
     // import the network from the edgelist
     model.from_edgelist(edgelist)
     
     // look at stored network in the form of
     // an adjacency matrix
-    model.export_adjmat(0)
+    model.export_adjmat(1)
     end
 {txt}{...}
 
@@ -95,7 +95,7 @@ more than 3 columns.
 
 {p 4 4 2}
 {cmd:from_edgelist()} aborts with an error if nodes were dropped with 
-{help abm_nw_remove_node:remove_node()} in the initial network (t=0).
+{help abm_nw_remove_node:remove_node()} in the initial network (t=1).
 
 {p 4 4 2}
 {cmd:from_edgelist()} aborts with an error if {it:edgelist} contains duplicates.
