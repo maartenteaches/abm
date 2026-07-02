@@ -1,6 +1,6 @@
 mata:
 //# add_edge()
-void nw_data::add_edge(real scalar t, real scalar orig, real scalar dest, real scalar weight, string scalar replace)
+void nw_data::add_edge(real scalar t, real scalar orig, real scalar dest, real scalar weight,| string scalar replace)
 {
 	real rowvector key
 	real scalar change

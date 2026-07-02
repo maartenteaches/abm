@@ -76,7 +76,7 @@ assert(foo.neumann()  == 0)
 assert(foo.torus()    == 0)
 assert(foo.randit()   == 0)
 assert(foo.size()     == 200)
-assert(foo.abm_version()==(0,2,0))
+assert(foo.abm_version()==foo.abm_current())
 
 void tests_abm_grid::tests_setup()
 {

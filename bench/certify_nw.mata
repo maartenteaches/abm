@@ -2,7 +2,7 @@ set seed 123456789
 
 do bench/certify_nw_data.mata
 
-// ======================================================== setup the test class
+//# setup the test class
 mata:
 class test_abm_nw extends abm_nw
 {
@@ -24,6 +24,7 @@ class test_abm_nw extends abm_nw
 		real                   scalar    get_setup()
 		pointer(real vector)   vector    get_nodes()
 		pointer(real vector)   matrix    get_adjlist()	
+		
 }
 		
 class nw_data scalar test_abm_nw::nw(){
@@ -92,14 +93,14 @@ void test_abm_nw::tests_is_posint(real scalar val, | string scalar zero_ok)
 
 end	
 
-// ======================================================================= setup
+//# setup
 mata:
 	foo = test_abm_nw()
 	// check new()
 	assert(foo.abm_version()==foo.abm_current())
 end
 
-// ----------------------------------------------------------------- is_valid_id
+//# is_valid_id
 // is_valid_id should return an error if N_nodes() has not been set
 rcof "mata: foo.tests_is_valid_id(1)" == 3498
 
@@ -138,7 +139,7 @@ mata:
 	}
 end
 
-// ----------------------------------------------------------------is_valid_time
+//# is_valid_time
 // valid times when tdim() has not been set
 mata:
 	foo = test_abm_nw()
@@ -163,9 +164,11 @@ rcof "mata: foo.tests_is_valid_time(-1)" == 3300
 rcof "mata: foo.tests_is_valid_time(1.5)" == 3300
 rcof "mata: foo.tests_is_valid_time(0)" == 3300
 
-// ------------------------------------------------------------------- parse_t()
-
-
+//# parse_t()
+mata: 
+	foo.parse_t(.)
+end
+exit
 // -------------------------------------------------------------------- directed
 mata:
 	assert(foo.directed()==.)
