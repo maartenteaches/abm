@@ -177,7 +177,7 @@ mata:
 	assert(foo.get_parse_t(3)==4)
 end
 
-// -------------------------------------------------------------------- directed
+//# directed
 mata:
 	foo = test_abm_nw()
 	foo.N_nodes(1,10)
@@ -193,7 +193,7 @@ mata:
 end
 rcof "mata: foo.directed(.5)" == 3300
 
-// ------------------------------------------------------------------------ tdim
+//#  tdim
 mata:
 	assert(foo.tdim()==.)
 	foo.tdim(10)
@@ -212,7 +212,7 @@ mata:
 	
 end
 exit
-// ------------------------------------------------------------- is_frozen setup
+//# is_frozen setup
 mata:
 	foo = test_abm_nw()
 	foo.N_nodes(0,10)
@@ -237,7 +237,7 @@ rcof "mata : foo.copy_nw(2,1)" == 3498
 rcof "mata : foo.add_node(1)" == 3498
 rcof "mata: foo.add_edge(1,1,2)" == 3498
 
-// ------------------------------------------------------------- N_nodes N_nodes
+//# N_nodes N_nodes
 mata:
 	foo = test_abm_nw()
 	assert(foo.N_nodes(0)==.)
@@ -253,7 +253,7 @@ mata:
 end
 
 
-// ----------------------------------- add_edge, neighbours, weight, and N_edges
+//# add_edge, neighbours, weight, and N_edges
 mata:
 	// directed graph
 	assert(foo.N_edges() == 0)
@@ -312,7 +312,7 @@ mata:
 	assert(foo.weight(1,5)==1)
 	assert(foo.edge_exists(1,5)==1)
 end
-// ------------------------------------------- export_adjmat and export_edgelist	
+//# export_adjmat and export_edgelist	
 
 mata:	
 	foo = test_abm_nw()
@@ -354,7 +354,7 @@ mata:
 	assert(foo.export_adjmat()	== true)	
 end
 
-// --------------------------------------------------------------------- no_edge
+//# no_edge
 
 mata:
 	foo = test_abm_nw()
@@ -380,7 +380,7 @@ rcof "mata : foo.no_edge(0,1,3)" == 3000
 rcof "mata : foo.no_edge(0,4,1)" == 3000
 rcof "mata : foo.no_edge(0,1,4)" == 3000
 
-// ----------------------------------------------------------------- edge_exists          
+//# edge_exists          
 mata:	
 	foo = test_abm_nw()
 	foo.N_nodes(0,5)
@@ -409,7 +409,7 @@ rcof "mata foo.edge_exists(1,6)" == 3000
 rcof "mata foo.edge_exists(1,6,0)" == 3000
 rcof "mata foo.edge_exists(1,6,1)" == 3000
 
-// --------------------------------------------------------------- from_edgelist
+//# from_edgelist
 mata:	
 	// undirected
 	foo = test_abm_nw()
@@ -528,7 +528,7 @@ mata:
 	assert(*(foo.get_adjlist0()[5]) == 3    )
 end
 
-// ---------------------------------------------------------------- from_adjlist
+//# from_adjlist
 mata:
 // undirected
 	foo = test_abm_nw()
@@ -596,7 +596,7 @@ mata:
 	assert(*(foo.get_adjlist0()[5]) == J(1,0,.) )
 end
 
-// -------------------------------------------------------------- from_adjmatrix
+//# from_adjmatrix
 mata:
 //undirected
 	foo = test_abm_nw()
@@ -729,7 +729,7 @@ mata:
 
 end
 	
-// -------------------------------------------------------------------------- sw
+//# sw
 // unidirected
 mata:
 	foo = test_abm_nw()
@@ -781,7 +781,7 @@ mata:
 	foo.sw(3,0)
 end
 
-// ----------------------------------------------------------------- remove_edge
+//# remove_edge
 mata:	
 	// undirected
 	foo = test_abm_nw()
@@ -844,7 +844,7 @@ mata:
 	assert(*foo.get_adjlist0()[5] == J(1,0,.))
 end
 
-// ------------------------------------------------------------ change_weight
+//# change_weight
 mata:	
 	// undirected
 	foo = test_abm_nw()
@@ -880,7 +880,7 @@ end
 // an edge needs to exist before changing the weight
 rcof "mata : foo.change_weight(0,2,1,5)" == 3000
 
-// ----------------------------------------------------------------- rewire
+//# rewire
 mata:
 	// undirected
 	foo = test_abm_nw()
@@ -929,7 +929,7 @@ mata:
 	assert(*foo.get_adjlist0()[5] == J(1,0,.))		
 end
 
-// ------------------------------------------------------------------ copy_nodes
+//# copy_nodes
 mata:
 	// undirected
 	foo = test_abm_nw()
@@ -948,7 +948,7 @@ mata:
 	assert(foo.get_N_nodes()[1]==5)
 end
 
-// ---------------------------------------------------------------- copy_adjlist
+//# copy_adjlist
 mata:
 	// undirected
 	foo = test_abm_nw()
@@ -995,7 +995,7 @@ mata:
 	assert(*foo.get_adjlist()[5,1] == J(1,0,.))	
 end
 
-// --------------------------------------------------------------------- copy_nw
+//# copy_nw
 mata:
 	// undirected
 	foo = test_abm_nw()
@@ -1182,7 +1182,7 @@ mata:
 	assert(foo.get_N_edges() == (4\0\0\0\0))
 end
 
-// ----------------------------------------------------------------- remove_node
+//# remove_node
 mata:
 	// undirected
 	foo = test_abm_nw()
@@ -1335,7 +1335,7 @@ mata:
 	}
 end
 
-// ----------------------------------------------------------------- return_node
+//# return_node
 mata:
 	foo = test_abm_nw()
 	foo.N_nodes(0,5)
@@ -1360,7 +1360,7 @@ end
 rcof "mata: foo.return_node(2,6)" == 3498
 rcof "mata: foo.return_node(2,5)" == 3498
 
-// -------------------------------------------------------------------- add_node
+//# add_node
 mata:
 	foo = test_abm_nw()
 	foo.N_nodes(0,5)
@@ -1389,7 +1389,7 @@ mata:
 	assert(rows(foo.get_adjlist())==7)	
 end
 
-// ------------------------------------------------------- randomit and schedule
+//# randomit and schedule
 mata:
 	foo = test_abm_nw()
 	foo.N_nodes(0,5)
@@ -1410,7 +1410,7 @@ mata:
 	assert(foo.schedule() == ( 2,1,5,3,4 ))
 end
 
-// -------------------------------------------------------------------- weighted 
+//# weighted 
 mata:
 	foo = test_abm_nw()
 	foo.N_nodes(0,5)
@@ -1424,7 +1424,7 @@ rcof "mata: foo.weighted(2)"==3300
 rcof "mata: foo.weighted(-1)"==3300
 
 
-// ----------------------------------------------------------------------- clear
+//# clear
 mata:
 	foo = test_abm_nw()
 	foo.N_nodes(0,10)
