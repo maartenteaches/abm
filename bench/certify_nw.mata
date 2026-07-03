@@ -24,11 +24,16 @@ class test_abm_nw extends abm_nw
 		real                   scalar    get_setup()
 		pointer(real vector)   vector    get_nodes()
 		pointer(real vector)   matrix    get_adjlist()	
+		real                   scalar    get_parse_t()
 		
 }
 		
 class nw_data scalar test_abm_nw::nw(){
 	return(network)
+}
+
+real scalar test_abm_nw::get_parse_t(real scalar t) {
+	return(parse_t(t))
 }
 		
 void test_abm_nw::tests_copy_nodes(real scalar t0, real scalar t1)
@@ -166,11 +171,18 @@ rcof "mata: foo.tests_is_valid_time(0)" == 3300
 
 //# parse_t()
 mata: 
-	foo.parse_t(.)
+	assert(foo.get_parse_t(.)==1)
+	assert(foo.get_parse_t(3)==3)
+	foo.abm_version("0.1.0")
+	assert(foo.get_parse_t(3)==4)
 end
-exit
+
 // -------------------------------------------------------------------- directed
 mata:
+	foo = test_abm_nw()
+	foo.N_nodes(1,10)
+	foo.tdim(10)
+	
 	assert(foo.directed()==.)
 	foo.directed(0)
 	assert(foo.directed()==0)
