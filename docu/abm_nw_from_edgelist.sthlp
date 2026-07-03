@@ -44,7 +44,7 @@ was set to 0, then this edgelist will add connections between nodes 1 and 2,
     
 {cmd}{...}
     // import abm_nw class
-    run abm_nw.mata
+    run abm.mata
     
     mata:
     // the edgelist:
