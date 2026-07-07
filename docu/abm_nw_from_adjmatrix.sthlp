@@ -29,30 +29,30 @@ is 0.
     
 {cmd}{...}
     // import abm_nw class
-    run abm_nw.mata
+    run abm.mata
     
     mata:
     // the adjacency matrix:
-		adjmat = J(5,5,0)
-		adjmat[1,2] = 1
-		adjmat[2,1] = 1
-		adjmat[1,3] = 1
-		adjmat[3,1] = 1
-		adjmat[4,5] = 1
-		adjmat[5,4] = 1
+    adjmat = J(5,5,0)
+    adjmat[1,2] = 1
+    adjmat[2,1] = 1
+    adjmat[1,3] = 1
+    adjmat[3,1] = 1
+    adjmat[4,5] = 1
+    adjmat[5,4] = 1
                
     // start the network           
     model = abm_nw()
-    model.N_nodes(0,5)
+    model.N_nodes(1,5)
     model.directed(0)
-	model.weighted(0)
+    model.weighted(0)
     
     // import the network from the edgelist
     model.from_adjmatrix(adjmat)
     
     // look at stored network in the form of
     // an adjacency matrix
-    model.export_adjmat(0)
+    model.export_adjmat(1)
     end
 {txt}{...}
 
@@ -82,4 +82,4 @@ is not equal to the initial number of nodes or the number of columns in
 
 {p 4 4 2}
 {cmd:from_adjmatrix()} aborts with an error if nodes were dropped with 
-{help abm_nw_remove_node:remove_node()} in the initial network (t=0).
+{help abm_nw_remove_node:remove_node()} in the initial network (t=1).
