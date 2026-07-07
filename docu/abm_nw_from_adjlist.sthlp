@@ -41,8 +41,8 @@ nodes 1 and 2, 2 and 1, 1 and 3, and 3 and 1, 4 and 5, and 5 and 4.
 {title:Example}
     
 {cmd}{...}
-    // import abm_nw class
-    run abm_nw.mata
+    // import abm class
+    run abm.mata
     
     mata:
     // the adjacency list:
@@ -51,16 +51,16 @@ nodes 1 and 2, 2 and 1, 1 and 3, and 3 and 1, 4 and 5, and 5 and 4.
                
     // start the network           
     model = abm_nw()
-    model.N_nodes(0,5)
+    model.N_nodes(1,5)
     model.directed(0)
-	model.weighted(0)
+    model.weighted(0)
     
     // import the network from the edgelist
     model.from_adjlist(adj)
     
     // look at stored network in the form of
     // an adjacency matrix
-    model.export_adjmat(0)
+    model.export_adjmat(1)
     end
 {txt}{...}
 
@@ -87,7 +87,7 @@ nodes 1 and 2, 2 and 1, 1 and 3, and 3 and 1, 4 and 5, and 5 and 4.
 
 {p 4 4 2}
 {cmd:from_adjlist()} aborts with an error if nodes were dropped with 
-{help abm_nw_remove_node:remove_node()} in the initial network (t=0).
+{help abm_nw_remove_node:remove_node()} in the initial network (t=1).
 
 {p 4 4 2}
 {cmd:from_adjlist()} aborts with an error if {it:adj} contains duplicates.
